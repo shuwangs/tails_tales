@@ -1,9 +1,9 @@
-import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
 import errorHandler from "./middleware/errorHandler.js";
-import AppError from "./utils/AppError.js";
-import entriesRoute from "./routes/entries.js";
+import entriesRoute from "./routes/entriesRoute.js";
+import petsRoute from "./routes/petsRoute.js";
 
 dotenv.config();
 
@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/entries", entriesRoute);
+app.use("/api/pets", petsRoute);
 
 app.use(errorHandler);
 export default app;

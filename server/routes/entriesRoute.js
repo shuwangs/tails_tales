@@ -1,8 +1,8 @@
 import { Router } from "express";
 import {
+	deleteEntry,
 	getEntryById,
 	updateEntry,
-	deleteEntry,
 } from "../controller/entriesController.js";
 
 const router = Router();
