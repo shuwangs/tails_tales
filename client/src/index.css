@@ -6,7 +6,7 @@
 	--color-primary-light: #fef3c7;
 	--color-primary-border: #fde68a;
 	--color-primary-text: #92400e;
-
+	--color-bg: #fffbeb;
 	/* AI related color */
 	--color-secondary: #8b5cf6;
 	--color-secondary-light: #ede9fe;
@@ -51,7 +51,10 @@ h2 {
 	font-size: 20px;
 }
 
-
 p {
 	margin: 0;
+}
+
+:root {
+	background-color: var(--color-bg);
 }

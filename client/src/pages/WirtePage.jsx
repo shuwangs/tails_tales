@@ -1,8 +1,8 @@
 const WritePage = () => {
 	return (
 		<div>
-			<h1>Welcome to the Home Page</h1>
-			<p>Here will display all the diary entries.</p>
+			<h1>Welcome to the Write Page</h1>
+			<p>Here will start the writing of your fav diary</p>
 		</div>
 	);
 };
