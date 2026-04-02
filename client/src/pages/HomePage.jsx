@@ -1,11 +1,11 @@
 import EntryList from "../components/EntriesList.jsx";
 import MainLayout from "../layout/MainLayout";
+import SearchBar from "../components/SerachBar.jsx";
 const HomePage = () => {
 	return (
 		<MainLayout>
-			<h1>Welcome to the Home Page</h1>
-			<p>Here will display all the diary entries.</p>
-
+			<h1>Meow! Welcome to my diary~ 🐾</h1>
+			<SearchBar />
 			<EntryList />
 		</MainLayout>
 	);

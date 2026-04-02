@@ -11,7 +11,7 @@ const EntryList = () => {
 
 
     return (
-        <div>
+        <div className="flex flex-row gap-6">
             {
                 entries.map((entry) => (<div >
                     <EntryCard entry={entry} />

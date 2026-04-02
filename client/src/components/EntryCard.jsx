@@ -1,9 +1,13 @@
+import GeneralContainer from './ui/GeneralContainer.jsx'
 const EntryCard = ({ entry }) => {
     return (
-        <div>
-            <h1>{entry.title}</h1>
-            <p>{entry.content}</p>
-        </div>
+        <GeneralContainer>
+            <div>
+                <h1>{entry.title}</h1>
+                <p>{entry.content}</p>
+            </div>
+
+        </GeneralContainer>
     );
 };
 
