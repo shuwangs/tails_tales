@@ -1,8 +1,8 @@
 import GeneralContainer from "./ui/GeneralContainer";
 const SearchBar = () => {
     return (
-        <GeneralContainer >
-            <input type="text" className="Seaching for diary" />
+        <GeneralContainer className="mt-6">
+            <input type="text" placeholder="Seaching for diary" />
         </GeneralContainer>
     )
 }

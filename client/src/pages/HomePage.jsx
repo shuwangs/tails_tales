@@ -1,6 +1,6 @@
 import EntryList from "../components/EntriesList.jsx";
 import MainLayout from "../layout/MainLayout";
-import SearchBar from "../components/SerachBar.jsx";
+import SearchBar from "../components/SearchBar.jsx";
 const HomePage = () => {
 	return (
 		<MainLayout>

@@ -1,10 +1,15 @@
 import MainLayout from "../layout/MainLayout";
+import GeneralContainer from "../components/ui/GeneralContainer";
+import WriteForm from "../components/WriteForm.jsx"
 const WritePage = () => {
 	return (
 		<MainLayout>
-			<h1>Welcome to the Write Page</h1>
-			<p>Here will start the writing of your fav diary</p>
-		</MainLayout>
+
+			<GeneralContainer className="mt-10 p-8">
+				<h1>haven't think of a header</h1>
+				<WriteForm />
+			</GeneralContainer>
+		</MainLayout >
 	);
 };
 
