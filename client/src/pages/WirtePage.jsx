@@ -6,7 +6,6 @@ const WritePage = () => {
 		<MainLayout>
 
 			<GeneralContainer className="mt-10 p-8">
-				<h1>haven't think of a header</h1>
 				<WriteForm />
 			</GeneralContainer>
 		</MainLayout >

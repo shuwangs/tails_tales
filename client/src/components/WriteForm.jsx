@@ -1,22 +1,38 @@
 import FormDiv from "./ui/FormDiv";
 const WriteForm = () => {
+
     return (
-        <form>
-            <div className="flex flex-col">
-                <FormDiv className="flex flex-col">
-                    <label htmlFor="title">Title </label>
-                    <input name="title" placeholder="Give your memory a title..." />
+        <div>
+            <h1>haven't think of a header</h1>
+            <form>
 
+                <FormDiv className="flex flex-row">
+                    <div>
+                        <h3>Mood</h3>
+
+                    </div>
+                    <div>
+                        <h3>Weather</h3>
+                    </div>
                 </FormDiv>
-                <FormDiv className="flex flex-col">
-                    <label htmlFor="title">Story </label>
-                    <input name="title" placeholder="What's on your mind today Bobo?" />
 
-                </FormDiv>
+                <div className="flex flex-col">
+                    <FormDiv className="flex flex-col">
+                        <label htmlFor="title">Title </label>
+                        <input name="title" placeholder="Give your memory a title..." />
 
-            </div>
+                    </FormDiv>
+                    <FormDiv className="flex flex-col">
+                        <label htmlFor="title">Story </label>
+                        <input name="title" placeholder="What's on your mind today Bobo?" />
+                    </FormDiv>
 
-        </form>
+
+                </div>
+
+            </form>
+        </div>
+
     )
 }
 
