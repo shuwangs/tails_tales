@@ -1,4 +1,4 @@
-import EntryList from "../components/EntriesList";
+import EntryList from "../components/EntriesList.jsx";
 import MainLayout from "../layout/MainLayout";
 const HomePage = () => {
 	return (

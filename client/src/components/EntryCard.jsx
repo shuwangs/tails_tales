@@ -1,9 +1,9 @@
-const EntryCard = () => {
+const EntryCard = ({ entry }) => {
     return (
-        <nav>
-            <h1>Dear Diary</h1>
-            <p>Card place hoder</p>
-        </nav>
+        <div>
+            <h1>{entry.title}</h1>
+            <p>{entry.content}</p>
+        </div>
     );
 };
 
