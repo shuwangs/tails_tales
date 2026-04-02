@@ -30,7 +30,6 @@
 	}
 }
 
-
 body {
 	margin: 0;
 }
@@ -40,7 +39,6 @@ body {
 	/* max-width: 1126px; */
 	margin: 0 auto;
 }
-
 
 h1 {
 	font-size: 36px;
@@ -55,6 +53,6 @@ p {
 	margin: 0;
 }
 
-:root {
+/* :root {
 	background-color: var(--color-bg);
-}
+} */

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import { EntriesProvider } from "./contexts/EntriesContext";
 import HomePage from "./pages/HomePage";
 import WritePage from "./pages/WirtePage";
-import NavBar from "./components/NavBar";
 
 import "./App.css";
 
