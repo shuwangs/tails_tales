@@ -1,6 +1,7 @@
-import GeneralContainer from "./ui/GeneralContainer"
-import { getMoodIcon } from "../utils/getIcons"
-import AiDiv from "./ui/AiDiv.jsx"
+import { Link } from "react-router-dom";
+import GeneralContainer from "./ui/GeneralContainer";
+import { getMoodIcon } from "../utils/getIcons";
+import AiDiv from "./ui/AiDiv.jsx";
 import AiBtn from "./ui/AiBtn.jsx";
 import FormBtn from "./ui/FormBtn.jsx";
 import DeleteBtn from "./ui/DeleteBtn.jsx";
@@ -10,52 +11,59 @@ import { CiCalendar } from "react-icons/ci";
 import { LuWandSparkles } from "react-icons/lu";
 
 const DetailCard = ({ entry }) => {
-    return (
-        <GeneralContainer className="mt-10 w-80/100 mx-auto gap-6 ">
+	return (
+		<GeneralContainer className="mt-10 w-80/100 mx-auto gap-6 ">
+			<div className="flex justify-between items-center bg-amber-300 p-8">
+				<div className="flex flex-col gap-4">
+					<h2 className="font-heading text-4xl text-amber-800">
+						{entry.title}{" "}
+					</h2>
+					<p className="flex gap-2 text-xl">
+						{" "}
+						<CiCalendar />{" "}
+						<span>
+							{new Date(entry.entry_date).toLocaleDateString("en-US", {
+								month: "short",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</span>
+					</p>
+				</div>
+				<div className="text-2xl">
+					<h2 className="text-5xl">{getMoodIcon(entry.mood)}</h2>
+				</div>
+			</div>
+			<div className="bg-white flex flex-col gap-6">
+				<div className="px-8 text-mono text-amber-800 text-2xl px-2 line-">
+					{entry.content}
+				</div>
+				<div className="px-8">
+					<AiDiv className="flex flex-col gap-4">
+						<h3 className="flex gap-2 text-xl text-violet-700 font-bold">
+							{" "}
+							<LuWandSparkles /> <span>AI Tools</span>{" "}
+						</h3>
+						<AiBtn className="text-lg"> Translate to Chinese</AiBtn>
+					</AiDiv>
+				</div>
 
-            <div className="flex justify-between items-center bg-amber-300 p-8">
-                <div className="flex flex-col gap-4">
-                    <h2 className="font-heading text-4xl text-amber-800">{entry.title} </h2>
-                    <p className="flex gap-2 text-xl"> <CiCalendar /> <span>{new Date(entry.entry_date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                    })}
-                    </span>
-                    </p>
-                </div>
-                <div className="text-2xl">
-                    <h2 className="text-5xl">{getMoodIcon(entry.mood)}</h2>
-                </div>
-            </div>
-            <div className="bg-white flex flex-col gap-6"  >
-                <div className="px-8 text-mono text-amber-800 text-2xl px-2 line-">
-                    {entry.content}
-                </div>
-                <div className="px-8">
-                    <AiDiv className="flex flex-col gap-4">
-                        <h3 className="flex gap-2 text-xl text-violet-700 font-bold"> <LuWandSparkles /> <span>AI Tools</span> </h3>
-                        <AiBtn className="text-lg"> Translate to Chinese</AiBtn>
-
-                    </AiDiv>
-                </div>
-
-
-                <div className="flex flex-row  gap-6 px-8 pb-6">
-                    <FormBtn className="bg-amber-400 hover:bg-amber-500 text-white flex-[2]">
-                        Edit
-                    </FormBtn>
-                    <DeleteBtn className="bg-amber-500 hover:bg-amber-600 text-red text-xl flex-[1] justify-center">
-                        <RiDeleteBin5Line />  Delete
-                    </DeleteBtn>
-                    <button className="flex items-center px-6 rounded-full bg-gray-200 hover:bg-gray-300  justify-center text-black text-xl flex-[1]">
-                        <IoMdArrowRoundBack /> Back
-                    </button>
-                </div>
-            </div>
-        </GeneralContainer >
-
-    )
-
-}
-export default DetailCard
+				<div className="flex flex-row  gap-6 px-8 pb-6">
+					<FormBtn className="bg-amber-400 hover:bg-amber-500 text-white flex-[2]">
+						Edit
+					</FormBtn>
+					<DeleteBtn className="bg-amber-500 hover:bg-amber-600 text-red text-xl flex-[1] justify-center">
+						<RiDeleteBin5Line /> Delete
+					</DeleteBtn>
+					<Link
+						to="/entries"
+						className="flex items-center justify-center px-6 rounded-full bg-gray-200 hover:bg-gray-300 text-black text-xl flex-[1]"
+					>
+						<IoMdArrowRoundBack /> Back
+					</Link>
+				</div>
+			</div>
+		</GeneralContainer>
+	);
+};
+export default DetailCard;
