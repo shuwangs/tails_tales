@@ -15,7 +15,7 @@ function App() {
 				<Routes>
 					<Route path="/entries" element={<HomePage />} />
 					<Route path="/write" element={<WritePage />} />
-					<Route path="/detail" element={<DetailPage />} />
+					<Route path="/entries/:id" element={<DetailPage />} />
 				</Routes>
 			</EntriesProvider>
 		</BrowserRouter>
