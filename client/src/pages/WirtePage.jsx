@@ -1,3 +1,4 @@
+import AiCard from "../components/AiCard.jsx";
 import GeneralContainer from "../components/ui/GeneralContainer";
 import WriteForm from "../components/WriteForm.jsx";
 import MainLayout from "../layout/MainLayout";
@@ -5,9 +6,14 @@ import MainLayout from "../layout/MainLayout";
 const WritePage = () => {
 	return (
 		<MainLayout>
-			<GeneralContainer className="mt-10 p-8">
-				<WriteForm />
-			</GeneralContainer>
+			<div className="w-full flex gap-4">
+				<GeneralContainer className="mt-10 p-8 flex-[3]">
+					<WriteForm />
+
+				</GeneralContainer>
+
+
+			</div>
 		</MainLayout>
 	);
 };
