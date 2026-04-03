@@ -3,11 +3,14 @@ import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
 import FormDiv from "./ui/FormDiv";
 import FormBtn from "./ui/FormBtn";
 import AiCard from "./AiCard";
-import { SiCcleaner } from "react-icons/si";
-import { IoMdSave } from "react-icons/io";
 import FormSelect from "./ui/FormSelect.jsx";
 import FormLabel from "./ui/FormLabel.jsx";
 import FormInput from "./ui/FormInput.jsx";
+import { SiCcleaner } from "react-icons/si";
+import { IoMdSave } from "react-icons/io";
+import { TfiThought } from "react-icons/tfi";
+
+
 const WriteForm = () => {
     const initalForm = {
         mood: "",
@@ -18,7 +21,7 @@ const WriteForm = () => {
     }
     return (
         <div>
-            <h1 className="font-heading text-amber-800 pb-2">Another Day, Another Bobo Thought</h1>
+            <h1 className="font-heading text-amber-800 pb-2 flex gap-4"><TfiThought /> <span>Another Day, Another Bobo Thought</span></h1>
             <form
                 className="flex flex-col gap-4">
                 <div className="flex flex-row gap-6">
@@ -26,7 +29,7 @@ const WriteForm = () => {
                         <FormLabel htmlFor="mood" >Mood</FormLabel>
                         <FormSelect name="mood" value={initalForm.mood}>
                             {moodOpts.map((mood) => (
-                                <option value={mood.value}>    {mood.label} {getMoodIcon(mood.value)}</option>
+                                <option value={mood.value}> {mood.label} {getMoodIcon(mood.value)}</option>
                             ))}
                         </FormSelect>
                     </div>
@@ -45,7 +48,8 @@ const WriteForm = () => {
                         <FormLabel htmlFor="title">Title </FormLabel>
                         <FormInput
                             className="placeholder:text-amber-400"
-                            name="title" placeholder="Give your memory a title..." />
+                            name="title" placeholder="Give your memory a title..."
+                        />
                     </FormDiv>
                     <FormDiv className="flex flex-col bg-amber-50">
                         <FormLabel htmlFor="title">Story </FormLabel>
