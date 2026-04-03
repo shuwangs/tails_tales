@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getEntriesByPetId } from "../services/entryService.js";
+import { getEntriesByPetId, deleteEntry } from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -26,11 +26,26 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const deleteEntryHandler = async (entry_id) => {
+		try {
+			setLoading(true);
+			setError("");
+			await deleteEntry(entry_id);
+			setEntries(prev => prev.filter(e => e.id !== Number(entry_id)));
+			// await fetchEntries();
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	const values = {
 		petId,
 		entries,
 		error,
 		loading,
+		deleteEntryHandler,
 	};
 
 	return (
