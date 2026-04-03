@@ -1,9 +1,9 @@
 import GeneralContainer from "./ui/GeneralContainer";
-
+import FormInput from "./ui/FormInput.jsx";
 const SearchBar = () => {
 	return (
-		<GeneralContainer className="mt-6">
-			<input type="text" placeholder="Seaching for diary" />
+		<GeneralContainer className="">
+			<FormInput type="text" placeholder="Seaching for diary" />
 		</GeneralContainer>
 	);
 };

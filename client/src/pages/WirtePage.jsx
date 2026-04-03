@@ -9,10 +9,7 @@ const WritePage = () => {
 			<div className="flex gap-4 mx-15">
 				<GeneralContainer className="mt-10 p-8 flex-[3]">
 					<WriteForm />
-
 				</GeneralContainer>
-
-
 			</div>
 		</MainLayout>
 	);

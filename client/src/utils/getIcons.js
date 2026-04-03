@@ -1,54 +1,52 @@
 export const getMoodIcon = (mood) => {
-    switch (mood) {
-        case "happy":
-            return "😺";
+	switch (mood) {
+		case "happy":
+			return "😺";
 
-        case "sad":
-            return "😿";
+		case "sad":
+			return "😿";
 
-        case "excited":
-            return "😸";
+		case "excited":
+			return "😸";
 
-        case "loved":
-            return "😽";
+		case "loved":
+			return "😽";
 
-        case "bored":
-            return "😼";
+		case "bored":
+			return "😼";
 
-        case "anxious":
-            return "🙀";
+		case "anxious":
+			return "🙀";
 
-        case "angry":
-            return "😾";
+		case "angry":
+			return "😾";
 
-        default:
-            break;
-    }
-
-}
+		default:
+			break;
+	}
+};
 
 export const getWeatherIcon = (weather) => {
-    switch (weather) {
-        case "sunny":
-            return "☀️";
+	switch (weather) {
+		case "sunny":
+			return "☀️";
 
-        case "cloudy":
-            return "☁️";
+		case "cloudy":
+			return "☁️";
 
-        case "rainy":
-            return "🌧️";
+		case "rainy":
+			return "🌧️";
 
-        case "snowy":
-            return "❄️";
+		case "snowy":
+			return "❄️";
 
-        case "windy":
-            return "🌬️";
+		case "windy":
+			return "🌬️";
 
-        case "foggy":
-            return "⛈️";
+		case "foggy":
+			return "⛈️";
 
-        default:
-            break;
-    }
-
-}
+		default:
+			break;
+	}
+};

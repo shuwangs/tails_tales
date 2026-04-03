@@ -5,9 +5,13 @@ import MainLayout from "../layout/MainLayout";
 const HomePage = () => {
 	return (
 		<MainLayout>
-			<h1>Meow! Welcome to my diary~ 🐾</h1>
-			<SearchBar />
-			<EntryList />
+			<div className="flex flex-col gap-10">
+				<h1>
+					{"ฅ•ω•ฅ"} Welcome to my diary {">-;;⁠;⁠;€ᐷ"}
+				</h1>
+				<SearchBar />
+				<EntryList />
+			</div>
 		</MainLayout>
 	);
 };
