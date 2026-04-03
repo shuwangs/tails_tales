@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEntries } from "../contexts/EntriesContext.jsx"
 import GeneralContainer from "./ui/GeneralContainer";
 import { getMoodIcon } from "../utils/getIcons";
@@ -10,8 +10,19 @@ import DeleteBtn from "./ui/DeleteBtn.jsx";
 import { LuWandSparkles, LuTrash2, LuArrowLeftToLine, LuCalendarHeart } from "react-icons/lu";
 
 const DetailCard = ({ entry }) => {
-    const { deleteEntryHandler } = useEntries();
+    const navigate = useNavigate();
+    const { deleteEntryHandler, error, loading } = useEntries();
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const handleDeleteEntry = async (entry_id) => {
+        try {
+            await deleteEntryHandler(Number(entry_id));
+            navigate("/entries");
+        } catch (err) {
+            console.error("Delete failed:", err);
+        }
+    }
+    if (error) return <p>{error}</p>
+    if (loading) return <p>Loading</p>
 
     return (
         <GeneralContainer className="mt-10 w-80/100 mx-auto gap-6 ">
@@ -75,7 +86,7 @@ const DetailCard = ({ entry }) => {
 
                         <div className='flex gap-6'>
                             <DeleteBtn
-                                onClick={() => deleteEntryHandler(Number(entry.id))}
+                                onClick={() => handleDeleteEntry(Number(entry.id))}
                             >Yes, Delete</DeleteBtn>
                             <button
                                 onClick={() => setShowDeleteConfirm(false)}
