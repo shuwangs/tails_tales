@@ -6,7 +6,7 @@ import MainLayout from "../layout/MainLayout";
 const WritePage = () => {
 	return (
 		<MainLayout>
-			<div className="w-full flex gap-4">
+			<div className="flex gap-4 mx-15">
 				<GeneralContainer className="mt-10 p-8 flex-[3]">
 					<WriteForm />
 
