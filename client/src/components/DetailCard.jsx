@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useEntries } from "../contexts/EntriesContext.jsx"
 import GeneralContainer from "./ui/GeneralContainer";
@@ -54,7 +55,7 @@ const DetailCard = ({ entry }) => {
                         Edit
                     </FormBtn>
                     <DeleteBtn
-                        onClick={() => deleteEntryHandler(Number(entry.id))}
+                        onClick={() => setShowDeleteConfirm(true)}
                         className="bg-amber-500 hover:bg-amber-600 text-red text-xl flex-[1] justify-center">
                         <LuTrash2 /> Delete
                     </DeleteBtn>
@@ -67,15 +68,26 @@ const DetailCard = ({ entry }) => {
                 </div>
 
                 {showDeleteConfirm && (
-                    <div>
-                        <h3>Are you sure you want to delete this diary? 😿</h3>
+                    <div className='rounded-lg border-2 border-red-500 mx-6 p-4 mb-6'>
+                        <h3 className='text-red-700 mb-4'>
+                            Are you sure you want to delete this diary? 😿
+                        </h3>
 
+                        <div className='flex gap-6'>
+                            <DeleteBtn
+                                onClick={() => deleteEntryHandler(Number(entry.id))}
+                            >Yes, Delete</DeleteBtn>
+                            <button
+                                onClick={() => setShowDeleteConfirm(false)}
+                                className='bg-gray-200 hover:bg-gray-400 px-6 rounded-full'
+                            >Cancel</button>
+                        </div>
                     </div>
                 )
                 }
 
             </div>
-        </GeneralContainer>
+        </GeneralContainer >
     );
 };
 export default DetailCard;
