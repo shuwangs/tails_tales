@@ -31,7 +31,7 @@ export const EntriesProvider = ({ children }) => {
 			setLoading(true);
 			setError("");
 			await deleteEntry(entry_id);
-			setEntries(prev => prev.filter(e => e.id !== Number(entry_id)));
+			setEntries((prev) => prev.filter((e) => e.id !== Number(entry_id)));
 			// await fetchEntries();
 		} catch (err) {
 			setError(err.message);

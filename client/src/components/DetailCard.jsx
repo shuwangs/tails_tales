@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useEntries } from "../contexts/EntriesContext.jsx"
+import { useEntries } from "../contexts/EntriesContext.jsx";
+import { toast } from "react-toastify";
 import GeneralContainer from "./ui/GeneralContainer";
 import { getMoodIcon } from "../utils/getIcons";
 import AiDiv from "./ui/AiDiv.jsx";
 import AiBtn from "./ui/AiBtn.jsx";
 import FormBtn from "./ui/FormBtn.jsx";
 import DeleteBtn from "./ui/DeleteBtn.jsx";
-import { LuWandSparkles, LuTrash2, LuArrowLeftToLine, LuCalendarHeart } from "react-icons/lu";
+import {
+    LuWandSparkles,
+    LuTrash2,
+    LuArrowLeftToLine,
+    LuCalendarHeart,
+} from "react-icons/lu";
 
 const DetailCard = ({ entry }) => {
     const navigate = useNavigate();
@@ -16,13 +22,22 @@ const DetailCard = ({ entry }) => {
     const handleDeleteEntry = async (entry_id) => {
         try {
             await deleteEntryHandler(Number(entry_id));
-            navigate("/entries");
+
+            navigate("/entries", {
+                state: { message: "Diary deleted successfully 😿" },
+            })
+
+
         } catch (err) {
             console.error("Delete failed:", err);
+            toast.error(err.message, {
+                position: "top-right",
+            }
+            );
         }
-    }
-    if (error) return <p>{error}</p>
-    if (loading) return <p>Loading</p>
+    };
+    if (error) return <p>{error}</p>;
+    if (loading) return <p>Loading</p>;
 
     return (
         <GeneralContainer className="mt-10 w-80/100 mx-auto gap-6 ">
@@ -67,7 +82,8 @@ const DetailCard = ({ entry }) => {
                     </FormBtn>
                     <DeleteBtn
                         onClick={() => setShowDeleteConfirm(true)}
-                        className="bg-amber-500 hover:bg-amber-600 text-red text-xl flex-[1] justify-center">
+                        className="bg-amber-500 hover:bg-amber-600 text-red-600 text-xl flex-[1] justify-center"
+                    >
                         <LuTrash2 /> Delete
                     </DeleteBtn>
                     <Link
@@ -79,26 +95,26 @@ const DetailCard = ({ entry }) => {
                 </div>
 
                 {showDeleteConfirm && (
-                    <div className='rounded-lg border-2 border-red-500 mx-6 p-4 mb-6'>
-                        <h3 className='text-red-700 mb-4'>
+                    <div className="rounded-lg border-2 border-red-500 mx-6 p-4 mb-6">
+                        <h3 className="text-red-700 mb-4">
                             Are you sure you want to delete this diary? 😿
                         </h3>
 
-                        <div className='flex gap-6'>
-                            <DeleteBtn
-                                onClick={() => handleDeleteEntry(Number(entry.id))}
-                            >Yes, Delete</DeleteBtn>
+                        <div className="flex gap-6">
+                            <DeleteBtn onClick={() => handleDeleteEntry(Number(entry.id))}>
+                                Yes, Delete
+                            </DeleteBtn>
                             <button
                                 onClick={() => setShowDeleteConfirm(false)}
-                                className='bg-gray-200 hover:bg-gray-400 px-6 rounded-full'
-                            >Cancel</button>
+                                className="bg-gray-200 hover:bg-gray-400 px-6 rounded-full"
+                            >
+                                Cancel
+                            </button>
                         </div>
                     </div>
-                )
-                }
-
+                )}
             </div>
-        </GeneralContainer >
+        </GeneralContainer>
     );
 };
 export default DetailCard;

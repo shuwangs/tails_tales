@@ -11,7 +11,7 @@ export const getEntriesByPetId = async (petId) => {
 
 export const deleteEntry = async (entryId) => {
 	const response = await fetch(`/api/entries/${entryId}`, {
-		method: "DELETE"
+		method: "DELETE",
 	});
 	if (!response.ok) {
 		throw new Error("Failed to fetch entries");
@@ -19,4 +19,4 @@ export const deleteEntry = async (entryId) => {
 
 	const deleted = await response.json();
 	return deleted.success;
-}
+};
