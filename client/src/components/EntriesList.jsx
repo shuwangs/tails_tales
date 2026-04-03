@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import EntryCard from "./EntryCard.jsx";
 
@@ -13,7 +15,9 @@ const EntryList = () => {
 		<div className="flex flex-row gap-6">
 			{entries.map((entry) => (
 				<div>
-					<EntryCard entry={entry} />
+					<Link to="/detail">
+						<EntryCard entry={entry} />
+					</Link>
 				</div>
 			))}
 		</div>

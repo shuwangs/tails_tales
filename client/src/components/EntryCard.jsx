@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { getMoodIcon } from "../utils/getIcons.js";
 import GeneralContainer from "./ui/GeneralContainer.jsx";
 import { FaRegClock } from "react-icons/fa";
@@ -5,7 +6,7 @@ import { FaRegClock } from "react-icons/fa";
 const EntryCard = ({ entry }) => {
 	return (
 		<GeneralContainer className="w-90 h-50 ">
-			<div className="flex flex-col px-4 gap-4 pt-4">
+			<div className="flex flex-col p-4 gap-4 h-full">
 				<div className="flex justify-between text-xl">
 					<h3 className="font-heading text-amber-800 font-bold">
 						{entry.title}
@@ -15,7 +16,7 @@ const EntryCard = ({ entry }) => {
 
 				<p className="font-sans">{entry.content}</p>
 
-				<div className="flex items-center gap-2 text-amber-500">
+				<div className="flex items-center gap-2 text-amber-500 mt-auto">
 					{" "}
 					<span>
 						<FaRegClock />{" "}
