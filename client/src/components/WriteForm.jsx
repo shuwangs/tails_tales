@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { moodOpts, weatherOpts } from "../utils/ConstantOptions.js";
 import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
 import { useEntries } from "../contexts/EntriesContext.jsx";
@@ -40,14 +41,17 @@ const WriteForm = () => {
 		event.preventDefault();
 
 		try {
-			console.log("Submitting...");
 			await addEntry(petId, formData);
-
-			console.log("Success, navigating...");
 			setFormData(initalForm);
-			navigate("/entries");
+			navigate("/entries", {
+				state: { message: "Your diary entry has been saved 🐾" }
+			});
 		} catch (error) {
 			console.error("Submit failed:", error);
+			toast.error(error.message, {
+				position: "top-right",
+			}
+			);
 		}
 	};
 
@@ -59,6 +63,7 @@ const WriteForm = () => {
 	if (loading) return <p>Loading...</p>;
 
 	return (
+
 		<div>
 			<h1 className="font-heading text-amber-800 pb-2 flex gap-4">
 				<TfiThought /> <span>Another Day, Another Bobo Thought</span>
