@@ -9,10 +9,6 @@ const DetailPage = () => {
 
 	const selectedEntry = entries.find((entry) => entry.id === Number(id));
 
-	useEffect(() => {
-		console.log("selectedEntry  is: ", selectedEntry);
-	}, [selectedEntry]);
-
 	return (
 		<MainLayout>
 			<DetailCard entry={selectedEntry} />
