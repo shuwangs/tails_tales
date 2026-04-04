@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
 	/* primary color */
 	--color-primary: #f59e0b;
 	--color-primary-light: #fef3c7;
@@ -21,7 +21,6 @@
 	--font-mono: "JetBrains Mono", monospace;
 	/* extras */
 	--color-hover: #fcd34d;
-
 }
 
 @media (max-width: 1024px) {
@@ -30,31 +29,17 @@
 	}
 }
 
-
 body {
 	margin: 0;
 }
 
 #root {
 	width: 100%;
-	/* max-width: 1126px; */
+	background-color: var(--color-bg);
 	margin: 0 auto;
 }
-
 
 h1 {
 	font-size: 36px;
 	margin: 20px 0;
-}
-
-h2 {
-	font-size: 20px;
-}
-
-p {
-	margin: 0;
-}
-
-:root {
-	background-color: var(--color-bg);
 }

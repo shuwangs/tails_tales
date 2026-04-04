@@ -4,12 +4,10 @@ import { Pool } from "pg";
 dotenv.config();
 
 let pool;
-
 if (process.env.db_connection) {
 	pool = new Pool({
-		connectionString: process.env.db_connection
+		connectionString: process.env.db_connection,
 	});
-
 } else {
 	pool = new Pool({
 		host: process.env.PGHOST,
@@ -18,5 +16,4 @@ if (process.env.db_connection) {
 		port: process.env.PGPORT,
 	});
 }
-
 export default pool;

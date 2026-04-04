@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import { EntriesProvider } from "./contexts/EntriesContext";
+import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import WritePage from "./pages/WirtePage";
-import NavBar from "./components/NavBar";
-
 import "./App.css";
 
 function App() {
@@ -15,6 +14,7 @@ function App() {
 				<Routes>
 					<Route path="/entries" element={<HomePage />} />
 					<Route path="/write" element={<WritePage />} />
+					<Route path="/entries/:id" element={<DetailPage />} />
 				</Routes>
 			</EntriesProvider>
 		</BrowserRouter>
