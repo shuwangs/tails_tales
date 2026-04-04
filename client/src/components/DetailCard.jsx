@@ -27,9 +27,7 @@ const DetailCard = ({ entry }) => {
                 state: { message: "Diary deleted successfully 😿" },
             })
 
-
         } catch (err) {
-            console.error("Delete failed:", err);
             toast.error(err.message, {
                 position: "top-right",
             }

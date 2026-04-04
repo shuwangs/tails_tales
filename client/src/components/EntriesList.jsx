@@ -7,10 +7,6 @@ import EntryCard from "./EntryCard.jsx";
 const EntryList = () => {
 	const { entries, loading, error } = useEntries();
 
-	useEffect(() => {
-		console.log(entries);
-	}, [entries]);
-
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>{`Opps something is wrong, see here ${error}`}</p>;
 	return (
