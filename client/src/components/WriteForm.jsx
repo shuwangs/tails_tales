@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { moodOpts, weatherOpts } from "../utils/ConstantOptions.js";
 import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
 import FormDiv from "./ui/FormDiv";
@@ -13,22 +14,48 @@ import { TbMoodCheck } from "react-icons/tb";
 
 const WriteForm = () => {
 	const initalForm = {
-		mood: "",
-		weather: "",
+		mood: "happy",
+		weather: "sunny",
 		title: "",
 		entry_date: "",
 		content: "",
 	};
+
+	const [formData, setFormData] = useState(initalForm);
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value
+		}))
+	}
+
+	const handleSubmit = () => {
+		console.log("Fake submitting...");
+	}
+
+	const handleClear = () => {
+		setFormData(initalForm);
+	}
+	useEffect(() => {
+		console.log("formData is: ", formData);
+	}, [formData])
+
 	return (
 		<div>
 			<h1 className="font-heading text-amber-800 pb-2 flex gap-4">
 				<TfiThought /> <span>Another Day, Another Bobo Thought</span>
 			</h1>
-			<form className="flex flex-col gap-4">
+			<form onSubmit={handleSubmit}
+				className="flex flex-col gap-4">
 				<div className="flex flex-row gap-6">
 					<div className="flex flex-row gap-2 items-center">
 						<FormLabel htmlFor="mood">ᓚ₍ ^. .^₎</FormLabel>
-						<FormSelect name="mood" value={initalForm.mood}>
+						<FormSelect
+							onChange={handleChange}
+							id="mood"
+							name="mood" value={formData.mood}>
 							{moodOpts.map((mood) => (
 								<option value={mood.value}>
 									{" "}
@@ -39,7 +66,10 @@ const WriteForm = () => {
 					</div>
 					<div className="flex flex-row gap-2 items-center">
 						<FormLabel htmlFor="weather">🌈</FormLabel>
-						<FormSelect name="weather" value={initalForm.weather}>
+						<FormSelect
+							onChange={handleChange}
+
+							name="weather" value={formData.weather}>
 							{weatherOpts.map((weather) => (
 								<option value={weather.value}>
 									{" "}
@@ -51,7 +81,9 @@ const WriteForm = () => {
 
 					<div>
 						<FormLabel htmlFor="entry_date">🗓️</FormLabel>
-						<FormInput name="entry_date" type="date" />
+						<FormInput
+							onChange={handleChange}
+							name="entry_date" type="date" />
 					</div>
 				</div>
 
@@ -59,6 +91,7 @@ const WriteForm = () => {
 					<FormDiv className="flex flex-col bg-amber-50">
 						<FormLabel htmlFor="title">Title </FormLabel>
 						<FormInput
+							onChange={handleChange}
 							className="placeholder:text-amber-400"
 							name="title"
 							placeholder="Give your memory a title..."
@@ -67,6 +100,7 @@ const WriteForm = () => {
 					<FormDiv className="flex flex-col bg-amber-50">
 						<FormLabel htmlFor="title">Story </FormLabel>
 						<textarea
+							onChange={handleChange}
 							name="title"
 							className="w-full h-60 max-h-80 placeholder:text-amber-400 font-mono text-lg px-2 py-2"
 							placeholder="What's on your mind today Bobo?"
@@ -80,8 +114,10 @@ const WriteForm = () => {
 					<FormBtn className="bg-amber-500 hover:bg-amber-600 text-white">
 						<IoMdSave /> Save Diary
 					</FormBtn>
-					<FormBtn className="bg-amber-500 hover:bg-amber-600 text-white">
-						{" "}
+					<FormBtn
+						onClick={handleClear}
+						className="bg-amber-500 hover:bg-amber-600 text-white">
+
 						<SiCcleaner /> Clear
 					</FormBtn>
 				</div>
