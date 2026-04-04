@@ -8,7 +8,7 @@ const DetailPage = () => {
 	const { entries } = useEntries();
 
 	const selectedEntry = entries.find((entry) => entry.id === Number(id));
-	const badchange = "some text"
+	const badchange = "some text";
 
 	return (
 		<MainLayout>
