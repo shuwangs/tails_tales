@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { moodOpts, weatherOpts } from "../utils/ConstantOptions.js";
 import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
+import { useEntries } from '../contexts/EntriesContext.jsx';
 import FormDiv from "./ui/FormDiv";
 import FormBtn from "./ui/FormBtn";
 import AiCard from "./AiCard";
@@ -13,6 +15,9 @@ import { TfiThought } from "react-icons/tfi";
 import { TbMoodCheck } from "react-icons/tb";
 
 const WriteForm = () => {
+	const navigate = useNavigate();
+	const { petId, error, setError, loading, setLoading, addEntry } = useEntries();
+
 	const initalForm = {
 		mood: "happy",
 		weather: "sunny",
@@ -31,16 +36,30 @@ const WriteForm = () => {
 		}))
 	}
 
-	const handleSubmit = () => {
-		console.log("Fake submitting...");
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		try {
+			console.log("Submitting...");
+			await addEntry(petId, formData);
+
+			console.log("Success, navigating...");
+			setFormData(initalForm);
+			navigate("/entries");
+		} catch (error) {
+			console.error("Submit failed:", error);
+		}
 	}
 
 	const handleClear = () => {
 		setFormData(initalForm);
 	}
+
 	useEffect(() => {
 		console.log("formData is: ", formData);
 	}, [formData])
+
+
 
 	return (
 		<div>
@@ -94,14 +113,16 @@ const WriteForm = () => {
 							onChange={handleChange}
 							className="placeholder:text-amber-400"
 							name="title"
+							value={formData.title}
 							placeholder="Give your memory a title..."
 						/>
 					</FormDiv>
 					<FormDiv className="flex flex-col bg-amber-50">
-						<FormLabel htmlFor="title">Story </FormLabel>
+						<FormLabel htmlFor="content">Story </FormLabel>
 						<textarea
 							onChange={handleChange}
-							name="title"
+							name="content"
+							value={formData.content}
 							className="w-full h-60 max-h-80 placeholder:text-amber-400 font-mono text-lg px-2 py-2"
 							placeholder="What's on your mind today Bobo?"
 						/>
@@ -111,13 +132,16 @@ const WriteForm = () => {
 				{/*  AI suggestion Card */}
 				<AiCard />
 				<div className="flex flex-row gap-6">
-					<FormBtn className="bg-amber-500 hover:bg-amber-600 text-white">
+					<FormBtn
+						type="submit"
+						className="bg-amber-500 hover:bg-amber-600 text-white">
 						<IoMdSave /> Save Diary
 					</FormBtn>
+
 					<FormBtn
+						type="button"
 						onClick={handleClear}
 						className="bg-amber-500 hover:bg-amber-600 text-white">
-
 						<SiCcleaner /> Clear
 					</FormBtn>
 				</div>
