@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getEntriesByPetId } from "../services/entryService.js";
+import {
+	getEntriesByPetId,
+	addEntriesToPetId,
+} from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -26,11 +29,29 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const addEntry = async (pet_id, newEntry) => {
+		try {
+			setLoading(true);
+			setError("");
+			const result = await addEntriesToPetId(pet_id, newEntry);
+			console.log("In entryContext check the result", result);
+			setEntries((prev) => [...prev, result]);
+			console.log("In entryContext check after setEntries", entries);
+
+			// await fetchEntries(pet_id);
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	const values = {
 		petId,
 		entries,
 		error,
 		loading,
+		addEntry,
 	};
 
 	return (
