@@ -1,4 +1,5 @@
 import MainLayout from "../layout/MainLayout";
+
 const WritePage = () => {
 	return (
 		<MainLayout>
