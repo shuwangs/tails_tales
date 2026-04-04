@@ -13,6 +13,7 @@ const DetailPage = () => {
 	return (
 		<MainLayout>
 			<DetailCard entry={selectedEntry} />
+			{badchange}
 		</MainLayout>
 	);
 };
