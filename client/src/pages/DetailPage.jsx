@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import MainLayout from "../layout/MainLayout.jsx";
