@@ -19,6 +19,11 @@ jobs:
         uses: biomejs/setup-biome@v2
         with:
           version: latest
+      - name: Show repo structure
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 -type d
       - name: Check client
         working-directory: client
         run: biome ci .
