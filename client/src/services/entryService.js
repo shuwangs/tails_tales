@@ -19,6 +19,7 @@ export const addEntriesToPetId = async (petId, newEntry) => {
 		throw new Error("Failed to post entry");
 	}
 
-	const newDairy = await result.json.data();
-	return newDairy;
+	const newDairy = await result.json();
+	console.log("In the service newDiary", newDairy);
+	return newDairy.data;
 };

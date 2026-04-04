@@ -34,7 +34,10 @@ export const EntriesProvider = ({ children }) => {
 			setLoading(true);
 			setError("");
 			const result = await addEntriesToPetId(pet_id, newEntry);
+			console.log("In entryContext check the result", result);
 			setEntries((prev) => [...prev, result]);
+			console.log("In entryContext check after setEntries", entries);
+
 			// await fetchEntries(pet_id);
 		} catch (err) {
 			setError(err.message);
