@@ -1,7 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS vector;
 
 CREATE SCHEMA IF NOT EXISTS pet_diary;
-SET search_path TO pet_diary;
+SET search_path TO pet_diary , public;
 
 DROP TABLE IF EXISTS diary_entries CASCADE;
 DROP TABLE IF EXISTS pets CASCADE;
