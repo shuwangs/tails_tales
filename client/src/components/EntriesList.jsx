@@ -17,7 +17,7 @@ const EntryList = () => {
 		<div className="flex flex-wrap justify-around gap-6">
 			{entries.map((entry) => (
 				<div>
-					<Link to="/detail">
+					<Link to={`/entries/${entry.id}`}>
 						<EntryCard entry={entry} />
 					</Link>
 				</div>

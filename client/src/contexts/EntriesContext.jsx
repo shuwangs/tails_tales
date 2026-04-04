@@ -1,8 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import {
-	getEntriesByPetId,
-	addEntriesToPetId,
-} from "../services/entryService.js";
+import { getEntriesByPetId, deleteEntry, addEntriesToPetId, } from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -29,6 +26,19 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const deleteEntryHandler = async (entry_id) => {
+		try {
+			setLoading(true);
+			setError("");
+			await deleteEntry(entry_id);
+			setEntries((prev) => prev.filter((e) => e.id !== Number(entry_id)));
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	const addEntry = async (pet_id, newEntry) => {
 		try {
 			setLoading(true);
@@ -37,8 +47,6 @@ export const EntriesProvider = ({ children }) => {
 			console.log("In entryContext check the result", result);
 			setEntries((prev) => [...prev, result]);
 			console.log("In entryContext check after setEntries", entries);
-
-			// await fetchEntries(pet_id);
 		} catch (err) {
 			setError(err.message);
 		} finally {
@@ -51,6 +59,7 @@ export const EntriesProvider = ({ children }) => {
 		entries,
 		error,
 		loading,
+		deleteEntryHandler,
 		addEntry,
 	};
 

@@ -1,8 +1,16 @@
+import { useParams } from "react-router-dom";
+import { useEntries } from "../contexts/EntriesContext.jsx";
 import MainLayout from "../layout/MainLayout.jsx";
+import DetailCard from "../components/DetailCard.jsx";
 const DetailPage = () => {
+	const { id } = useParams();
+	const { entries } = useEntries();
+
+	const selectedEntry = entries.find((entry) => entry.id === Number(id));
+
 	return (
 		<MainLayout>
-			<h1>This is the detail Page</h1>;
+			<DetailCard entry={selectedEntry} />
 		</MainLayout>
 	);
 };

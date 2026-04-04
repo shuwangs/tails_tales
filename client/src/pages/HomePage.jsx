@@ -16,11 +16,9 @@ const HomePage = () => {
 			});
 		}
 	}, [location.state]);
-
 	return (
 		<MainLayout>
 			<ToastContainer />
-
 			<div className="flex flex-col gap-10">
 				<h1>
 					{"ฅ•ω•ฅ"} Welcome to my diary {">-;;⁠;⁠;€ᐷ"}
