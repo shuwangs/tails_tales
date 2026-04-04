@@ -21,7 +21,6 @@
 	--font-mono: "JetBrains Mono", monospace;
 	/* extras */
 	--color-hover: #fcd34d;
-
 }
 
 @media (max-width: 1024px) {
@@ -36,7 +35,7 @@ body {
 
 #root {
 	width: 100%;
-	/* max-width: 1126px; */
+	background-color: var(--color-bg);
 	margin: 0 auto;
 }
 
@@ -47,8 +46,4 @@ h1 {
 
 p {
 	margin: 0;
-}
-
-:root {
-	background-color: var(--color-bg);
 }

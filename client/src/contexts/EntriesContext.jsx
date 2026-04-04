@@ -1,5 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { addEntriesToPetId, deleteEntry, getEntriesByPetId } from "../services/entryService.js";
+import {
+	addEntriesToPetId,
+	deleteEntry,
+	getEntriesByPetId,
+} from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -24,9 +28,7 @@ export const EntriesProvider = ({ children }) => {
 		};
 
 		fetchEntries(petId);
-	}, [petId]);
-
-
+	}, []);
 
 	const deleteEntryHandler = async (entry_id) => {
 		try {

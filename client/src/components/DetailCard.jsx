@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useEntries } from "../contexts/EntriesContext.jsx";
-import { getMoodIcon } from "../utils/getIcons";
 import {
 	LuArrowLeftToLine,
 	LuCalendarHeart,
 	LuTrash2,
 	LuWandSparkles,
 } from "react-icons/lu";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEntries } from "../contexts/EntriesContext.jsx";
+import { getMoodIcon } from "../utils/getIcons";
 import AiBtn from "./ui/AiBtn.jsx";
 import AiDiv from "./ui/AiDiv.jsx";
 import DeleteBtn from "./ui/DeleteBtn.jsx";
