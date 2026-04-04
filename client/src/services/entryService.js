@@ -20,3 +20,20 @@ export const deleteEntry = async (entryId) => {
 	const deleted = await response.json();
 	return deleted.success;
 };
+
+export const addEntriesToPetId = async (petId, newEntry) => {
+	const result = await fetch(`/api/pets/${petId}/entries`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(newEntry),
+	});
+	if (!result.ok) {
+		throw new Error("Failed to post entry");
+	}
+
+	const newDairy = await result.json();
+	console.log("In the service newDiary", newDairy);
+	return newDairy.data;
+};

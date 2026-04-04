@@ -11,8 +11,10 @@ const EntryList = () => {
 		console.log(entries);
 	}, [entries]);
 
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>{`Opps something is wrong, see here ${error}`}</p>;
 	return (
-		<div className="flex flex-row gap-6">
+		<div className="flex flex-wrap justify-around gap-6">
 			{entries.map((entry) => (
 				<div>
 					<Link to={`/entries/${entry.id}`}>

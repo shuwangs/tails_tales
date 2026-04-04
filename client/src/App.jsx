@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { EntriesProvider } from "./contexts/EntriesContext";
