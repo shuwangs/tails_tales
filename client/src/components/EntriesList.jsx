@@ -14,7 +14,7 @@ const EntryList = () => {
 	if (loading) return <p>Loading...</p>
 	if (loading) return <p>{`Opps something is wrong, see here ${error}`}</p>
 	return (
-		<div className="flex flex-row gap-6">
+		<div className="flex flex-wrap justify-around gap-6">
 			{entries.map((entry) => (
 				<div>
 					<Link to="/detail">
