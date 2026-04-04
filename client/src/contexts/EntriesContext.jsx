@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getEntriesByPetId, addEntriesToPetId } from "../services/entryService.js";
+import {
+	getEntriesByPetId,
+	addEntriesToPetId,
+} from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -12,7 +15,6 @@ export const EntriesProvider = ({ children }) => {
 	useEffect(() => {
 		fetchEntries(petId);
 	}, [petId]);
-
 
 	const fetchEntries = async (pet_id) => {
 		try {
@@ -27,21 +29,19 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
-
 	const addEntry = async (pet_id, newEntry) => {
 		try {
 			setLoading(true);
-			setError("")
+			setError("");
 			const result = await addEntriesToPetId(pet_id, newEntry);
 			setEntries((prev) => [...prev, result]);
 			// await fetchEntries(pet_id);
-
 		} catch (err) {
 			setError(err.message);
 		} finally {
 			setLoading(false);
 		}
-	}
+	};
 
 	const values = {
 		petId,

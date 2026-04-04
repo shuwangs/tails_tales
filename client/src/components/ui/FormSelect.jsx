@@ -6,7 +6,7 @@ const FormSelect = ({ children, className, ...rest }) => {
 			{...rest}
 		>
 			{children}
-		</select >
+		</select>
 	);
 };
 

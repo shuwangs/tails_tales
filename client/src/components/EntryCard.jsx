@@ -17,7 +17,6 @@ const EntryCard = ({ entry }) => {
 					<p className="line-clamp-3 ">{entry.content}</p>
 				</div>
 
-
 				<div className="flex items-center gap-2 text-amber-500 mt-auto">
 					{" "}
 					<span>

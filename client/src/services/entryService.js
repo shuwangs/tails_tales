@@ -7,7 +7,6 @@ export const getEntriesByPetId = async (petId) => {
 	return data.data;
 };
 
-
 export const addEntriesToPetId = async (petId, newEntry) => {
 	const result = await fetch(`/api/pets/${petId}/entries`, {
 		method: "POST",
@@ -15,11 +14,11 @@ export const addEntriesToPetId = async (petId, newEntry) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(newEntry),
-	})
+	});
 	if (!result.ok) {
 		throw new Error("Failed to post entry");
 	}
 
 	const newDairy = await result.json.data();
 	return newDairy;
-}
+};

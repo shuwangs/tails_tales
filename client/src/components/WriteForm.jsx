@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { moodOpts, weatherOpts } from "../utils/ConstantOptions.js";
 import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
-import { useEntries } from '../contexts/EntriesContext.jsx';
+import { useEntries } from "../contexts/EntriesContext.jsx";
 import FormDiv from "./ui/FormDiv";
 import FormBtn from "./ui/FormBtn";
 import AiCard from "./AiCard";
@@ -16,7 +16,7 @@ import { TbMoodCheck } from "react-icons/tb";
 
 const WriteForm = () => {
 	const navigate = useNavigate();
-	const { petId, error, setError, loading, setLoading, addEntry } = useEntries();
+	const { petId, error, loading, addEntry } = useEntries();
 
 	const initalForm = {
 		mood: "happy",
@@ -32,9 +32,9 @@ const WriteForm = () => {
 		const { name, value } = event.target;
 		setFormData((prev) => ({
 			...prev,
-			[name]: value
-		}))
-	}
+			[name]: value,
+		}));
+	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -49,32 +49,30 @@ const WriteForm = () => {
 		} catch (error) {
 			console.error("Submit failed:", error);
 		}
-	}
+	};
 
 	const handleClear = () => {
 		setFormData(initalForm);
-	}
+	};
 
-	useEffect(() => {
-		console.log("formData is: ", formData);
-	}, [formData])
-
-
+	if (error) return <p>{error}</p>;
+	if (loading) return <p>Loading...</p>;
 
 	return (
 		<div>
 			<h1 className="font-heading text-amber-800 pb-2 flex gap-4">
 				<TfiThought /> <span>Another Day, Another Bobo Thought</span>
 			</h1>
-			<form onSubmit={handleSubmit}
-				className="flex flex-col gap-4">
+			<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 				<div className="flex flex-row gap-6">
 					<div className="flex flex-row gap-2 items-center">
 						<FormLabel htmlFor="mood">ᓚ₍ ^. .^₎</FormLabel>
 						<FormSelect
 							onChange={handleChange}
 							id="mood"
-							name="mood" value={formData.mood}>
+							name="mood"
+							value={formData.mood}
+						>
 							{moodOpts.map((mood) => (
 								<option value={mood.value}>
 									{" "}
@@ -87,8 +85,9 @@ const WriteForm = () => {
 						<FormLabel htmlFor="weather">🌈</FormLabel>
 						<FormSelect
 							onChange={handleChange}
-
-							name="weather" value={formData.weather}>
+							name="weather"
+							value={formData.weather}
+						>
 							{weatherOpts.map((weather) => (
 								<option value={weather.value}>
 									{" "}
@@ -100,9 +99,7 @@ const WriteForm = () => {
 
 					<div>
 						<FormLabel htmlFor="entry_date">🗓️</FormLabel>
-						<FormInput
-							onChange={handleChange}
-							name="entry_date" type="date" />
+						<FormInput onChange={handleChange} name="entry_date" type="date" />
 					</div>
 				</div>
 
@@ -134,14 +131,16 @@ const WriteForm = () => {
 				<div className="flex flex-row gap-6">
 					<FormBtn
 						type="submit"
-						className="bg-amber-500 hover:bg-amber-600 text-white">
+						className="bg-amber-500 hover:bg-amber-600 text-white"
+					>
 						<IoMdSave /> Save Diary
 					</FormBtn>
 
 					<FormBtn
 						type="button"
 						onClick={handleClear}
-						className="bg-amber-500 hover:bg-amber-600 text-white">
+						className="bg-amber-500 hover:bg-amber-600 text-white"
+					>
 						<SiCcleaner /> Clear
 					</FormBtn>
 				</div>
