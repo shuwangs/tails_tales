@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
+import DetailCard from "../components/DetailCard.jsx";
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import MainLayout from "../layout/MainLayout.jsx";
-import DetailCard from "../components/DetailCard.jsx";
+
 const DetailPage = () => {
 	const { id } = useParams();
 	const { entries } = useEntries();

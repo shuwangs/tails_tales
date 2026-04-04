@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getEntriesByPetId, deleteEntry, addEntriesToPetId, } from "../services/entryService.js";
+import { createContext, useContext, useEffect, useState } from "react";
+import { addEntriesToPetId, deleteEntry, getEntriesByPetId } from "../services/entryService.js";
 
 const EntriesContext = createContext();
 
@@ -10,21 +10,23 @@ export const EntriesProvider = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		const fetchEntries = async (pet_id) => {
+			try {
+				setLoading(true);
+				setError("");
+				const result = await getEntriesByPetId(pet_id);
+				setEntries(result);
+			} catch (err) {
+				setError(err.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
 		fetchEntries(petId);
 	}, [petId]);
 
-	const fetchEntries = async (pet_id) => {
-		try {
-			setLoading(true);
-			setError("");
-			const result = await getEntriesByPetId(pet_id);
-			setEntries(result);
-		} catch (err) {
-			setError(err.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+
 
 	const deleteEntryHandler = async (entry_id) => {
 		try {
@@ -44,9 +46,7 @@ export const EntriesProvider = ({ children }) => {
 			setLoading(true);
 			setError("");
 			const result = await addEntriesToPetId(pet_id, newEntry);
-			console.log("In entryContext check the result", result);
 			setEntries((prev) => [...prev, result]);
-			console.log("In entryContext check after setEntries", entries);
 		} catch (err) {
 			setError(err.message);
 		} finally {

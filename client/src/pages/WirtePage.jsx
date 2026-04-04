@@ -1,5 +1,3 @@
-import { ToastContainer } from 'react-toastify';
-import AiCard from "../components/AiCard.jsx";
 import GeneralContainer from "../components/ui/GeneralContainer";
 import WriteForm from "../components/WriteForm.jsx";
 import MainLayout from "../layout/MainLayout";

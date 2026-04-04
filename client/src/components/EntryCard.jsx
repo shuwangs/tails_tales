@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
+import { FaRegClock } from "react-icons/fa";
 import { getMoodIcon } from "../utils/getIcons.js";
 import GeneralContainer from "./ui/GeneralContainer.jsx";
-import { FaRegClock } from "react-icons/fa";
 
 const EntryCard = ({ entry }) => {
 	return (

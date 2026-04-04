@@ -1,5 +1,3 @@
-import { FaTeeth } from "react-icons/fa";
-
 export const getEntriesByPetId = async (petId) => {
 	const response = await fetch(`/api/pets/${petId}/entries`);
 	if (!response.ok) {

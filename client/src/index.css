@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
 	/* primary color */
 	--color-primary: #f59e0b;
 	--color-primary-light: #fef3c7;
@@ -48,7 +48,6 @@ h1 {
 p {
 	margin: 0;
 }
-
 
 :root {
 	background-color: var(--color-bg);

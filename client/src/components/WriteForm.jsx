@@ -1,20 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { useEntries } from "../contexts/EntriesContext.jsx";
 import { moodOpts, weatherOpts } from "../utils/ConstantOptions.js";
 import { getMoodIcon, getWeatherIcon } from "../utils/getIcons.js";
-import { useEntries } from "../contexts/EntriesContext.jsx";
-import FormDiv from "./ui/FormDiv";
-import FormBtn from "./ui/FormBtn";
-import AiCard from "./AiCard";
-import FormSelect from "./ui/FormSelect.jsx";
-import FormLabel from "./ui/FormLabel.jsx";
-import FormInput from "./ui/FormInput.jsx";
-import { SiCcleaner } from "react-icons/si";
 import { IoMdSave } from "react-icons/io";
+import { SiCcleaner } from "react-icons/si";
 import { TfiThought } from "react-icons/tfi";
-import { TbMoodCheck } from "react-icons/tb";
-
+import AiCard from "./AiCard";
+import FormBtn from "./ui/FormBtn";
+import FormDiv from "./ui/FormDiv";
+import FormInput from "./ui/FormInput.jsx";
+import FormLabel from "./ui/FormLabel.jsx";
+import FormSelect from "./ui/FormSelect.jsx";
 const WriteForm = () => {
 	const navigate = useNavigate();
 	const { petId, error, loading, addEntry } = useEntries();
@@ -44,14 +42,13 @@ const WriteForm = () => {
 			await addEntry(petId, formData);
 			setFormData(initalForm);
 			navigate("/entries", {
-				state: { message: "Your diary entry has been saved 🐾" }
+				state: { message: "Your diary entry has been saved 🐾" },
 			});
 		} catch (error) {
 			console.error("Submit failed:", error);
 			toast.error(error.message, {
 				position: "top-right",
-			}
-			);
+			});
 		}
 	};
 
@@ -63,7 +60,6 @@ const WriteForm = () => {
 	if (loading) return <p>Loading...</p>;
 
 	return (
-
 		<div>
 			<h1 className="font-heading text-amber-800 pb-2 flex gap-4">
 				<TfiThought /> <span>Another Day, Another Bobo Thought</span>
@@ -79,7 +75,7 @@ const WriteForm = () => {
 							value={formData.mood}
 						>
 							{moodOpts.map((mood) => (
-								<option value={mood.value}>
+								<option value={mood.value} key={mood.value}>
 									{" "}
 									{mood.label} {getMoodIcon(mood.value)}
 								</option>
@@ -94,7 +90,7 @@ const WriteForm = () => {
 							value={formData.weather}
 						>
 							{weatherOpts.map((weather) => (
-								<option value={weather.value}>
+								<option value={weather.value} key={weather.value}>
 									{" "}
 									{weather.label} {getWeatherIcon(weather.value)}
 								</option>

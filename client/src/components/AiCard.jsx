@@ -1,7 +1,6 @@
-import GeneralContainer from "./ui/GeneralContainer";
-import AiDiv from "./ui/AiDiv.jsx";
-import AiBtn from "./ui/AiBtn.jsx";
 import { HiMiniSparkles } from "react-icons/hi2";
+import AiBtn from "./ui/AiBtn.jsx";
+import AiDiv from "./ui/AiDiv.jsx";
 
 const AiCard = () => {
 	return (

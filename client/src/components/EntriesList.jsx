@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import EntryCard from "./EntryCard.jsx";
 
@@ -12,7 +10,7 @@ const EntryList = () => {
 	return (
 		<div className="flex flex-wrap justify-around gap-6">
 			{entries.map((entry) => (
-				<div>
+				<div key={entry.id}>
 					<Link to={`/entries/${entry.id}`}>
 						<EntryCard entry={entry} />
 					</Link>

@@ -1,5 +1,6 @@
-import GeneralContainer from "./ui/GeneralContainer";
 import FormInput from "./ui/FormInput.jsx";
+import GeneralContainer from "./ui/GeneralContainer";
+
 const SearchBar = () => {
 	return (
 		<GeneralContainer className="">
