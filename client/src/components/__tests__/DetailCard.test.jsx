@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import DetailCard from "../DetailCard";
-import { useEntries } from "../../contexts/EntriesContext";
 import { MemoryRouter } from "react-router-dom";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useEntries } from "../../contexts/EntriesContext";
+import DetailCard from "../DetailCard";
 
 vi.mock("../../contexts/EntriesContext.jsx", () => ({
 	useEntries: vi.fn(),

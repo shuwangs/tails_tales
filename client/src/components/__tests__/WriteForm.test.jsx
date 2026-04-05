@@ -1,10 +1,9 @@
-import "@testing-library/jest-dom/vitest";
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-import WriteForm from "../WriteForm.jsx";
-import { useEntries } from "../../contexts/EntriesContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { describe, expect, it, vi } from "vitest";
+import { useEntries } from "../../contexts/EntriesContext.jsx";
+import WriteForm from "../WriteForm.jsx";
 
 vi.mock("../../contexts/EntriesContext.jsx", () => ({
 	useEntries: vi.fn(),

@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
-import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, beforeEach } from "vitest";
+import { BrowserRouter } from "react-router-dom";
+import { beforeEach, describe, expect, it } from "vitest";
 import NavBar from "../NavBar.jsx";
 
-const routes = ["Homes", "Write"];
+const _routes = ["Home", "Write"];
 
 describe("NavBar test", () => {
 	beforeEach(() => {

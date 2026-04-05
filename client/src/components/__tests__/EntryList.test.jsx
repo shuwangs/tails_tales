@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/vitest";
+import { describe, expect, it, vi } from "vitest";
+import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
-import EntryList from "../EntryList.jsx";
 import { useEntries } from "../../contexts/EntriesContext.jsx";
+import EntryList from "../EntryList.jsx";
 
 vi.mock("../../contexts/EntriesContext.jsx", () => ({
 	useEntries: vi.fn(),
