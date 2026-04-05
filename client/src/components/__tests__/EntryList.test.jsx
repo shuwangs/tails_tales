@@ -6,27 +6,27 @@ import EntryList from "../EntryList.jsx";
 import { useEntries } from "../../contexts/EntriesContext.jsx";
 
 vi.mock("../../contexts/EntriesContext.jsx", () => ({
-	useEntries: vi.fn(),
+    useEntries: vi.fn(),
 }));
 
 vi.mock("../EntryCard.jsx", () => ({
-	default: ({ entry }) => <div>{entry.title}</div>,
+    default: ({ entry }) => <div>{entry.title}</div>,
 }));
 
 describe("EntryList", () => {
-	it("shows loading state", () => {
-		useEntries.mockReturnValue({
-			entries: [],
-			loading: true,
-			error: null,
-		});
+    it("shows loading state", () => {
+        useEntries.mockReturnValue({
+            entries: [],
+            loading: true,
+            error: null,
+        });
 
-		render(
-			<MemoryRouter>
-				<EntryList />
-			</MemoryRouter>,
-		);
+        render(
+            <MemoryRouter>
+                <EntryList />
+            </MemoryRouter>,
+        );
 
-		expect(screen.getByText("Loading...")).toBeInTheDocument();
-	});
+        expect(screen.getByText("Loading...")).toBeInTheDocument();
+    });
 });
