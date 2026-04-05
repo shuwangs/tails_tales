@@ -19,5 +19,22 @@ describe("NavBar test", () => {
         expect(await screen.findByText('Write')).toBeVisible()
     })
 
+    it("has correct navigation paths", () => {
+
+        expect(screen.getByRole("link", { name: /bobo's diary/i })).toHaveAttribute(
+            "href",
+            "/entries",
+        );
+
+        expect(screen.getByRole("link", { name: /home/i })).toHaveAttribute(
+            "href",
+            "/entries",
+        );
+
+        expect(screen.getByRole("link", { name: /write/i })).toHaveAttribute(
+            "href",
+            "/write",
+        );
+    });
 
 })
