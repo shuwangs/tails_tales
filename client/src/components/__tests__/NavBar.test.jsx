@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, beforeEach } from "vitest"
+import { describe, it, expect, beforeEach } from "vitest";
 import NavBar from "../NavBar.jsx";
 
-const routes = ['Homes', 'Write']
+const routes = ["Homes", "Write"];
 
 describe("NavBar test", () => {
     beforeEach(() => {
@@ -12,15 +12,14 @@ describe("NavBar test", () => {
             <BrowserRouter>
                 <NavBar />
             </BrowserRouter>,
-        )
-    })
-    it('should verify route layout', async () => {
-        expect(await screen.findByText('Home')).toBeVisible()
-        expect(await screen.findByText('Write')).toBeVisible()
-    })
+        );
+    });
+    it("should verify route layout", async () => {
+        expect(await screen.findByText("Home")).toBeVisible();
+        expect(await screen.findByText("Write")).toBeVisible();
+    });
 
     it("has correct navigation paths", () => {
-
         expect(screen.getByRole("link", { name: /bobo's diary/i })).toHaveAttribute(
             "href",
             "/entries",
@@ -36,5 +35,4 @@ describe("NavBar test", () => {
             "/write",
         );
     });
-
-})
+});

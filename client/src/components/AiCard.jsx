@@ -10,7 +10,7 @@ const AiCard = () => {
 				<HiMiniSparkles /> AI Writing Assistant
 			</h2>
 			<div className="flex gap-8">
-				<AiBtn type="button" >Suggest a Title</AiBtn>
+				<AiBtn type="button">Suggest a Title</AiBtn>
 				<AiBtn type="button">Placeholder</AiBtn>
 			</div>
 		</AiDiv>
