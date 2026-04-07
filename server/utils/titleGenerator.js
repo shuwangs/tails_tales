@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import { cleanText } from "./cleanText.js";
 import dotenv from "dotenv";
 dotenv.config();
 const apiKey = process.env.GEMINI_API_KEY;
@@ -33,6 +34,7 @@ const titleGenerator = async (content) => {
 
 	const generationConfig = {
 		temperature: 0.3,
+        topP: 0.8,
 	};
 	if (!content || !content.trim()) {
 		throw new Error("Content is required to generate titles");
@@ -45,7 +47,7 @@ const titleGenerator = async (content) => {
 			generationConfig: generationConfig,
 		});
 
-		return result.text;
+		return cleanText(result.text);
 	} catch (error) {
 		console.error("AI title generation failed:", error);
 	}
