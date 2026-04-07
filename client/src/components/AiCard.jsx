@@ -23,9 +23,11 @@ const AiCard = ({content,selectSuggestedTitle}) => {
 				</AiBtn>
 
 				{/* <AiBtn>Summarize</AiBtn> */}
-				<div className="flex border-2 border-violet-700 gap-2 ">
+				<div className="flex gap-2 ">
 				{suggestedTitles.map((title, index) => (
 					<button 
+					className="rounded-lg flex bg-violet-200 hover:bg-violet-300 px-2 justify-center
+					 gap-2 text-xl font-semibold text-violet-700 text-center items-center"
 					type="button"
 					onClick={()=>selectSuggestedTitle(title)}
 					key={index}>{title}</button>
