@@ -34,13 +34,12 @@ const TranslateCard = ({ content }) => {
 				>
 					Translate
 				</AiBtn>
-
-				{translatedText && (
-					<div>
-						<p>{translatedText}</p>
-					</div>
-				)}
 			</div>
+			{translatedText && (
+				<div>
+					<p>{translatedText}</p>
+				</div>
+			)}
 		</AiDiv>
 	);
 };
