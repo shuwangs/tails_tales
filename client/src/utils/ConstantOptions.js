@@ -19,8 +19,8 @@ export const moodOpts = [
 
 export const languages = [
 	{ label: "English", code: "en" },
-	{ label: "Spanish", value: "es" },
-	{ label: "Chinese", value: "zh" },
-	{ label: "French", value: "fr" },
-	{ label: "Janpanese", value: "ja" },
+	{ label: "Spanish", code: "es" },
+	{ label: "Chinese", code: "zh" },
+	{ label: "French", code: "fr" },
+	{ label: "Janpanese", code: "ja" },
 ];
