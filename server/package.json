@@ -16,6 +16,7 @@
 	"type": "module",
 	"dependencies": {
 		"@huggingface/transformers": "^4.0.1",
+		"@google-cloud/translate": "^9.3.0",
 		"@google/genai": "^1.48.0",
 		"cors": "^2.8.6",
 		"dotenv": "^17.3.1",
