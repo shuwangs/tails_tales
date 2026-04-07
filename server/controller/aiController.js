@@ -2,6 +2,7 @@ import { calCosineSimilarity } from "../models/cosineSimilarity.js";
 import { embedText } from "../utils/embedText.js";
 import titleGenerator from "../utils/titleGenerator.js";
 import textTranslator from "../utils/textTranslation.js";
+<<<<<<< HEAD
 
 export const semanticSearch = async (req, res, next) => {
 	console.log("semantic controller is called...");
@@ -39,6 +40,16 @@ export const suggestTitles = async (req, res, next) => {
 			return next(new AppError("Content is required", 400));
 		}
 
+=======
+export const suggestTitles = async (req, res, next) => {
+	console.log("suggesting title controller is called....");
+	try {
+		const { content } = req.body;
+		if (!content || !content.trim()) {
+			return next(new AppError("Content is required", 400));
+		}
+
+>>>>>>> 83ed675 (format code with biome)
 		const titles = await titleGenerator(content);
 		console.log("ai generated titles are: ", titles);
 		res.status(200).json({
@@ -51,12 +62,21 @@ export const suggestTitles = async (req, res, next) => {
 };
 
 export const translateContent = async (req, res, next) => {
+<<<<<<< HEAD
 	console.log("translating controller is called....")
 	try {
 		const { content, target } = req.body;
 		if (!content || !content.trim()) {
 			return next(new AppError("Content is required", 400))
 		};
+=======
+	console.log("translating controller is called....");
+	try {
+		const { content, target } = req.body;
+		if (!content || !content.trim()) {
+			return next(new AppError("Content is required", 400));
+		}
+>>>>>>> 83ed675 (format code with biome)
 		if (!target || !target.trim()) {
 			return next(new AppError("Target language is required", 400));
 		}
