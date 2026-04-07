@@ -34,7 +34,7 @@ const titleGenerator = async (content) => {
 
 	const generationConfig = {
 		temperature: 0.3,
-        topP: 0.8,
+		topP: 0.8,
 	};
 	if (!content || !content.trim()) {
 		throw new Error("Content is required to generate titles");

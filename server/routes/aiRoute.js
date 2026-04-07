@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { suggestTitles, translateContent} from "../controller/aiController.js";
+import { suggestTitles, translateContent } from "../controller/aiController.js";
 
 const router = Router();
 
