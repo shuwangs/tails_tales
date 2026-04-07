@@ -50,3 +50,26 @@ export const getWeatherIcon = (weather) => {
 			break;
 	}
 };
+
+
+export const getFlagIcon = (code) => {
+	switch (code) {
+		case "en":
+			return "🇺🇸";
+
+		case "es":
+			return "🇪🇸";
+
+		case "zh":
+			return "🇨🇳";
+
+		case "fr":
+			return "🇫🇷";
+
+		case "ja":
+			return "🇯🇵";
+
+		default:
+			break;
+	}
+};
