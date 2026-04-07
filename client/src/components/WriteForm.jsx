@@ -28,6 +28,12 @@ const WriteForm = () => {
 
 	const [formData, setFormData] = useState(initalForm);
 
+	const selectSuggestedTitle = (title) => {
+		setFormData((prev) => ({
+			...prev,
+			title,
+		}));
+	}
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prev) => ({
@@ -129,7 +135,10 @@ const WriteForm = () => {
 				</div>
 
 				{/*  AI suggestion Card */}
-				<AiCard content={formData.content}/>
+				<AiCard 
+				selectSuggestedTitle={selectSuggestedTitle}
+				content={formData.content}
+				/>
 				<div className="flex flex-row gap-6">
 					<FormBtn
 						type="submit"

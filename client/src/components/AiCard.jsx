@@ -4,7 +4,7 @@ import AiBtn from "./ui/AiBtn.jsx";
 import AiDiv from "./ui/AiDiv.jsx";
 import { useEffect } from "react";
 
-const AiCard = ({content}) => {
+const AiCard = ({content,selectSuggestedTitle}) => {
 	const {suggestedTitles, isGenerating, handleSuggestTitle} = useEntries();
 	useEffect(()=>{
 		console.log("suggestion titles are: ",suggestedTitles);
@@ -25,7 +25,10 @@ const AiCard = ({content}) => {
 				{/* <AiBtn>Summarize</AiBtn> */}
 				<div className="flex border-2 border-violet-700 gap-2 ">
 				{suggestedTitles.map((title, index) => (
-					<div key={index}>{title}</div>
+					<button 
+					type="button"
+					onClick={()=>selectSuggestedTitle(title)}
+					key={index}>{title}</button>
 				))}
 			</div>
 			</div>
