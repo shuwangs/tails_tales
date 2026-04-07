@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { LuWandSparkles } from "react-icons/lu";
+import { useEntries } from "../contexts/EntriesContext.jsx";
 import AiDiv from "./ui/AiDiv.jsx";
 import AiBtn from "./ui/AiBtn.jsx";
 import { languages } from "../utils/ConstantOptions.js";
 import { getFlagIcon } from "../utils/getIcons.js";
-const TranslateCard = () => {
+const TranslateCard = ({ content }) => {
 	const [targetLang, setTargetLang] = useState("zh");
-	const handleTranslate = () => {
-		console.log("translate button is clicked");
-	};
+	const { translatedText, isTranslating, handleTranslateText } = useEntries();
 
 	return (
 		<AiDiv className="flex flex-col gap-4">
@@ -24,19 +23,23 @@ const TranslateCard = () => {
 					className="border rounded-xl border-violet-500 text-violet-700 text-mono text-lg p-2"
 				>
 					{languages.map((lang) => (
-						<option 
-                            key={lang.code}
-                            value={lang.code}>
+						<option key={lang.code} value={lang.code}>
 							{getFlagIcon(lang.code)} {lang.label}
 						</option>
 					))}
 				</select>
-				<AiBtn 
-                    className="text-lg hover:bg-violet-200"
-                    onClick={handleTranslate} 
-                >
+				<AiBtn
+					className="text-lg hover:bg-violet-200"
+					onClick={() => handleTranslateText(content, targetLang)}
+				>
 					Translate
 				</AiBtn>
+
+				{translatedText && (
+					<div>
+						<p>{translatedText}</p>
+					</div>
+				)}
 			</div>
 		</AiDiv>
 	);

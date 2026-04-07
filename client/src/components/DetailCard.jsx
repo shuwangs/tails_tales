@@ -58,7 +58,7 @@ const DetailCard = ({ entry }) => {
 
 				{/* Translate Card */}
 				<div className="px-8">
-					<TranslateCard />
+					<TranslateCard content={entry.content} />
 				</div>
 
 				<div className="flex flex-row  gap-6 px-8 pb-6">
