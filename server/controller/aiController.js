@@ -1,5 +1,6 @@
 import titleGenerator from "../utils/titleGenerator.js";
 export const suggestTitles = async (req, res, next) => {
+	console.log("suggesting title controller is called....")
 	try {	
 		const { content } = req.body;
 		if (!content || !content.trim()) {
@@ -7,7 +8,7 @@ export const suggestTitles = async (req, res, next) => {
 		};
 
 		const titles =  await titleGenerator(content);
-
+		console.log("ai generated titles are: ", titles);
 		res.status(200).json({
 			success: true,
 			data: titles,

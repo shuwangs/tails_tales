@@ -129,7 +129,7 @@ const WriteForm = () => {
 				</div>
 
 				{/*  AI suggestion Card */}
-				<AiCard />
+				<AiCard content={formData.content}/>
 				<div className="flex flex-row gap-6">
 					<FormBtn
 						type="submit"

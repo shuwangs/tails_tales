@@ -3,6 +3,6 @@ import { suggestTitles } from "../controller/aiController.js";
 
 const router = Router();
 
-router.get("/title", suggestTitles);
+router.post("/title", suggestTitles);
 
 export default router;
