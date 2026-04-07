@@ -51,7 +51,6 @@ export const getWeatherIcon = (weather) => {
 	}
 };
 
-
 export const getFlagIcon = (code) => {
 	switch (code) {
 		case "en":

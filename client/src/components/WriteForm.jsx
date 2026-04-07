@@ -33,7 +33,7 @@ const WriteForm = () => {
 			...prev,
 			title,
 		}));
-	}
+	};
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prev) => ({
@@ -135,9 +135,9 @@ const WriteForm = () => {
 				</div>
 
 				{/*  AI suggestion Card */}
-				<AiCard 
-				selectSuggestedTitle={selectSuggestedTitle}
-				content={formData.content}
+				<AiCard
+					selectSuggestedTitle={selectSuggestedTitle}
+					content={formData.content}
 				/>
 				<div className="flex flex-row gap-6">
 					<FormBtn

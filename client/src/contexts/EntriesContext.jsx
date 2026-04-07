@@ -86,7 +86,7 @@ export const EntriesProvider = ({ children }) => {
 		setIsGeneratingTitle,
 		deleteEntryHandler,
 		addEntry,
-		handleSuggestTitle
+		handleSuggestTitle,
 	};
 
 	return (
