@@ -38,7 +38,7 @@ CREATE TABLE diary_entries(
     content TEXT NOT NULL,
     cover_image_url TEXT,
     entry_date DATE NOT NULL,
-    embedding VECTOR(1536),
+    embedding VECTOR(384),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
