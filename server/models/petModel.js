@@ -1,4 +1,6 @@
 import pool from "../db/db.js";
+import { embedText } from "../utils/embedText.js";
+
 export const getEntriesByPetIdQuery = async (petId) => {
 	const { rows } = await pool.query(
 		`
@@ -15,9 +17,8 @@ export const getEntriesByPetIdQuery = async (petId) => {
 };
 
 export const addEntriesByPetIdQuery = async (petId, entry) => {
-	const { title, mood, content, cover_image_url, entry_date, embedding } =
-		entry;
-
+	const { title, mood, content, cover_image_url, entry_date } = entry;
+	const embedding = await embedText(content);
 	const { rows } = await pool.query(
 		`
         INSERT INTO pet_diary.diary_entries (pet_id, title, mood, content, cover_image_url, entry_date, embedding)
