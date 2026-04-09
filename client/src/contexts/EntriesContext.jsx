@@ -56,6 +56,9 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const onSearch = async (text) => {
+		console.log("Searching for ...", text);
+	}
 	const values = {
 		petId,
 		entries,
@@ -63,6 +66,7 @@ export const EntriesProvider = ({ children }) => {
 		loading,
 		deleteEntryHandler,
 		addEntry,
+		onSearch,
 	};
 
 	return (
