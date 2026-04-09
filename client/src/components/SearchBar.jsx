@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useEntries } from "../contexts/EntriesContext.jsx";
+import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import FormInput from "./ui/FormInput.jsx";
+import { useEntries } from "../contexts/EntriesContext.jsx";
 import FormBtn from "./ui/FormBtn.jsx";
+import FormInput from "./ui/FormInput.jsx";
 
 const SearchBar = () => {
 	const { onSearch, clearSearch } = useEntries();
@@ -16,14 +16,16 @@ const SearchBar = () => {
 				type="text"
 				placeholder="Searching for diary"
 			/>
-			<button className='text-amber-400 text-2xl'
-				onClick={clearSearch}>
+			<button
+				className="text-amber-400 text-2xl"
+				type="button"
+				onClick={clearSearch}
+			>
 				<AiOutlineCloseCircle />
 			</button>
 
 			<FormBtn onClick={() => onSearch(searchText)}>Search</FormBtn>
 		</div>
-
 	);
 };
 

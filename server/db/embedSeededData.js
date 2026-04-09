@@ -1,5 +1,5 @@
-import pool from "./db.js";
 import { embedText } from "../utils/embedText.js";
+import pool from "./db.js";
 
 const backfillEmbedding = async () => {
 	try {

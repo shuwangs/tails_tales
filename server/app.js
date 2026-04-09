@@ -2,9 +2,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import errorHandler from "./middleware/errorHandler.js";
+import aiRoute from "./routes/aiRoute.js";
 import entriesRoute from "./routes/entriesRoute.js";
 import petsRoute from "./routes/petsRoute.js";
-import aiRoute from "./routes/aiRoute.js";
+
 dotenv.config();
 
 const app = express();

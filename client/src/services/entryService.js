@@ -42,7 +42,7 @@ export const searchDiary = async (petId, searchText) => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ searchText })
+		body: JSON.stringify({ searchText }),
 	});
 
 	if (!result.ok) {
@@ -54,5 +54,4 @@ export const searchDiary = async (petId, searchText) => {
 	console.log("In the service search Diary", data);
 
 	return relatedDairy.data;
-
-}
+};

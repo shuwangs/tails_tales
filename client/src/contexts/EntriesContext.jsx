@@ -3,7 +3,7 @@ import {
 	addEntriesToPetId,
 	deleteEntry,
 	getEntriesByPetId,
-	searchDiary
+	searchDiary,
 } from "../services/entryService.js";
 
 const EntriesContext = createContext();
@@ -18,7 +18,7 @@ export const EntriesProvider = ({ children }) => {
 
 	useEffect(() => {
 		console.log("searchResults are: ", searchResults);
-	})
+	});
 	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
 			try {
@@ -78,7 +78,7 @@ export const EntriesProvider = ({ children }) => {
 		} finally {
 			setLoading(false);
 		}
-	}
+	};
 
 	const clearSearch = () => {
 		setSearchResults([]);
