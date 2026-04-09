@@ -3,6 +3,7 @@ import {
 	addEntriesToPetId,
 	deleteEntry,
 	getEntriesByPetId,
+	searchDiary
 } from "../services/entryService.js";
 
 const EntriesContext = createContext();
@@ -12,7 +13,12 @@ export const EntriesProvider = ({ children }) => {
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [searchResults, setSearchResults] = useState([]);
+	const [isSearching, setIsSearching] = useState(false);
 
+	useEffect(() => {
+		console.log("searchResults are: ", searchResults);
+	})
 	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
 			try {
@@ -57,16 +63,38 @@ export const EntriesProvider = ({ children }) => {
 	};
 
 	const onSearch = async (text) => {
-		console.log("Searching for ...", text);
+		try {
+			setLoading(true);
+			setError("");
+			if (!text.trim()) {
+				setSearchResults([]);
+				return;
+			}
+			const result = await searchDiary(petId, text);
+			setIsSearching(true);
+			setSearchResults(result);
+		} catch (error) {
+			setError(error.message);
+		} finally {
+			setLoading(false);
+		}
 	}
+
+	const clearSearch = () => {
+		setSearchResults([]);
+		setIsSearching(false);
+	};
 	const values = {
 		petId,
 		entries,
 		error,
 		loading,
+		searchResults,
+		isSearching,
 		deleteEntryHandler,
 		addEntry,
 		onSearch,
+		clearSearch,
 	};
 
 	return (

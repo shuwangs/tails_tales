@@ -37,12 +37,12 @@ export const addEntriesToPetId = async (petId, newEntry) => {
 };
 
 export const searchDiary = async (petId, searchText) => {
-	const result = await fetch(`/api/pets/${petId}/entries/search`, {
+	const result = await fetch(`/api/ai/${petId}/search`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(searchText)
+		body: JSON.stringify({ searchText })
 	});
 
 	if (!result.ok) {
@@ -50,7 +50,9 @@ export const searchDiary = async (petId, searchText) => {
 	}
 
 	const relatedDairy = await result.json();
-	console.log("In the service newDiary", relatedDairy);
-	return relatedDairy;
+	const data = relatedDairy.data;
+	console.log("In the service search Diary", data);
+
+	return relatedDairy.data;
 
 }
