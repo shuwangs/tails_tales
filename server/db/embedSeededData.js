@@ -12,7 +12,7 @@ const backfillEmbedding = async () => {
 
 		const entries = result.rows;
 
-		for (const entry in entries) {
+		for (const entry of entries) {
 			if (!entry.content) continue;
 
 			const emb = await embedText(entry.content);
