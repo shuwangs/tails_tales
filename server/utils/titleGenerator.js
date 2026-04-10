@@ -7,7 +7,7 @@ const apiKey = process.env.GEMINI_API_KEY;
 const ai = new GoogleGenAI({ apiKey: apiKey });
 
 const titleGenerator = async (content) => {
-    const prompt = `
+	const prompt = `
         ROLE:
         You are a diary-writing cat.
 
@@ -33,29 +33,29 @@ const titleGenerator = async (content) => {
         {"titles" : ["title1", "title2", "title3"]}
     `;
 
-    const generationConfig = {
-        temperature: 0.3,
-        topP: 0.8,
-    };
-    if (!content?.trim()) {
-        throw new Error("Content is required to generate titles");
-    }
+	const generationConfig = {
+		temperature: 0.3,
+		topP: 0.8,
+	};
+	if (!content?.trim()) {
+		throw new Error("Content is required to generate titles");
+	}
 
-    try {
-        const result = await ai.models.generateContent({
-            model: "gemini-3-flash-preview",
-            contents: prompt,
-            generationConfig: generationConfig,
-        });
+	try {
+		const result = await ai.models.generateContent({
+			model: "gemini-3-flash-preview",
+			contents: prompt,
+			generationConfig: generationConfig,
+		});
 
-        return cleanText(result.text);
-    } catch (error) {
-        console.error("AI title generation failed:", error);
-    }
+		return cleanText(result.text);
+	} catch (error) {
+		console.error("AI title generation failed:", error);
+	}
 };
 
 if (!apiKey) {
-    console.warn("GEMINI_API_KEY not found in .env");
+	console.warn("GEMINI_API_KEY not found in .env");
 }
 
 export default titleGenerator;
