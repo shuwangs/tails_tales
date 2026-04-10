@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { LuWandSparkles } from "react-icons/lu";
 import { useEntries } from "../contexts/EntriesContext.jsx";
-import AiDiv from "./ui/AiDiv.jsx";
-import AiBtn from "./ui/AiBtn.jsx";
 import { languages } from "../utils/ConstantOptions.js";
 import { getFlagIcon } from "../utils/getIcons.js";
+import AiBtn from "./ui/AiBtn.jsx";
+import AiDiv from "./ui/AiDiv.jsx";
+
 const TranslateCard = ({ content }) => {
 	const [targetLang, setTargetLang] = useState("zh");
-	const { translatedText, isTranslating, handleTranslateText } = useEntries();
+	const { translatedText, handleTranslateText } = useEntries();
 
 	return (
 		<AiDiv className="flex flex-col gap-4">

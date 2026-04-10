@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { calCosineSimilarity } from "../models/cosineSimilarity.js";
 import { embedText } from "../utils/embedText.js";
 import titleGenerator from "../utils/titleGenerator.js";
@@ -41,11 +42,15 @@ export const suggestTitles = async (req, res, next) => {
 		}
 
 =======
+=======
+import textTranslator from "../utils/textTranslation.js";
+import titleGenerator from "../utils/titleGenerator.js";
+>>>>>>> 412541c (format according biome)
 export const suggestTitles = async (req, res, next) => {
 	console.log("suggesting title controller is called....");
 	try {
 		const { content } = req.body;
-		if (!content || !content.trim()) {
+		if (!content?.trim()) {
 			return next(new AppError("Content is required", 400));
 		}
 
@@ -73,11 +78,15 @@ export const translateContent = async (req, res, next) => {
 	console.log("translating controller is called....");
 	try {
 		const { content, target } = req.body;
-		if (!content || !content.trim()) {
+		if (!content?.trim()) {
 			return next(new AppError("Content is required", 400));
 		}
+<<<<<<< HEAD
 >>>>>>> 83ed675 (format code with biome)
 		if (!target || !target.trim()) {
+=======
+		if (!target?.trim()) {
+>>>>>>> 412541c (format according biome)
 			return next(new AppError("Target language is required", 400));
 		}
 
