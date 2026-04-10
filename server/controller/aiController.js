@@ -1,6 +1,6 @@
-import textTranslator from "../utils/textTranslation.js";
 import { calCosineSimilarity } from "../models/cosineSimilarity.js";
 import { embedText } from "../utils/embedText.js";
+import textTranslator from "../utils/textTranslation.js";
 import titleGenerator from "../utils/titleGenerator.js";
 
 export const semanticSearch = async (req, res, next) => {
