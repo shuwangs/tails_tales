@@ -1,10 +1,10 @@
-import titleGenerator from "../utils/titleGenerator.js";
 import textTranslator from "../utils/textTranslation.js";
+import titleGenerator from "../utils/titleGenerator.js";
 export const suggestTitles = async (req, res, next) => {
 	console.log("suggesting title controller is called....");
 	try {
 		const { content } = req.body;
-		if (!content || !content.trim()) {
+		if (!content?.trim()) {
 			return next(new AppError("Content is required", 400));
 		}
 
@@ -23,10 +23,10 @@ export const translateContent = async (req, res, next) => {
 	console.log("translating controller is called....");
 	try {
 		const { content, target } = req.body;
-		if (!content || !content.trim()) {
+		if (!content?.trim()) {
 			return next(new AppError("Content is required", 400));
 		}
-		if (!target || !target.trim()) {
+		if (!target?.trim()) {
 			return next(new AppError("Target language is required", 400));
 		}
 

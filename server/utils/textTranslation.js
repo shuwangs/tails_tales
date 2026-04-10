@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const API_KEY = process.env.TRANSLATE_API_KEY;

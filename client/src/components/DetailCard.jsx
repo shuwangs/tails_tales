@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import { getMoodIcon } from "../utils/getIcons";
+import TranslateCard from "./TranslateCard.jsx";
 import DeleteBtn from "./ui/DeleteBtn.jsx";
 import GeneralContainer from "./ui/GeneralContainer";
-import TranslateCard from "./TranslateCard.jsx";
 
 const DetailCard = ({ entry }) => {
 	const navigate = useNavigate();

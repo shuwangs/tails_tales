@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getSuggestedTitle, getTranslatedText } from "../services/aiService.js";
 import {
 	addEntriesToPetId,
 	deleteEntry,
 	getEntriesByPetId,
 } from "../services/entryService.js";
-import { getSuggestedTitle, getTranslatedText } from "../services/aiService.js";
+
 const EntriesContext = createContext();
 
 export const EntriesProvider = ({ children }) => {
