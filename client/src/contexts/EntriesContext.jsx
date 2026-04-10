@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getSuggestedTitle } from "../services/aiService.js";
 import {
 	addEntriesToPetId,
 	deleteEntry,
@@ -15,6 +16,8 @@ export const EntriesProvider = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const [isSearching, setIsSearching] = useState(false);
+	const [suggestedTitles, setSuggestedTitles] = useState([]);
+	const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
 
 	useEffect(() => {
 		console.log("searchResults are: ", searchResults);
@@ -84,6 +87,23 @@ export const EntriesProvider = ({ children }) => {
 		setSearchResults([]);
 		setIsSearching(false);
 	};
+	const handleSuggestTitle = async (content) => {
+		if (!content.trim()) return;
+
+		try {
+			setIsGeneratingTitle(true);
+			setSuggestedTitles([]);
+
+			const result = await getSuggestedTitle(content);
+			console.log("in useEntries, after fetch titles are: ", result);
+			setSuggestedTitles(result.titles);
+		} catch (error) {
+			console.error("Failed to generate titles:", error);
+		} finally {
+			setIsGeneratingTitle(false);
+		}
+	};
+
 	const values = {
 		petId,
 		entries,
@@ -91,10 +111,15 @@ export const EntriesProvider = ({ children }) => {
 		loading,
 		searchResults,
 		isSearching,
+		suggestedTitles,
+		isGeneratingTitle,
 		deleteEntryHandler,
 		addEntry,
 		onSearch,
 		clearSearch,
+		setSuggestedTitles,
+		setIsGeneratingTitle,
+		handleSuggestTitle,
 	};
 
 	return (

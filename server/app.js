@@ -15,6 +15,5 @@ app.use(express.json());
 app.use("/api/entries", entriesRoute);
 app.use("/api/pets", petsRoute);
 app.use("/api/ai", aiRoute);
-
 app.use(errorHandler);
 export default app;
