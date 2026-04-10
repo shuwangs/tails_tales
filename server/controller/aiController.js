@@ -10,7 +10,7 @@ export const semanticSearch = async (req, res, next) => {
 			return next(new AppError("Bad request", 400));
 		}
 		const { searchText } = req.body;
-		if (!searchText || !searchText.trim()) {
+		if (!searchText?.trim()) {
 			return next(new AppError("search term is required", 400));
 		}
 
@@ -24,12 +24,11 @@ export const semanticSearch = async (req, res, next) => {
 		res.status(200).json({
 			success: true,
 			data: result,
-		})
-
+		});
 	} catch (err) {
 		next(err);
 	}
-}
+};
 
 export const suggestTitles = async (req, res, next) => {
 	console.log("suggesting title controller is called....");
@@ -48,5 +47,4 @@ export const suggestTitles = async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
-}
-
+};

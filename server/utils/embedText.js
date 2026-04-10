@@ -13,7 +13,7 @@ const truncateText = (text, maxLength = 1000) => {
 };
 
 export const embedText = async (text) => {
-	if (!text || !text.trim()) {
+	if (!text?.trim()) {
 		throw new Error("text cannot be emtpy");
 	}
 	const model = await getExtractor();

@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { semanticSearch } from "../controller/aiController.js";
-import { suggestTitles } from "../controller/aiController.js";
+import { semanticSearch, suggestTitles } from "../controller/aiController.js";
 
 const router = Router();
 

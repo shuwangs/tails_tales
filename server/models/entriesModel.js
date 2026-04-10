@@ -1,5 +1,4 @@
 import pool from "../db/db.js";
-import { embedText } from "../utils/embedText.js";
 
 export const getEntryByIdQuery = async (id) => {
 	const { rows } = await pool.query(
