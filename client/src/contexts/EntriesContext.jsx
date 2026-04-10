@@ -4,6 +4,7 @@ import {
 	addEntriesToPetId,
 	deleteEntry,
 	getEntriesByPetId,
+	searchDiary,
 } from "../services/entryService.js";
 
 const EntriesContext = createContext();
@@ -13,9 +14,14 @@ export const EntriesProvider = ({ children }) => {
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [searchResults, setSearchResults] = useState([]);
+	const [isSearching, setIsSearching] = useState(false);
 	const [suggestedTitles, setSuggestedTitles] = useState([]);
 	const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
 
+	useEffect(() => {
+		console.log("searchResults are: ", searchResults);
+	});
 	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
 			try {
@@ -59,6 +65,28 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const onSearch = async (text) => {
+		try {
+			setLoading(true);
+			setError("");
+			if (!text.trim()) {
+				setSearchResults([]);
+				return;
+			}
+			const result = await searchDiary(petId, text);
+			setIsSearching(true);
+			setSearchResults(result);
+		} catch (error) {
+			setError(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const clearSearch = () => {
+		setSearchResults([]);
+		setIsSearching(false);
+	};
 	const handleSuggestTitle = async (content) => {
 		if (!content.trim()) return;
 
@@ -81,12 +109,16 @@ export const EntriesProvider = ({ children }) => {
 		entries,
 		error,
 		loading,
+		searchResults,
+		isSearching,
 		suggestedTitles,
-		setSuggestedTitles,
 		isGeneratingTitle,
-		setIsGeneratingTitle,
 		deleteEntryHandler,
 		addEntry,
+		onSearch,
+		clearSearch,
+		setSuggestedTitles,
+		setIsGeneratingTitle,
 		handleSuggestTitle,
 	};
 
