@@ -19,13 +19,15 @@ export const getEntriesByPetIdQuery = async (petId) => {
 export const addEntriesByPetIdQuery = async (petId, entry) => {
 	const { title, mood, content, cover_image_url, entry_date } = entry;
 	const embedding = await embedText(content);
+	const vectorEmbedding = embedding ? `[${embedding.join(",")}]` : null;
+
 	const { rows } = await pool.query(
 		`
         INSERT INTO pet_diary.diary_entries (pet_id, title, mood, content, cover_image_url, entry_date, embedding)
         VALUES ($1, $2,  $3, $4, $5, $6, $7)
         RETURNING *
         `,
-		[petId, title, mood, content, cover_image_url, entry_date, embedding],
+		[petId, title, mood, content, cover_image_url, entry_date, vectorEmbedding],
 	);
 	console.log("In petModels, addEntriesByPetIdQuery: ", rows);
 	return rows[0];
