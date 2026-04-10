@@ -1,3 +1,4 @@
+import textTranslator from "../utils/textTranslation.js";
 import titleGenerator from "../utils/titleGenerator.js";
 export const suggestTitles = async (req, res, next) => {
 	console.log("suggesting title controller is called....");
@@ -12,6 +13,28 @@ export const suggestTitles = async (req, res, next) => {
 		res.status(200).json({
 			success: true,
 			data: titles,
+		});
+	} catch (err) {
+		next(err);
+	}
+};
+
+export const translateContent = async (req, res, next) => {
+	console.log("translating controller is called....");
+	try {
+		const { content, target } = req.body;
+		if (!content?.trim()) {
+			return next(new AppError("Content is required", 400));
+		}
+		if (!target?.trim()) {
+			return next(new AppError("Target language is required", 400));
+		}
+
+		const translated = await textTranslator(content, target);
+		console.log("translating content is: ", translated);
+		res.status(200).json({
+			success: true,
+			data: translated,
 		});
 	} catch (err) {
 		next(err);

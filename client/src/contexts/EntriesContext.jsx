@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getSuggestedTitle } from "../services/aiService.js";
+import { getSuggestedTitle, getTranslatedText } from "../services/aiService.js";
 import {
 	addEntriesToPetId,
 	deleteEntry,
@@ -15,6 +15,8 @@ export const EntriesProvider = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 	const [suggestedTitles, setSuggestedTitles] = useState([]);
 	const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
+	const [translatedText, setTranslatedText] = useState("");
+	const [isTranslating, setIsTranslating] = useState(false);
 
 	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
@@ -75,19 +77,36 @@ export const EntriesProvider = ({ children }) => {
 			setIsGeneratingTitle(false);
 		}
 	};
+	const handleTranslateText = async (content, lang) => {
+		if (!content?.trim()) return;
+		if (!lang?.trim()) return;
 
+		try {
+			setIsTranslating(true);
+			setTranslatedText("");
+
+			const result = await getTranslatedText(content, lang);
+			console.log("in useEntries, after fetch translating are: ", result);
+			setTranslatedText(result);
+		} catch (error) {
+			console.error("Failed to generate titles:", error);
+		} finally {
+			setIsTranslating(false);
+		}
+	};
 	const values = {
 		petId,
 		entries,
 		error,
 		loading,
 		suggestedTitles,
-		setSuggestedTitles,
 		isGeneratingTitle,
-		setIsGeneratingTitle,
+		translatedText,
+		isTranslating,
 		deleteEntryHandler,
 		addEntry,
 		handleSuggestTitle,
+		handleTranslateText,
 	};
 
 	return (
