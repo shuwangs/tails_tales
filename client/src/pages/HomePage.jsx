@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import EntryList from "../components/EntriesList.jsx";
+import EntryList from "../components/EntryList.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 import MainLayout from "../layout/MainLayout";
 
