@@ -17,12 +17,13 @@ import FormSelect from "./ui/FormSelect.jsx";
 const WriteForm = () => {
 	const navigate = useNavigate();
 	const { petId, error, loading, addEntry } = useEntries();
+	const today = new Date().toISOString().split("T")[0];
 
 	const initalForm = {
 		mood: "happy",
 		weather: "sunny",
 		title: "",
-		entry_date: "",
+		entry_date: today,
 		content: "",
 	};
 
@@ -107,7 +108,12 @@ const WriteForm = () => {
 
 					<div>
 						<FormLabel htmlFor="entry_date">🗓️</FormLabel>
-						<FormInput onChange={handleChange} name="entry_date" type="date" />
+						<FormInput
+							onChange={handleChange}
+							value={formData.entry_date}
+							name="entry_date"
+							type="date"
+						/>
 					</div>
 				</div>
 
