@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getSuggestedTitle } from "../services/aiService.js";
 import {
 	addEntriesToPetId,
 	deleteEntry,
@@ -12,6 +13,8 @@ export const EntriesProvider = ({ children }) => {
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [suggestedTitles, setSuggestedTitles] = useState([]);
+	const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
 
 	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
@@ -56,13 +59,35 @@ export const EntriesProvider = ({ children }) => {
 		}
 	};
 
+	const handleSuggestTitle = async (content) => {
+		if (!content.trim()) return;
+
+		try {
+			setIsGeneratingTitle(true);
+			setSuggestedTitles([]);
+
+			const result = await getSuggestedTitle(content);
+			console.log("in useEntries, after fetch titles are: ", result);
+			setSuggestedTitles(result.titles);
+		} catch (error) {
+			console.error("Failed to generate titles:", error);
+		} finally {
+			setIsGeneratingTitle(false);
+		}
+	};
+
 	const values = {
 		petId,
 		entries,
 		error,
 		loading,
+		suggestedTitles,
+		setSuggestedTitles,
+		isGeneratingTitle,
+		setIsGeneratingTitle,
 		deleteEntryHandler,
 		addEntry,
+		handleSuggestTitle,
 	};
 
 	return (
