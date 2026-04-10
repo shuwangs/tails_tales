@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getSuggestedTitle } from "../services/aiService.js";
 import {
 	addEntriesToPetId,
 	deleteEntry,
 	getEntriesByPetId,
 } from "../services/entryService.js";
-import { getSuggestedTitle } from "../services/aiService.js";
+
 const EntriesContext = createContext();
 
 export const EntriesProvider = ({ children }) => {
@@ -86,7 +87,7 @@ export const EntriesProvider = ({ children }) => {
 		setIsGeneratingTitle,
 		deleteEntryHandler,
 		addEntry,
-		handleSuggestTitle
+		handleSuggestTitle,
 	};
 
 	return (

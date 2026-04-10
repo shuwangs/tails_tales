@@ -12,6 +12,6 @@ export const getSuggestedTitle = async (content) => {
 		throw new Error("Failed to generate titles");
 	}
 	const data = await response.json();
-    const titles = data.data;
+	const titles = data.data;
 	return titles;
 };

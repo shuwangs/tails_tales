@@ -34,7 +34,7 @@ const WriteForm = () => {
 			...prev,
 			title,
 		}));
-	}
+	};
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prev) => ({
@@ -108,10 +108,12 @@ const WriteForm = () => {
 
 					<div>
 						<FormLabel htmlFor="entry_date">🗓️</FormLabel>
-						<FormInput onChange={handleChange}
+						<FormInput
+							onChange={handleChange}
 							value={formData.entry_date}
 							name="entry_date"
-							type="date" />
+							type="date"
+						/>
 					</div>
 				</div>
 
