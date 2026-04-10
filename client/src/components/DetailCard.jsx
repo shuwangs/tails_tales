@@ -1,18 +1,11 @@
 import { useState } from "react";
-import {
-	LuArrowLeftToLine,
-	LuCalendarHeart,
-	LuTrash2,
-	LuWandSparkles,
-} from "react-icons/lu";
+import { LuArrowLeftToLine, LuCalendarHeart, LuTrash2 } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import { getMoodIcon } from "../utils/getIcons";
-import AiBtn from "./ui/AiBtn.jsx";
-import AiDiv from "./ui/AiDiv.jsx";
+import TranslateCard from "./TranslateCard.jsx";
 import DeleteBtn from "./ui/DeleteBtn.jsx";
-import FormBtn from "./ui/FormBtn.jsx";
 import GeneralContainer from "./ui/GeneralContainer";
 
 const DetailCard = ({ entry }) => {
@@ -62,20 +55,13 @@ const DetailCard = ({ entry }) => {
 				<div className="px-8 text-mono text-amber-800 text-2xl px-2 line-">
 					{entry.content}
 				</div>
+
+				{/* Translate Card */}
 				<div className="px-8">
-					<AiDiv className="flex flex-col gap-4">
-						<h3 className="flex gap-2 text-xl text-violet-700 font-bold">
-							{" "}
-							<LuWandSparkles /> <span>AI Tools</span>{" "}
-						</h3>
-						<AiBtn className="text-lg"> Translate to Chinese</AiBtn>
-					</AiDiv>
+					<TranslateCard content={entry.content} />
 				</div>
 
 				<div className="flex flex-row  gap-6 px-8 pb-6">
-					<FormBtn className="bg-amber-400 hover:bg-amber-500 text-white flex-[2] text-center">
-						Edit
-					</FormBtn>
 					<DeleteBtn
 						onClick={() => setShowDeleteConfirm(true)}
 						className="bg-amber-500 hover:bg-amber-600 text-red-600 text-xl flex-[1] justify-center"

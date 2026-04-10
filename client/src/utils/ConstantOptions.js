@@ -16,3 +16,11 @@ export const moodOpts = [
 	{ label: "Loved", value: "loved" },
 	{ label: "Bored", value: "bored" },
 ];
+
+export const languages = [
+	{ label: "English", code: "en" },
+	{ label: "Spanish", code: "es" },
+	{ label: "Chinese", code: "zh" },
+	{ label: "French", code: "fr" },
+	{ label: "Janpanese", code: "ja" },
+];
