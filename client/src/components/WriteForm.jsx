@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdSave } from "react-icons/io";
 import { SiCcleaner } from "react-icons/si";
 import { TfiThought } from "react-icons/tfi";
