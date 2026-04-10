@@ -35,3 +35,23 @@ export const addEntriesToPetId = async (petId, newEntry) => {
 	console.log("In the service newDiary", newDairy);
 	return newDairy.data;
 };
+
+export const searchDiary = async (petId, searchText) => {
+	const result = await fetch(`/api/ai/${petId}/search`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ searchText }),
+	});
+
+	if (!result.ok) {
+		throw new Error("Failed to post entry");
+	}
+
+	const relatedDairy = await result.json();
+	const data = relatedDairy.data;
+	console.log("In the service search Diary", data);
+
+	return relatedDairy.data;
+};
