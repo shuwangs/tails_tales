@@ -22,9 +22,6 @@ export const EntriesProvider = ({ children }) => {
 	const [isTranslating, setIsTranslating] = useState(false);
 
 	useEffect(() => {
-		console.log("searchResults are: ", searchResults);
-	});
-	useEffect(() => {
 		const fetchEntries = async (pet_id) => {
 			try {
 				setLoading(true);
@@ -114,7 +111,6 @@ export const EntriesProvider = ({ children }) => {
 			setTranslatedText("");
 
 			const result = await getTranslatedText(content, lang);
-			console.log("in useEntries, after fetch translating are: ", result);
 			setTranslatedText(result);
 		} catch (error) {
 			console.error("Failed to generate titles:", error);

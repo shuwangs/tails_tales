@@ -9,7 +9,6 @@ export const getEntryByIdQuery = async (id) => {
       `,
 		[id],
 	);
-	console.log("In models, getEntryByIdQuery: ", rows);
 	return rows[0];
 };
 
@@ -37,7 +36,6 @@ export const updateEntryQuery = async (
         `,
 		[title, mood, content, cover_image_url, entry_date, embedding, id],
 	);
-	console.log("In models, getEntryById : ", rows[0]);
 
 	return rows[0];
 };
@@ -52,6 +50,5 @@ export const deleteEntryByIdQuery = async (id) => {
       `,
 		[id],
 	);
-	console.log("In models, deleteEntryByIdQuery : ", rows);
 	return rows;
 };
