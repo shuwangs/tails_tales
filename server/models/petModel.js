@@ -12,7 +12,6 @@ export const getEntriesByPetIdQuery = async (petId) => {
       `,
 		[petId],
 	);
-	console.log("In petModels, getEntriesByPetIdQuery: ", rows);
 	return rows;
 };
 
@@ -29,6 +28,5 @@ export const addEntriesByPetIdQuery = async (petId, entry) => {
         `,
 		[petId, title, mood, content, cover_image_url, entry_date, vectorEmbedding],
 	);
-	console.log("In petModels, addEntriesByPetIdQuery: ", rows);
 	return rows[0];
 };
