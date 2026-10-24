@@ -46,6 +46,7 @@ export const EntriesProvider = ({ children }) => {
 			setEntries((prev) => prev.filter((e) => e.id !== Number(entry_id)));
 		} catch (err) {
 			setError(err.message);
+			throw err;
 		} finally {
 			setLoading(false);
 		}
@@ -59,6 +60,7 @@ export const EntriesProvider = ({ children }) => {
 			setEntries((prev) => [...prev, result]);
 		} catch (err) {
 			setError(err.message);
+			throw err;
 		} finally {
 			setLoading(false);
 		}

@@ -64,7 +64,6 @@ const WriteForm = () => {
 		setFormData(initalForm);
 	};
 
-	if (error) return <p>{error}</p>;
 	if (loading) return <p>Loading...</p>;
 
 	return (
@@ -73,6 +72,8 @@ const WriteForm = () => {
 				<TfiThought /> <span>Another Day, Another Bobo Thought</span>
 			</h1>
 			<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+				{error && <p role="alert">{error}</p>}
+
 				<div className="flex flex-row gap-6">
 					<div className="flex flex-row gap-2 items-center">
 						<FormLabel htmlFor="mood">ᓚ₍ ^. .^₎</FormLabel>
