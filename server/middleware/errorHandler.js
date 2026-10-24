@@ -1,15 +1,15 @@
 const errorHandler = (err, _req, res, _next) => {
 	console.error(err);
 
-	if (err.message) {
-		return res.status(err.status).json({
-			success: false,
-			message: err.message,
-		});
-	}
-	res.status(500).json({
+	const status =
+		Number.isInteger(err.status) &&
+			err.status >= 400 &&
+			err.status <= 599
+			? err.status
+			: 500;
+	res.status(status).json({
 		success: false,
-		message: "Internal Server Error",
+		message: status === 500 ? "Internal Server Error" : err.message,
 	});
 };
 

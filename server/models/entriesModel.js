@@ -30,8 +30,8 @@ export const updateEntryQuery = async (
         content = $3,
         cover_image_url = $4,
         entry_date = $5,
-        embedding = $6
-        WHERE id = $7
+        embedding = $6,
+		updated_at = NOW()        WHERE id = $7
         RETURNING *
         `,
 		[title, mood, content, cover_image_url, entry_date, embedding, id],
