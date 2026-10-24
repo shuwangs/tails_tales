@@ -30,14 +30,23 @@ const HomePage = () => {
 							onSelectDate={setSelectedDate}
 						/>
 						{selectedDate && (
-							<p role="status" className="mt-3 text-sm text-amber-800">
-								Selected date: {selectedDate}
-							</p>
+							<div className="mt-3 flex items-center justify-between gap-2">
+								<p role="status" className="text-sm text-amber-800">
+									Selected date: {selectedDate}
+								</p>
+								<button
+									type="button"
+									onClick={() => setSelectedDate("")}
+									className="text-sm text-amber-800 underline"
+								>
+									All dates
+								</button>
+							</div>
 						)}
 					</div>
 					<section className="min-w-0" aria-label="Diary entries">
 						<h2 className="mb-4 text-xl font-semibold text-amber-900">Diary entries</h2>
-						<EntryList />
+						<EntryList selectedDate={selectedDate} />
 					</section>
 				</div>
 			</div>
