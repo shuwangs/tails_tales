@@ -11,7 +11,10 @@ const toDateKey = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
+const DiaryCalendar = ({ entries = [], selectedDate, onSelectDate }) => {
+    const entryDates = new Set(
+        entries.map((entry) => entry.entry_date?.slice(0, 10)).filter(Boolean)
+    );
     const [visibleMonth, setVisibleMonth] = useState(() => {
         const today = new Date();
         return new Date(today.getFullYear(), today.getMonth(), 1);
@@ -100,18 +103,21 @@ const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
                     const dateKey = toDateKey(new Date(year, month, day));
                     const isSelected = selectedDate === dateKey;
                     const isToday = todayKey === dateKey;
+                    const hasEntries = entryDates.has(dateKey);
 
                     return (
                         <button
                             key={dateKey}
                             type="button"
-                            aria-label={dateKey}
+                            aria-label={`${dateKey}${hasEntries ? ", has diary entries" : ""}`}
                             aria-pressed={isSelected}
                             aria-current={isToday ? "date" : undefined}
                             onClick={() => onSelectDate(dateKey)}
                             className={`min-h-11 rounded-lg border ${isSelected
                                 ? "border-amber-600 bg-amber-500 text-white"
-                                : "border-transparent text-amber-900 hover:bg-amber-100"
+                                : hasEntries
+                                    ? "border-amber-200 bg-amber-100 text-amber-900 hover:bg-amber-200"
+                                    : "border-transparent text-amber-900 hover:bg-amber-50"
                                 } ${isToday ? "font-bold underline" : ""}`}
                         >
                             {day}
@@ -119,6 +125,13 @@ const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
                     );
                 })}
             </div>
+            <p className="mt-3 flex items-center gap-2 text-xs text-amber-800">
+                <span
+                    aria-hidden="true"
+                    className="h-3 w-3 rounded-sm border border-amber-200 bg-amber-100"
+                />
+                Has diary entries
+            </p>
         </section>
     );
 };

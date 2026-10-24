@@ -5,9 +5,11 @@ import EntryList from "../components/EntryList.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 import DiaryCalendar from "../components/DiaryCalendar.jsx";
 import MainLayout from "../layout/MainLayout";
+import { useEntries } from "../contexts/EntriesContext.jsx";
 
 const HomePage = () => {
 	const location = useLocation();
+	const { entries } = useEntries();
 	const [selectedDate, setSelectedDate] = useState("");
 	useEffect(() => {
 		if (location.state?.message) {
@@ -26,6 +28,7 @@ const HomePage = () => {
 				<div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
 					<div className="min-w-0">
 						<DiaryCalendar
+							entries={entries}
 							selectedDate={selectedDate}
 							onSelectDate={setSelectedDate}
 						/>
