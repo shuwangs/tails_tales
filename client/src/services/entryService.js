@@ -70,3 +70,21 @@ export const getEntryById = async (id, signal) => {
 	const result = await response.json();
 	return result.data;
 };
+
+export const updateEntry = async (entryId, entry) => {
+	const response = await fetch(`/api/entries/${entryId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(entry),
+	});
+
+	const result = await response.json();
+
+	if (!response.ok) {
+		throw new Error(result.message || "Failed to update entry");
+	}
+
+	return result.data;
+};

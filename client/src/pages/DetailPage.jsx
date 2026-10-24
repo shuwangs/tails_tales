@@ -16,7 +16,7 @@ const DetailPage = () => {
 			) : error ? (
 				<p role="alert">{error}</p>
 			) : selectedEntry ? (
-				<DetailCard entry={selectedEntry} />
+				<DetailCard key={selectedEntry.id} entry={selectedEntry} />
 			) : (
 				<p>Entry not found.</p>
 			)}

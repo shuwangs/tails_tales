@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LuArrowLeftToLine, LuCalendarHeart, LuPencil, LuTrash2 } from "react-icons/lu";
+import { LuArrowLeftToLine, LuCalendarHeart, LuTrash2 } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEntries } from "../contexts/EntriesContext.jsx";
@@ -93,23 +93,30 @@ const DetailCard = ({ entry }) => {
 	return (
 		<GeneralContainer className="mt-10 w-80/100 mx-auto gap-6 ">
 
-			<form onSubmit={handleSave} className="flex flex-col gap-6">
+			<form id="edit-entry-form" onSubmit={handleSave} className="flex flex-col gap-6">
 				{saveError && (
 					<p role="alert" className="px-8 text-red-700">
 						{saveError}
 					</p>
 				)}
 				{saveMessage && (
-					<p role="alert" className="px-8 text-green-700">
+					<p role="status" className="px-8 text-green-700">
 						{saveMessage}
 					</p>
 				)}
 
 				<div className="flex justify-between items-center bg-amber-300 p-8">
 					<div className="flex flex-col gap-4">
-						<h2 className="font-heading text-4xl text-amber-800">
-							{entry.title}{" "}
-						</h2>
+						<label htmlFor="entry-title">Title</label>
+						<input
+							id="entry-title"
+							name="title"
+							value={draft.title}
+							onChange={handleDraftChange}
+							maxLength={200}
+							disabled={isSaving}
+							className="w-full rounded-lg border border-amber-600 bg-white p-2 text-2xl text-amber-800"
+						/>
 						<p className="flex gap-2 text-xl">
 							{" "}
 							<LuCalendarHeart />{" "}
@@ -127,9 +134,22 @@ const DetailCard = ({ entry }) => {
 					</div>
 				</div>
 				<div className="bg-white flex flex-col gap-6">
-					<div className="px-8 text-mono text-amber-800 text-2xl px-2 line-">
-						{entry.content}
+					<div className="px-8">
+						<label htmlFor="entry-content" className="block mb-2">Story</label>
+						<textarea
+							id="entry-content"
+							name="content"
+							value={draft.content}
+							onChange={handleDraftChange}
+							disabled={isSaving}
+							required
+							rows={8}
+							className="w-full rounded-lg border border-amber-400 p-3 text-lg text-amber-800"
+						/>
 					</div>
+				</div>
+			</form>
+			<div className="bg-white flex flex-col gap-6">
 
 					{/* Translate Card */}
 					<div className="px-8">
@@ -188,7 +208,6 @@ const DetailCard = ({ entry }) => {
 						</div>
 					)}
 				</div>
-			</form>
 		</GeneralContainer>
 	);
 };
