@@ -92,9 +92,12 @@ const DiaryCalendar = ({ entries = [], selectedDate, onSelectDate }) => {
 					</div>
 				))}
 
-				{Array.from({ length: firstWeekday }, (_, index) => (
-					<div key={`empty-${index}`} aria-hidden="true" />
-				))}
+				{firstWeekday > 0 && (
+					<div
+						aria-hidden="true"
+						style={{ gridColumn: `span ${firstWeekday}` }}
+					/>
+				)}
 
 				{Array.from({ length: daysInMonth }, (_, index) => {
 					const day = index + 1;
