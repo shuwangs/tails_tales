@@ -4,13 +4,13 @@ import GeneralContainer from "./ui/GeneralContainer.jsx";
 
 const EntryCard = ({ entry }) => {
 	return (
-		<GeneralContainer className=" w-[360px] h-[200px] ">
+		<GeneralContainer className="w-full h-full min-h-[200px] break-words">
 			<div className="flex flex-col p-4 gap-4 h-full">
 				<div className="flex justify-between text-xl">
-					<h3 className="font-heading text-amber-800 font-bold">
+					<h3 className="min-w-0 line-clamp-2 font-heading text-amber-800 font-bold">
 						{entry.title}
 					</h3>
-					<span>{getMoodIcon(entry.mood)}</span>
+					<span className="shrink-0">{getMoodIcon(entry.mood)}</span>
 				</div>
 				<div className="text-wrap">
 					<p className="line-clamp-3 ">{entry.content}</p>

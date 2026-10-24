@@ -1,14 +1,24 @@
 # 🐾 Tails & Tales — AI-Powered Pet Diary
 
-A full-stack pet diary application that combines traditional CRUD functionality with AI-powered features such as semantic search, content generation, and translation.
+A full-stack pet diary application that combines traditional CRUD functionality with AI-powered features such as semantic search, Title generation, and translation.
 
 Built with a modern PERN-style architecture and extended with embeddings-based retrieval.
 ## Demo
-![tails_tales](./client/public/tails_tales.gif)
+![tails_tales](./client/public/tails-tales.gif)
 
 ## ✨ Features
 ### 📝 Core Diary Features
-- Create, and delete and view diary entries
+- Create, view, edit, and delete diary entries
+- Edit titles and content directly on the detail page with Save and Cancel controls
+- Restore saved content on cancel and preserve drafts when an update fails
+
+### 📅 Calendar & Browsing
+- Browse months and select a date to filter diary entries
+- Highlight dates with diary entries, with distinct styles for today and the selected date
+- Use **Today** to return to the current month and select today's entries
+- Use **All dates** to clear the date filter while preserving any active search
+- Combine date filtering with semantic search results
+- View the calendar beside entry cards on desktop, with a stacked layout on smaller screens
 
 ### 🤖 AI Features
 - ✨ AI Title Suggestion
@@ -19,6 +29,7 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
     
 ### Embedding Pipeline
 - Generate embeddings when creating entries
+- Regenerate embeddings on the server when updating entries, using the submitted content instead of client-supplied vectors
 - Backfill embeddings for existing data
 - MiniLM-based embedding model
 
@@ -46,6 +57,7 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 ## 📦 API Endpoints
 ### Entries
 >GET /api/entries/:id   
+>PUT /api/entries/:id → update an entry and regenerate its embedding\
 >DELETE /api/entries/:id
 
 ### Pet Entries

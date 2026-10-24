@@ -5,6 +5,7 @@ import {
 	deleteEntry,
 	getEntriesByPetId,
 	searchDiary,
+	updateEntry,
 } from "../services/entryService.js";
 
 const EntriesContext = createContext();
@@ -13,7 +14,7 @@ export const EntriesProvider = ({ children }) => {
 	const petId = 1;
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [searchResults, setSearchResults] = useState([]);
 	const [isSearching, setIsSearching] = useState(false);
 	const [suggestedTitles, setSuggestedTitles] = useState([]);
@@ -46,6 +47,7 @@ export const EntriesProvider = ({ children }) => {
 			setEntries((prev) => prev.filter((e) => e.id !== Number(entry_id)));
 		} catch (err) {
 			setError(err.message);
+			throw err;
 		} finally {
 			setLoading(false);
 		}
@@ -59,6 +61,7 @@ export const EntriesProvider = ({ children }) => {
 			setEntries((prev) => [...prev, result]);
 		} catch (err) {
 			setError(err.message);
+			throw err;
 		} finally {
 			setLoading(false);
 		}
@@ -118,6 +121,23 @@ export const EntriesProvider = ({ children }) => {
 			setIsTranslating(false);
 		}
 	};
+
+	const editEntry = async (entryId, updatedFields) => {
+		const updatedEntry = await updateEntry(entryId, updatedFields);
+
+		setEntries((prev) =>
+			prev.map((entry) =>
+				entry.id === updatedEntry.id ? updatedEntry : entry,
+			),
+		);
+
+		// after Edit, clear the search results as the updated entry might not match the previous search
+
+		setSearchResults([]);
+		setIsSearching(false);
+
+		return updatedEntry;
+	};
 	const values = {
 		petId,
 		entries,
@@ -133,6 +153,7 @@ export const EntriesProvider = ({ children }) => {
 		addEntry,
 		onSearch,
 		clearSearch,
+		editEntry,
 		setSuggestedTitles,
 		setIsGeneratingTitle,
 		handleSuggestTitle,
