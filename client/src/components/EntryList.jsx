@@ -8,8 +8,8 @@ const EntryList = ({ selectedDate = "" }) => {
 
 	const displayedEntries = selectedDate
 		? sourceEntries.filter(
-			(entry) => entry.entry_date?.slice(0, 10) === selectedDate
-		)
+				(entry) => entry.entry_date?.slice(0, 10) === selectedDate,
+			)
 		: sourceEntries;
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>{`Opps something is wrong, see here ${error}`}</p>;

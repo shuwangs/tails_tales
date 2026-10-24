@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import DiaryCalendar from "../components/DiaryCalendar.jsx";
 import EntryList from "../components/EntryList.jsx";
 import SearchBar from "../components/SearchBar.jsx";
-import DiaryCalendar from "../components/DiaryCalendar.jsx";
-import MainLayout from "../layout/MainLayout";
 import { useEntries } from "../contexts/EntriesContext.jsx";
+import MainLayout from "../layout/MainLayout";
 
 const HomePage = () => {
 	const location = useLocation();
@@ -48,7 +48,9 @@ const HomePage = () => {
 						)}
 					</div>
 					<section className="min-w-0" aria-label="Diary entries">
-						<h2 className="mb-4 text-xl font-semibold text-amber-900">Diary entries</h2>
+						<h2 className="mb-4 text-xl font-semibold text-amber-900">
+							Diary entries
+						</h2>
 						<EntryList selectedDate={selectedDate} />
 					</section>
 				</div>

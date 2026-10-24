@@ -30,9 +30,7 @@ export const updateEntry = async (req, res, next) => {
 		return next(new AppError("Content is required", 400));
 	}
 	if (typeof title !== "string" || title.trim().length > 200) {
-		return next(
-			new AppError("Title must be at most 200 characters", 400),
-		);
+		return next(new AppError("Title must be at most 200 characters", 400));
 	}
 	if (typeof mood !== "string" || mood.length > 50) {
 		return next(new AppError("Invalid mood", 400));
@@ -72,7 +70,6 @@ export const updateEntry = async (req, res, next) => {
 			JSON.stringify(embedding),
 		);
 
-
 		if (!updatedEntry) {
 			return next(new AppError("Entry not found", 404));
 		}
@@ -81,7 +78,6 @@ export const updateEntry = async (req, res, next) => {
 			success: true,
 			data: updatedEntry,
 		});
-
 	} catch (err) {
 		next(err);
 	}

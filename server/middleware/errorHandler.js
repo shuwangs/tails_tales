@@ -2,9 +2,7 @@ const errorHandler = (err, _req, res, _next) => {
 	console.error(err);
 
 	const status =
-		Number.isInteger(err.status) &&
-			err.status >= 400 &&
-			err.status <= 599
+		Number.isInteger(err.status) && err.status >= 400 && err.status <= 599
 			? err.status
 			: 500;
 	res.status(status).json({

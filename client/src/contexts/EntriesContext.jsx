@@ -127,8 +127,8 @@ export const EntriesProvider = ({ children }) => {
 
 		setEntries((prev) =>
 			prev.map((entry) =>
-				entry.id === updatedEntry.id ? updatedEntry : entry
-			)
+				entry.id === updatedEntry.id ? updatedEntry : entry,
+			),
 		);
 
 		// after Edit, clear the search results as the updated entry might not match the previous search
