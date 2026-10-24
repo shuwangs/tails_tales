@@ -34,6 +34,16 @@ const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
         );
     };
 
+    const goToToday = () => {
+        const today = new Date();
+
+        setVisibleMonth(
+            new Date(today.getFullYear(), today.getMonth(), 1)
+        );
+
+        onSelectDate(toDateKey(today));
+    };
+
     return (
         <section
             aria-label="Diary calendar"
@@ -65,7 +75,15 @@ const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
                     →
                 </button>
             </div>
-
+            <div className="mb-3 flex justify-end">
+                <button
+                    type="button"
+                    onClick={goToToday}
+                    className="rounded-lg border border-amber-200 px-3 py-1 text-sm font-medium text-amber-800 hover:bg-amber-100"
+                >
+                    Today
+                </button>
+            </div>
             <div className="grid grid-cols-7 gap-1 text-center">
                 {weekdays.map((day) => (
                     <div key={day} className="py-2 text-sm text-amber-800">
@@ -92,8 +110,8 @@ const DiaryCalendar = ({ selectedDate, onSelectDate }) => {
                             aria-current={isToday ? "date" : undefined}
                             onClick={() => onSelectDate(dateKey)}
                             className={`min-h-11 rounded-lg border ${isSelected
-                                    ? "border-amber-600 bg-amber-500 text-white"
-                                    : "border-transparent text-amber-900 hover:bg-amber-100"
+                                ? "border-amber-600 bg-amber-500 text-white"
+                                : "border-transparent text-amber-900 hover:bg-amber-100"
                                 } ${isToday ? "font-bold underline" : ""}`}
                         >
                             {day}
