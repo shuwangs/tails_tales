@@ -13,7 +13,7 @@ export const EntriesProvider = ({ children }) => {
 	const petId = 1;
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [searchResults, setSearchResults] = useState([]);
 	const [isSearching, setIsSearching] = useState(false);
 	const [suggestedTitles, setSuggestedTitles] = useState([]);
