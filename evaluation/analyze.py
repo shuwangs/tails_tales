@@ -1,11 +1,17 @@
 import json
 from pathlib import Path
 from statistics import mean
+import sys
 
 BASE_DIR = Path(__file__).resolve().parent
 
-with (BASE_DIR / "results.json").open("r") as file:
+# if filename is not provided as a command line argument, default to "results.json"
+filename = sys.argv[1] if len(sys.argv) > 1 else "results.json"
+
+with (BASE_DIR / filename).open(encoding="utf-8") as file:
     results = json.load(file)
+
+print(f"Analyzing: {filename}")
 
 with(BASE_DIR / "queries.json").open("r") as file:
     queries = json.load(file)

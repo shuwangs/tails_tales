@@ -28,6 +28,7 @@ The workflow uses JavaScript to generate retrieval results and Python to analyze
 
 - `evaluate.mjs` reuses `embedText` from `server/utils/embedText.js`, embeds diary content and queries, and ranks all 51 entries by cosine similarity. It saves the top six results for each query to `results.json`.
 - `results.json` stores model metadata and per-query `top_entries`, each containing an `id` and `similarity`. It contains retrieval output, not aggregate evaluation metrics.
+- `keyword_baseline.py` fits scikit-learn’s default `TfidfVectorizer()` on diary content, transforms queries using that vocabulary and weighting, and ranks entries by cosine similarity. It saves the top six results to `keyword_results.json`.
 - `analyze.py` reads the saved results and joins them to `queries.json` by `query_id` to obtain relevance labels. It prints aggregate metrics, missing relevant IDs, and rankings for q023 and q030.
 
 The embedding implementation uses `Xenova/all-MiniLM-L6-v2`, 1,000-character truncation, mean pooling, and normalized 384-dimensional vectors. The `.mjs` extension enables ES modules so the script can import the existing backend function.
@@ -37,10 +38,15 @@ Install the server dependencies if needed, then run these commands from the repo
 ```bash
 npm ci --prefix server
 node evaluation/evaluate.mjs
-python3 evaluation/analyze.py
+python3 evaluation/analyze.py results.json
+
+# Generate and analyze the keyword baseline using the same Python environment
+python3 -m pip install scikit-learn
+python3 evaluation/keyword_baseline.py
+python3 evaluation/analyze.py keyword_results.json
 ```
 
-Python uses only the standard library. The first embedding run may require downloading the model. No API server or PostgreSQL connection is needed: similarity is calculated in memory. This evaluates embedding retrieval quality, not database queries or pet-isolation behavior.
+The analysis script uses only the Python standard library; generating the TF-IDF baseline requires scikit-learn. With no filename argument, `analyze.py` defaults to `results.json`. The first embedding run may require downloading the model. No API server or PostgreSQL connection is needed: similarity is calculated in memory. This evaluates embedding retrieval quality, not database queries or pet-isolation behavior.
 
 To reanalyze an unchanged saved run, execute only the Python command. If the corpus or queries change, regenerate the retrieval results before analyzing them. The analyzer reads current relevance labels from `queries.json`, so keep the results and labels from the same evaluation version.
 
@@ -69,4 +75,30 @@ For q023, results include interactions with visitors and the owner but miss the 
 
 For q030, the highest-ranked entry describes having plenty of energy and playing with toys, the opposite of the requested behavior. The retrieved list suggests that play-related similarity outweighed the negative condition in this example.
 
-These are observations from a small synthetic development dataset, not evidence of performance on real user traffic or a held-out test set. No keyword baseline comparison has been run yet. The next step is to compare keyword retrieval on the same content, queries, and top-six cutoff, then investigate improvements without changing relevance labels merely to improve scores.
+## Comparison with the TF-IDF baseline
+
+Both methods search the same 51 diary bodies using the same queries, relevance labels, and top-six cutoff. The same analysis script calculates macro-averaged metrics for the 40 answerable queries. Neither method applies an abstention threshold.
+
+| Metric | Semantic retrieval | Default TF-IDF | Semantic minus TF-IDF |
+| --- | --- | --- | --- |
+| Recall@6 | 0.9500 | 0.8750 | +0.0750 (7.5 percentage points) |
+| MRR@6 | 0.8217 | 0.7417 | +0.0800 |
+| Precision@6 | 0.1750 | 0.1625 | +0.0125 (1.25 percentage points) |
+
+Semantic retrieval performs better overall on this dataset, but not on every query:
+
+| Outcome | Queries | Observation |
+| --- | --- | --- |
+| Semantic retrieves the relevant entry; TF-IDF misses it | q005, q019, q020, q045 | These include wording differences such as “another cat” versus “feline housemate,” and “thunder” versus “thunderclap.” |
+| TF-IDF retrieves the relevant entry; semantic misses it | q023 | TF-IDF ranks diary 33 fourth; semantic retrieval does not include it in the top six. |
+| Both methods miss the relevant entry | q030 | Neither retrieves diary 9, which describes declining to play with a favorite toy. |
+
+TF-IDF misses diaries 27, 31, 32, 9, and 31 for q005, q019, q020, q030, and q045 respectively. Its q030 results are diaries 49, 33, 30, 32, 44, and 45. The earlier semantic failure analysis suggests difficulty with negation in q030; the TF-IDF failure alone does not establish the same cause.
+
+The analyzer currently prints q023 and q030 under “Failed query rankings” for both methods. These are fixed diagnostic queries; q023 is actually successful for TF-IDF.
+
+### Scope and next steps
+
+These findings describe a small synthetic development dataset with provisional relevance labels, not real user traffic or a held-out test set. The comparison uses an untuned default TF-IDF baseline and does not establish superiority over tuned lexical methods. Related queries such as q019 and q045 also cover the same event, so they are not independent examples of broader coverage. Latency and correct abstention on the six empty-label queries remain unmeasured.
+
+Preserve these baseline results before investigating improvements. Any tuning should use development queries, followed by evaluation on a separate event-grouped test set. Do not change relevance labels merely to improve scores.
