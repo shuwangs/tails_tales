@@ -1,0 +1,408 @@
+[
+  {
+    "query_id": "q001",
+    "query": "When did Milo watch birds by the window?",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      24,
+      25
+    ],
+    "rationale": "Both entries explicitly describe watching birds by a window."
+  },
+  {
+    "query_id": "q002",
+    "query": "Playing with a ball indoors because it was raining",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      23
+    ],
+    "rationale": "Entry 23 includes rain, indoor play, and chasing a ball. Entry 26 describes sleeping instead."
+  },
+  {
+    "query_id": "q003",
+    "query": "Sleeping inside on a rainy afternoon",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      26
+    ],
+    "rationale": "Entry 26 explicitly describes napping indoors on a rainy afternoon. Entry 32 mentions thunder but does not establish an afternoon or rain."
+  },
+  {
+    "query_id": "q004",
+    "query": "Climbing the cat tree",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      19,
+      22
+    ],
+    "rationale": "Both entries explicitly mention climbing the cat tree."
+  },
+  {
+    "query_id": "q005",
+    "query": "Playing chase with another cat",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      27
+    ],
+    "rationale": "Entry 27 describes taking turns chasing another cat."
+  },
+  {
+    "query_id": "q006",
+    "query": "Running around the apartment after sunset",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      28
+    ],
+    "rationale": "Entry 28 includes both running around the apartment and the time just after sunset."
+  },
+  {
+    "query_id": "q007",
+    "query": "Chasing a little red dot",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      30
+    ],
+    "rationale": "Entry 30 explicitly describes chasing a little red dot; no assumption about the device producing it is needed."
+  },
+  {
+    "query_id": "q008",
+    "query": "Exploring plants and bugs in the catio",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      21
+    ],
+    "rationale": "Entry 21 describes sniffing plants and watching insects in the catio."
+  },
+  {
+    "query_id": "q009",
+    "query": "Learning to jump over something for a reward",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      29
+    ],
+    "rationale": "Entry 29 describes learning to jump over a small obstacle for treats."
+  },
+  {
+    "query_id": "q010",
+    "query": "Waiting on the mat when asked",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      38
+    ],
+    "rationale": "Entry 38 describes waiting on the mat for twenty seconds when asked."
+  },
+  {
+    "query_id": "q011",
+    "query": "Coming over when I called his name",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      48
+    ],
+    "rationale": "Entry 48 describes running over when his human calls his name."
+  },
+  {
+    "query_id": "q012",
+    "query": "Turning down breakfast",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      13
+    ],
+    "rationale": "Entry 13 describes sniffing breakfast and leaving without eating. Entry 14 describes finishing breakfast and wanting more."
+  },
+  {
+    "query_id": "q013",
+    "query": "Finishing breakfast and asking for more",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      14
+    ],
+    "rationale": "Entry 14 includes both finishing breakfast and asking for another serving."
+  },
+  {
+    "query_id": "q014",
+    "query": "Trying salmon kibble mixed into his usual food",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      15
+    ],
+    "rationale": "Entry 15 explicitly describes trying salmon kibble mixed into his regular food."
+  },
+  {
+    "query_id": "q015",
+    "query": "Refusing wet food but still eating dry food",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      18
+    ],
+    "rationale": "Entry 18 describes rejecting fish-flavored wet food while happily eating dry kibble, rather than refusing all food."
+  },
+  {
+    "query_id": "q016",
+    "query": "Eating slowly with a puzzle feeder",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      17
+    ],
+    "rationale": "Entry 17 describes eating dinner slowly because of a puzzle feeder."
+  },
+  {
+    "query_id": "q017",
+    "query": "Getting extra hungry after playing",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      19
+    ],
+    "rationale": "Entry 19 explicitly links a long play session to extra hunger and quickly finishing dinner."
+  },
+  {
+    "query_id": "q018",
+    "query": "Enjoying a freshly cleaned water bowl",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      20
+    ],
+    "rationale": "Entry 20 describes enjoying water after the bowl is washed and refilled. Entry 10 describes drinking unusually often."
+  },
+  {
+    "query_id": "q019",
+    "query": "Hiding because of thunder",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      31
+    ],
+    "rationale": "Entry 31 describes hiding under the table and trembling because of thunder. Entry 32 explicitly says the noise did not bother him."
+  },
+  {
+    "query_id": "q020",
+    "query": "Sleeping through a thunderstorm",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      32
+    ],
+    "rationale": "Entry 32 describes sleeping peacefully during thunder. Entry 31 describes fear instead."
+  },
+  {
+    "query_id": "q021",
+    "query": "Hiding from visitors",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      35
+    ],
+    "rationale": "Entry 35 describes hiding behind the sofa until unfamiliar visitors leave. Entry 36 describes approaching visitors willingly."
+  },
+  {
+    "query_id": "q022",
+    "query": "Relaxing on the couch with guests",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      36
+    ],
+    "rationale": "Entry 36 describes calmly approaching visitors and curling up beside them on the couch."
+  },
+  {
+    "query_id": "q023",
+    "query": "Greeting me excitedly when I got home",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      33
+    ],
+    "rationale": "Entry 33 describes running to the door with a raised tail and loud meows when his human returns."
+  },
+  {
+    "query_id": "q024",
+    "query": "The time Milo chewed my shoelace",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      37
+    ],
+    "rationale": "Entry 37 explicitly describes chewing a shoelace before his human replaces it with a safe toy."
+  },
+  {
+    "query_id": "q025",
+    "query": "Getting a new toy for his birthday",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      45
+    ],
+    "rationale": "Entry 45 describes receiving a new mouse toy on his birthday. Entries 30 and 37 have toys but no birthday context."
+  },
+  {
+    "query_id": "q026",
+    "query": "Celebrating a year since adoption",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      49
+    ],
+    "rationale": "Entry 49 explicitly celebrates one year since adoption."
+  },
+  {
+    "query_id": "q027",
+    "query": "Settling into a new home",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      46
+    ],
+    "rationale": "Entry 46 describes exploring a new apartment and gradually feeling safe enough to sleep in a new bed."
+  },
+  {
+    "query_id": "q028",
+    "query": "Kneading a soft new blanket",
+    "category": "keyword",
+    "relevant_diary_ids": [
+      47
+    ],
+    "rationale": "Entry 47 describes receiving a fleece blanket, kneading it, and sleeping on it."
+  },
+  {
+    "query_id": "q029",
+    "query": "Ear discomfort",
+    "category": "symptom",
+    "relevant_diary_ids": [
+      1,
+      39
+    ],
+    "rationale": "Entry 1 describes itchy ears, scratching, and head shaking. Entry 39 describes an ear infection. Entry 2 explicitly describes comfortable, healthy ears."
+  },
+  {
+    "query_id": "q030",
+    "query": "Not feeling like playing, even with his favorite toy",
+    "category": "semantic_paraphrase",
+    "relevant_diary_ids": [
+      9
+    ],
+    "rationale": "Entry 9 describes sleeping most of the afternoon and declining to play even with his favorite feather wand."
+  },
+  {
+    "query_id": "q031",
+    "query": "Getting itchy after trying a new chicken treat",
+    "category": "multi_concept",
+    "relevant_diary_ids": [
+      16
+    ],
+    "rationale": "Entry 16 describes neck itching after a new chicken treat. Entry 11 describes itching after rolling on grass instead."
+  },
+  {
+    "query_id": "q032",
+    "query": "Trouble putting weight on a back leg",
+    "category": "symptom",
+    "relevant_diary_ids": [
+      5
+    ],
+    "rationale": "Entry 5 describes avoiding weight on the left hind leg. "
+  },
+  {
+    "query_id": "q033",
+    "query": "Taking Milo on an airplane",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes traveling on an airplane."
+  },
+  {
+    "query_id": "q034",
+    "query": "Milo swimming in a pool",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes swimming or visiting a pool."
+  },
+  {
+    "query_id": "q035",
+    "query": "Staying overnight at a boarding cattery",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes an overnight boarding stay. Moving to a new home and visiting a vet do not qualify."
+  },
+  {
+    "query_id": "q036",
+    "query": "Milo knocking a flower vase off the table",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes knocking over a flower vase. Observing plants does not match this event."
+  },
+  {
+    "query_id": "q037",
+    "query": "Trying out an automatic litter box",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes an automatic litter box or trying a litter box."
+  },
+  {
+    "query_id": "q038",
+    "query": "Wearing a costume for Halloween",
+    "category": "no_relevant_results",
+    "relevant_diary_ids": [],
+    "rationale": "No entry describes a Halloween costume. A birthday celebration is a different event."
+  },
+  {
+    "query_id": "q039",
+    "query": "Milo had itchy ears",
+    "category": "negation",
+    "relevant_diary_ids": [
+      1,
+      39
+    ],
+    "rationale": "Entry 1 describes Milo having itchy ears. Entry 39 explicitly mentions ear itching and visited vet."
+  },
+  {
+    "query_id": "q040",
+    "query": "Milo's ears were not itchy",
+    "category": "negation",
+    "relevant_diary_ids": [
+      2
+    ],
+    "rationale": "Entry 2 explicitly mentions that Milo's ears were not itchy."
+  },
+  {
+    "query_id": "q041",
+    "query": "Milo refused to eat breakfast",
+    "category": "negation",
+    "relevant_diary_ids": [
+      13
+    ],
+    "rationale": "Entry 13 explicitly mentions that Milo refused to eat breakfast."
+  },
+  {
+    "query_id": "q042",
+    "query": "Milo did not refuse breakfast and ate everything",
+    "category": "negation",
+    "relevant_diary_ids": [
+      14
+    ],
+    "rationale": "Entry 14 explicitly mentions that Milo ate everything."
+  },
+  {
+    "query_id": "q043",
+    "query": "Milo was limping",
+    "category": "negation",
+    "relevant_diary_ids": [
+      41
+    ],
+    "rationale": "Entry 41 also mentions Milo limping."
+  },
+  {
+    "query_id": "q044",
+    "query": "Milo was not limping",
+    "category": "negation",
+    "relevant_diary_ids": [
+      6
+    ],
+    "rationale": "Entry 6 explicitly mentions that Milo was not limping."
+  },
+  {
+    "query_id": "q045",
+    "query": "Milo was frightened by thunder",
+    "category": "negation",
+    "relevant_diary_ids": [
+      31
+    ],
+    "rationale": "Entry 31 explicitly mentions that Milo was frightened by thunder."
+  },
+  {
+    "query_id": "q046",
+    "query": "Milo was not frightened by thunder",
+    "category": "negation",
+    "relevant_diary_ids": [
+      32
+    ],
+    "rationale": "Entry 32 explicitly mentions that Milo was not frightened by thunder."
+  }
+]

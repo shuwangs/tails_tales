@@ -54,6 +54,31 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 3. Compare with stored embeddings (cosine similarity)
 4. Return top 6 most relevant entries
 
+## 📊 Search Evaluation
+
+An offline evaluation compares MiniLM semantic retrieval with a default TF-IDF keyword baseline using **51 synthetic English diary entries and 46 labeled queries**. Both methods search diary content and return the top six results. JavaScript generates semantic rankings using the application's embedding function; Python generates the TF-IDF baseline and analyzes both runs.
+
+| Metric | Semantic search | TF-IDF baseline |
+| --- | --- | --- |
+| Recall@6 | 0.9500 | 0.8750 |
+| MRR@6 | 0.8217 | 0.7417 |
+| Precision@6 | 0.1750 | 0.1625 |
+
+Metrics are averaged over **40 answerable queries**. Semantic search improves Recall@6 by **7.5 percentage points** on this dataset. The six no-answer queries are excluded; abstention performance has not been measured.
+
+Error analysis shows complementary behavior: semantic retrieval finds relevant entries for four queries that TF-IDF misses, while TF-IDF retrieves a homecoming greeting missed by semantic search. Both methods miss a query about not wanting to play with a favorite toy.
+
+These results describe a small synthetic development dataset with provisional relevance labels, not a held-out benchmark or real-user performance. Evaluation runs in memory without PostgreSQL and does not test database filtering.
+
+To analyze the saved results from the repository root using Python 3:
+
+```bash
+python3 evaluation/analyze.py
+python3 evaluation/analyze.py keyword_results.json
+```
+
+See the [evaluation README](./evaluation/README.md) for data, relevance criteria, dependencies, commands to regenerate results, and detailed failure analysis.
+
 ## 📦 API Endpoints
 ### Entries
 >GET /api/entries/:id   

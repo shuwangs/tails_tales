@@ -1,0 +1,1437 @@
+{
+  "metadata": {
+    "model": "TF-IDF (scikit-learn defaults)",
+    "top_k": 6,
+    "diary_count": 51,
+    "query_count": 46,
+    "generated_at": "2026-10-30T06:33:13.674947+00:00"
+  },
+  "results": [
+    {
+      "query_id": "q001",
+      "query": "When did Milo watch birds by the window?",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 24,
+          "similarity": 0.2690140333011087
+        },
+        {
+          "id": 22,
+          "similarity": 0.12111051279212623
+        },
+        {
+          "id": 6,
+          "similarity": 0.115382041909929
+        },
+        {
+          "id": 7,
+          "similarity": 0.10741281607885962
+        },
+        {
+          "id": 26,
+          "similarity": 0.09772337978316226
+        },
+        {
+          "id": 25,
+          "similarity": 0.0937622145496454
+        }
+      ]
+    },
+    {
+      "query_id": "q002",
+      "query": "Playing with a ball indoors because it was raining",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 47,
+          "similarity": 0.18416661320844263
+        },
+        {
+          "id": 23,
+          "similarity": 0.16915934786380502
+        },
+        {
+          "id": 39,
+          "similarity": 0.136185200692722
+        },
+        {
+          "id": 33,
+          "similarity": 0.13356942611444514
+        },
+        {
+          "id": 18,
+          "similarity": 0.11022397411962875
+        },
+        {
+          "id": 8,
+          "similarity": 0.08931102088441385
+        }
+      ]
+    },
+    {
+      "query_id": "q003",
+      "query": "Sleeping inside on a rainy afternoon",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 26,
+          "similarity": 0.24103198850625995
+        },
+        {
+          "id": 11,
+          "similarity": 0.21842035248381694
+        },
+        {
+          "id": 9,
+          "similarity": 0.18798549895533911
+        },
+        {
+          "id": 8,
+          "similarity": 0.1737439586263649
+        },
+        {
+          "id": 47,
+          "similarity": 0.1588467114731283
+        },
+        {
+          "id": 39,
+          "similarity": 0.1284767083458426
+        }
+      ]
+    },
+    {
+      "query_id": "q004",
+      "query": "Climbing the cat tree",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 19,
+          "similarity": 0.35422392215258003
+        },
+        {
+          "id": 22,
+          "similarity": 0.23413523555397256
+        },
+        {
+          "id": 45,
+          "similarity": 0.11031094098611886
+        },
+        {
+          "id": 34,
+          "similarity": 0.0701227312915513
+        },
+        {
+          "id": 5,
+          "similarity": 0.04572517775820202
+        },
+        {
+          "id": 7,
+          "similarity": 0.03817804342352164
+        }
+      ]
+    },
+    {
+      "query_id": "q005",
+      "query": "Playing chase with another cat",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 23,
+          "similarity": 0.13452649797441799
+        },
+        {
+          "id": 33,
+          "similarity": 0.13403076468200606
+        },
+        {
+          "id": 14,
+          "similarity": 0.11925029476128761
+        },
+        {
+          "id": 38,
+          "similarity": 0.10700702117128125
+        },
+        {
+          "id": 45,
+          "similarity": 0.10535042075191153
+        },
+        {
+          "id": 19,
+          "similarity": 0.0941125423304289
+        }
+      ]
+    },
+    {
+      "query_id": "q006",
+      "query": "Running around the apartment after sunset",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 28,
+          "similarity": 0.4561889058427708
+        },
+        {
+          "id": 5,
+          "similarity": 0.1652294128794263
+        },
+        {
+          "id": 46,
+          "similarity": 0.10903830026104164
+        },
+        {
+          "id": 42,
+          "similarity": 0.09880164578177525
+        },
+        {
+          "id": 41,
+          "similarity": 0.08864775805253508
+        },
+        {
+          "id": 27,
+          "similarity": 0.08690637342289556
+        }
+      ]
+    },
+    {
+      "query_id": "q007",
+      "query": "Chasing a little red dot",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 30,
+          "similarity": 0.33262609436576096
+        },
+        {
+          "id": 19,
+          "similarity": 0.10118119198035011
+        },
+        {
+          "id": 9,
+          "similarity": 0.09591789782865917
+        },
+        {
+          "id": 11,
+          "similarity": 0.07963107686491352
+        },
+        {
+          "id": 15,
+          "similarity": 0.07604438529303084
+        },
+        {
+          "id": 50,
+          "similarity": 0.07485812101294481
+        }
+      ]
+    },
+    {
+      "query_id": "q008",
+      "query": "Exploring plants and bugs in the catio",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 21,
+          "similarity": 0.3184253449557932
+        },
+        {
+          "id": 11,
+          "similarity": 0.232639291479235
+        },
+        {
+          "id": 26,
+          "similarity": 0.15466372413744542
+        },
+        {
+          "id": 39,
+          "similarity": 0.12001142139162618
+        },
+        {
+          "id": 10,
+          "similarity": 0.10189873632586224
+        },
+        {
+          "id": 34,
+          "similarity": 0.08799266660197347
+        }
+      ]
+    },
+    {
+      "query_id": "q009",
+      "query": "Learning to jump over something for a reward",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 29,
+          "similarity": 0.37242177572694746
+        },
+        {
+          "id": 7,
+          "similarity": 0.1891159348846458
+        },
+        {
+          "id": 48,
+          "similarity": 0.1789067404037571
+        },
+        {
+          "id": 35,
+          "similarity": 0.12339998599158176
+        },
+        {
+          "id": 2,
+          "similarity": 0.09607666054820259
+        },
+        {
+          "id": 23,
+          "similarity": 0.09489019208197498
+        }
+      ]
+    },
+    {
+      "query_id": "q010",
+      "query": "Waiting on the mat when asked",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 38,
+          "similarity": 0.37894288722041364
+        },
+        {
+          "id": 5,
+          "similarity": 0.11601658925981444
+        },
+        {
+          "id": 17,
+          "similarity": 0.0979262477922255
+        },
+        {
+          "id": 43,
+          "similarity": 0.07262982455707903
+        },
+        {
+          "id": 35,
+          "similarity": 0.06891956052011798
+        },
+        {
+          "id": 2,
+          "similarity": 0.06408543628870958
+        }
+      ]
+    },
+    {
+      "query_id": "q011",
+      "query": "Coming over when I called his name",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 48,
+          "similarity": 0.6343035838534999
+        },
+        {
+          "id": 7,
+          "similarity": 0.1408478502982751
+        },
+        {
+          "id": 35,
+          "similarity": 0.12141341139749262
+        },
+        {
+          "id": 42,
+          "similarity": 0.09672182969894594
+        },
+        {
+          "id": 44,
+          "similarity": 0.09350485359159044
+        },
+        {
+          "id": 2,
+          "similarity": 0.07155500201664974
+        }
+      ]
+    },
+    {
+      "query_id": "q012",
+      "query": "Turning down breakfast",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 13,
+          "similarity": 0.33449175200760684
+        },
+        {
+          "id": 26,
+          "similarity": 0.16439336404360558
+        },
+        {
+          "id": 14,
+          "similarity": 0.13652649279336845
+        },
+        {
+          "id": 4,
+          "similarity": 0.06524054094720823
+        },
+        {
+          "id": 43,
+          "similarity": 0.06508688078601252
+        },
+        {
+          "id": 10,
+          "similarity": 0.06107342022347428
+        }
+      ]
+    },
+    {
+      "query_id": "q013",
+      "query": "Finishing breakfast and asking for more",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 14,
+          "similarity": 0.3329573653808342
+        },
+        {
+          "id": 13,
+          "similarity": 0.3140731299610296
+        },
+        {
+          "id": 10,
+          "similarity": 0.14424439526675326
+        },
+        {
+          "id": 16,
+          "similarity": 0.1404460133580992
+        },
+        {
+          "id": 48,
+          "similarity": 0.11264848710580284
+        },
+        {
+          "id": 18,
+          "similarity": 0.10417634301483515
+        }
+      ]
+    },
+    {
+      "query_id": "q014",
+      "query": "Trying salmon kibble mixed into his usual food",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 15,
+          "similarity": 0.548454398493215
+        },
+        {
+          "id": 18,
+          "similarity": 0.14925192284333952
+        },
+        {
+          "id": 6,
+          "similarity": 0.08075365838932397
+        },
+        {
+          "id": 12,
+          "similarity": 0.07203524071002314
+        },
+        {
+          "id": 27,
+          "similarity": 0.06882650726489839
+        },
+        {
+          "id": 19,
+          "similarity": 0.06826727402633676
+        }
+      ]
+    },
+    {
+      "query_id": "q015",
+      "query": "Refusing wet food but still eating dry food",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 18,
+          "similarity": 0.35039815203914687
+        },
+        {
+          "id": 15,
+          "similarity": 0.14248431891131352
+        },
+        {
+          "id": 13,
+          "similarity": 0.14057273362046352
+        },
+        {
+          "id": 19,
+          "similarity": 0.12750205110212245
+        },
+        {
+          "id": 32,
+          "similarity": 0.044198345966317165
+        },
+        {
+          "id": 40,
+          "similarity": 0.03967888071704151
+        }
+      ]
+    },
+    {
+      "query_id": "q016",
+      "query": "Eating slowly with a puzzle feeder",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 17,
+          "similarity": 0.3779333505476665
+        },
+        {
+          "id": 13,
+          "similarity": 0.12129868194198676
+        },
+        {
+          "id": 33,
+          "similarity": 0.11111474523012299
+        },
+        {
+          "id": 46,
+          "similarity": 0.09016623729653639
+        },
+        {
+          "id": 4,
+          "similarity": 0.04407699417448493
+        },
+        {
+          "id": 43,
+          "similarity": 0.04397318022794893
+        }
+      ]
+    },
+    {
+      "query_id": "q017",
+      "query": "Getting extra hungry after playing",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 19,
+          "similarity": 0.2680536042723462
+        },
+        {
+          "id": 50,
+          "similarity": 0.1327347296617639
+        },
+        {
+          "id": 42,
+          "similarity": 0.09379263458990078
+        },
+        {
+          "id": 41,
+          "similarity": 0.08415352510017635
+        },
+        {
+          "id": 28,
+          "similarity": 0.08096973786907521
+        },
+        {
+          "id": 5,
+          "similarity": 0.07809833900565318
+        }
+      ]
+    },
+    {
+      "query_id": "q018",
+      "query": "Enjoying a freshly cleaned water bowl",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 20,
+          "similarity": 0.37189367795777534
+        },
+        {
+          "id": 10,
+          "similarity": 0.2395690855847933
+        },
+        {
+          "id": 42,
+          "similarity": 0.1430054650469286
+        },
+        {
+          "id": 3,
+          "similarity": 0.12575540720980655
+        },
+        {
+          "id": 14,
+          "similarity": 0.10099863739295567
+        },
+        {
+          "id": 19,
+          "similarity": 0.09309187033942597
+        }
+      ]
+    },
+    {
+      "query_id": "q019",
+      "query": "Hiding because of thunder",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 32,
+          "similarity": 0.14430787463155442
+        },
+        {
+          "id": 39,
+          "similarity": 0.12643110569033
+        },
+        {
+          "id": 27,
+          "similarity": 0.12523956133094047
+        },
+        {
+          "id": 9,
+          "similarity": 0.07901364167198402
+        },
+        {
+          "id": 20,
+          "similarity": 0.045510914101677916
+        },
+        {
+          "id": 14,
+          "similarity": 0.04521431762571043
+        }
+      ]
+    },
+    {
+      "query_id": "q020",
+      "query": "Sleeping through a thunderstorm",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 6,
+          "similarity": 0.2297837695091777
+        },
+        {
+          "id": 1,
+          "similarity": 0.0
+        },
+        {
+          "id": 2,
+          "similarity": 0.0
+        },
+        {
+          "id": 3,
+          "similarity": 0.0
+        },
+        {
+          "id": 4,
+          "similarity": 0.0
+        },
+        {
+          "id": 5,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "query_id": "q021",
+      "query": "Hiding from visitors",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 27,
+          "similarity": 0.1486011435773718
+        },
+        {
+          "id": 35,
+          "similarity": 0.13482345302798518
+        },
+        {
+          "id": 36,
+          "similarity": 0.131033815747377
+        },
+        {
+          "id": 51,
+          "similarity": 0.08985961037525077
+        },
+        {
+          "id": 7,
+          "similarity": 0.08694383631500568
+        },
+        {
+          "id": 22,
+          "similarity": 0.08003604147868174
+        }
+      ]
+    },
+    {
+      "query_id": "q022",
+      "query": "Relaxing on the couch with guests",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 5,
+          "similarity": 0.2486569036983255
+        },
+        {
+          "id": 36,
+          "similarity": 0.22883773253186626
+        },
+        {
+          "id": 33,
+          "similarity": 0.20341292482547815
+        },
+        {
+          "id": 27,
+          "similarity": 0.1808868519251217
+        },
+        {
+          "id": 4,
+          "similarity": 0.16762847438292774
+        },
+        {
+          "id": 17,
+          "similarity": 0.1528791503541915
+        }
+      ]
+    },
+    {
+      "query_id": "q023",
+      "query": "Greeting me excitedly when I got home",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 43,
+          "similarity": 0.3129398713363335
+        },
+        {
+          "id": 40,
+          "similarity": 0.21139409754350394
+        },
+        {
+          "id": 50,
+          "similarity": 0.20459880363744984
+        },
+        {
+          "id": 33,
+          "similarity": 0.16916685497123324
+        },
+        {
+          "id": 42,
+          "similarity": 0.12424979110882867
+        },
+        {
+          "id": 41,
+          "similarity": 0.111480586513926
+        }
+      ]
+    },
+    {
+      "query_id": "q024",
+      "query": "The time Milo chewed my shoelace",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 37,
+          "similarity": 0.19865516213646592
+        },
+        {
+          "id": 26,
+          "similarity": 0.17529718505233874
+        },
+        {
+          "id": 19,
+          "similarity": 0.1633283044222137
+        },
+        {
+          "id": 12,
+          "similarity": 0.1580548454688845
+        },
+        {
+          "id": 34,
+          "similarity": 0.09248271754444898
+        },
+        {
+          "id": 5,
+          "similarity": 0.07214060567578649
+        }
+      ]
+    },
+    {
+      "query_id": "q025",
+      "query": "Getting a new toy for his birthday",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 45,
+          "similarity": 0.35698167341334025
+        },
+        {
+          "id": 46,
+          "similarity": 0.1964781944781644
+        },
+        {
+          "id": 12,
+          "similarity": 0.1292244927685988
+        },
+        {
+          "id": 30,
+          "similarity": 0.12921650575109317
+        },
+        {
+          "id": 16,
+          "similarity": 0.10680894113220342
+        },
+        {
+          "id": 48,
+          "similarity": 0.08424153610334649
+        }
+      ]
+    },
+    {
+      "query_id": "q026",
+      "query": "Celebrating a year since adoption",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 49,
+          "similarity": 0.3272793510591251
+        },
+        {
+          "id": 1,
+          "similarity": 0.0
+        },
+        {
+          "id": 2,
+          "similarity": 0.0
+        },
+        {
+          "id": 3,
+          "similarity": 0.0
+        },
+        {
+          "id": 4,
+          "similarity": 0.0
+        },
+        {
+          "id": 5,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "query_id": "q027",
+      "query": "Settling into a new home",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 46,
+          "similarity": 0.23095693970099795
+        },
+        {
+          "id": 45,
+          "similarity": 0.1306377659725265
+        },
+        {
+          "id": 15,
+          "similarity": 0.1304156996232672
+        },
+        {
+          "id": 16,
+          "similarity": 0.12555218273516483
+        },
+        {
+          "id": 12,
+          "similarity": 0.1231437646339597
+        },
+        {
+          "id": 27,
+          "similarity": 0.11765845616209424
+        }
+      ]
+    },
+    {
+      "query_id": "q028",
+      "query": "Kneading a soft new blanket",
+      "category": "keyword",
+      "top_entries": [
+        {
+          "id": 46,
+          "similarity": 0.19149077685881663
+        },
+        {
+          "id": 23,
+          "similarity": 0.13831113714368956
+        },
+        {
+          "id": 47,
+          "similarity": 0.13742070974147833
+        },
+        {
+          "id": 45,
+          "similarity": 0.10831424821252636
+        },
+        {
+          "id": 16,
+          "similarity": 0.104097694745186
+        },
+        {
+          "id": 1,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "query_id": "q029",
+      "query": "Ear discomfort",
+      "category": "symptom",
+      "top_entries": [
+        {
+          "id": 39,
+          "similarity": 0.23090507037396732
+        },
+        {
+          "id": 1,
+          "similarity": 0.0
+        },
+        {
+          "id": 2,
+          "similarity": 0.0
+        },
+        {
+          "id": 3,
+          "similarity": 0.0
+        },
+        {
+          "id": 4,
+          "similarity": 0.0
+        },
+        {
+          "id": 5,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "query_id": "q030",
+      "query": "Not feeling like playing, even with his favorite toy",
+      "category": "semantic_paraphrase",
+      "top_entries": [
+        {
+          "id": 49,
+          "similarity": 0.236420424235975
+        },
+        {
+          "id": 33,
+          "similarity": 0.14317573947420947
+        },
+        {
+          "id": 30,
+          "similarity": 0.1340899897251799
+        },
+        {
+          "id": 32,
+          "similarity": 0.10262656575034197
+        },
+        {
+          "id": 44,
+          "similarity": 0.09871113725060988
+        },
+        {
+          "id": 45,
+          "similarity": 0.08839483178226426
+        }
+      ]
+    },
+    {
+      "query_id": "q031",
+      "query": "Getting itchy after trying a new chicken treat",
+      "category": "multi_concept",
+      "top_entries": [
+        {
+          "id": 16,
+          "similarity": 0.26081647628406635
+        },
+        {
+          "id": 45,
+          "similarity": 0.1508469348573742
+        },
+        {
+          "id": 46,
+          "similarity": 0.14936468876597753
+        },
+        {
+          "id": 48,
+          "similarity": 0.11226495753908636
+        },
+        {
+          "id": 15,
+          "similarity": 0.09850425586450211
+        },
+        {
+          "id": 39,
+          "similarity": 0.08971409135344689
+        }
+      ]
+    },
+    {
+      "query_id": "q032",
+      "query": "Trouble putting weight on a back leg",
+      "category": "symptom",
+      "top_entries": [
+        {
+          "id": 5,
+          "similarity": 0.3590839763456868
+        },
+        {
+          "id": 41,
+          "similarity": 0.19587243734921203
+        },
+        {
+          "id": 50,
+          "similarity": 0.08354957803872579
+        },
+        {
+          "id": 27,
+          "similarity": 0.07657125455018542
+        },
+        {
+          "id": 23,
+          "similarity": 0.0760954425480118
+        },
+        {
+          "id": 4,
+          "similarity": 0.05462534571737139
+        }
+      ]
+    },
+    {
+      "query_id": "q033",
+      "query": "Taking Milo on an airplane",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 47,
+          "similarity": 0.22028967251370024
+        },
+        {
+          "id": 25,
+          "similarity": 0.21871471748797483
+        },
+        {
+          "id": 39,
+          "similarity": 0.14580745680337542
+        },
+        {
+          "id": 22,
+          "similarity": 0.14129584896470004
+        },
+        {
+          "id": 4,
+          "similarity": 0.09210129644356038
+        },
+        {
+          "id": 11,
+          "similarity": 0.09131285972039296
+        }
+      ]
+    },
+    {
+      "query_id": "q034",
+      "query": "Milo swimming in a pool",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 11,
+          "similarity": 0.15919807735804795
+        },
+        {
+          "id": 32,
+          "similarity": 0.15803895377080543
+        },
+        {
+          "id": 10,
+          "similarity": 0.15031637933041184
+        },
+        {
+          "id": 36,
+          "similarity": 0.14773825662059212
+        },
+        {
+          "id": 14,
+          "similarity": 0.1475965623058821
+        },
+        {
+          "id": 17,
+          "similarity": 0.1464441696008658
+        }
+      ]
+    },
+    {
+      "query_id": "q035",
+      "query": "Staying overnight at a boarding cattery",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 42,
+          "similarity": 0.2057936538724154
+        },
+        {
+          "id": 45,
+          "similarity": 0.19931150868946831
+        },
+        {
+          "id": 21,
+          "similarity": 0.19110464947607142
+        },
+        {
+          "id": 6,
+          "similarity": 0.18033708917764213
+        },
+        {
+          "id": 1,
+          "similarity": 0.0
+        },
+        {
+          "id": 2,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "query_id": "q036",
+      "query": "Milo knocking a flower vase off the table",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 31,
+          "similarity": 0.20988809767839725
+        },
+        {
+          "id": 5,
+          "similarity": 0.18305305195974267
+        },
+        {
+          "id": 37,
+          "similarity": 0.1476699149253612
+        },
+        {
+          "id": 34,
+          "similarity": 0.08202588204820609
+        },
+        {
+          "id": 7,
+          "similarity": 0.044658666726325645
+        },
+        {
+          "id": 39,
+          "similarity": 0.042423147451671424
+        }
+      ]
+    },
+    {
+      "query_id": "q037",
+      "query": "Trying out an automatic litter box",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 34,
+          "similarity": 0.12920264604627904
+        },
+        {
+          "id": 15,
+          "similarity": 0.12012451093700428
+        },
+        {
+          "id": 6,
+          "similarity": 0.10887374975841807
+        },
+        {
+          "id": 31,
+          "similarity": 0.0850779963266293
+        },
+        {
+          "id": 39,
+          "similarity": 0.08231610125498275
+        },
+        {
+          "id": 47,
+          "similarity": 0.0805119442117322
+        }
+      ]
+    },
+    {
+      "query_id": "q038",
+      "query": "Wearing a costume for Halloween",
+      "category": "no_relevant_results",
+      "top_entries": [
+        {
+          "id": 48,
+          "similarity": 0.2407731596695011
+        },
+        {
+          "id": 29,
+          "similarity": 0.13794073571245669
+        },
+        {
+          "id": 14,
+          "similarity": 0.1379399842324271
+        },
+        {
+          "id": 24,
+          "similarity": 0.13626647231153138
+        },
+        {
+          "id": 12,
+          "similarity": 0.13415870690497755
+        },
+        {
+          "id": 30,
+          "similarity": 0.13415041491699892
+        }
+      ]
+    },
+    {
+      "query_id": "q039",
+      "query": "Milo had itchy ears",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 39,
+          "similarity": 0.31267120411295063
+        },
+        {
+          "id": 1,
+          "similarity": 0.25622187399898766
+        },
+        {
+          "id": 2,
+          "similarity": 0.1278431354555025
+        },
+        {
+          "id": 28,
+          "similarity": 0.10500569959730528
+        },
+        {
+          "id": 42,
+          "similarity": 0.06081754413057379
+        },
+        {
+          "id": 44,
+          "similarity": 0.05879474755005969
+        }
+      ]
+    },
+    {
+      "query_id": "q040",
+      "query": "Milo's ears were not itchy",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 39,
+          "similarity": 0.3322234150155213
+        },
+        {
+          "id": 1,
+          "similarity": 0.24114255119434425
+        },
+        {
+          "id": 2,
+          "similarity": 0.21482552632963695
+        },
+        {
+          "id": 50,
+          "similarity": 0.09550017853003864
+        },
+        {
+          "id": 8,
+          "similarity": 0.09452465242146717
+        },
+        {
+          "id": 40,
+          "similarity": 0.09053730727343863
+        }
+      ]
+    },
+    {
+      "query_id": "q041",
+      "query": "Milo refused to eat breakfast",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 13,
+          "similarity": 0.4137651488140964
+        },
+        {
+          "id": 14,
+          "similarity": 0.20597313106876852
+        },
+        {
+          "id": 10,
+          "similarity": 0.07091489800642663
+        },
+        {
+          "id": 29,
+          "similarity": 0.06963214674578669
+        },
+        {
+          "id": 17,
+          "similarity": 0.06908810202282556
+        },
+        {
+          "id": 18,
+          "similarity": 0.06472475578963921
+        }
+      ]
+    },
+    {
+      "query_id": "q042",
+      "query": "Milo did not refuse breakfast and ate everything",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 13,
+          "similarity": 0.2400750102694992
+        },
+        {
+          "id": 4,
+          "similarity": 0.21098278284947955
+        },
+        {
+          "id": 6,
+          "similarity": 0.14039302373577314
+        },
+        {
+          "id": 14,
+          "similarity": 0.12515870898736967
+        },
+        {
+          "id": 44,
+          "similarity": 0.09986559829184179
+        },
+        {
+          "id": 17,
+          "similarity": 0.0962093961068596
+        }
+      ]
+    },
+    {
+      "query_id": "q043",
+      "query": "Milo was limping",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 6,
+          "similarity": 0.24057693367404623
+        },
+        {
+          "id": 41,
+          "similarity": 0.18395819270390845
+        },
+        {
+          "id": 18,
+          "similarity": 0.12129488806235399
+        },
+        {
+          "id": 19,
+          "similarity": 0.12027510300408267
+        },
+        {
+          "id": 45,
+          "similarity": 0.06731851246230096
+        },
+        {
+          "id": 35,
+          "similarity": 0.06719675264679706
+        }
+      ]
+    },
+    {
+      "query_id": "q044",
+      "query": "Milo was not limping",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 6,
+          "similarity": 0.24057693367404623
+        },
+        {
+          "id": 41,
+          "similarity": 0.18395819270390845
+        },
+        {
+          "id": 18,
+          "similarity": 0.12129488806235399
+        },
+        {
+          "id": 19,
+          "similarity": 0.12027510300408267
+        },
+        {
+          "id": 45,
+          "similarity": 0.06731851246230096
+        },
+        {
+          "id": 35,
+          "similarity": 0.06719675264679706
+        }
+      ]
+    },
+    {
+      "query_id": "q045",
+      "query": "Milo was frightened by thunder",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 19,
+          "similarity": 0.2025807067841588
+        },
+        {
+          "id": 32,
+          "similarity": 0.18737267618978665
+        },
+        {
+          "id": 9,
+          "similarity": 0.14960847225882895
+        },
+        {
+          "id": 24,
+          "similarity": 0.1211693895529296
+        },
+        {
+          "id": 18,
+          "similarity": 0.09028463141971961
+        },
+        {
+          "id": 45,
+          "similarity": 0.0501078584800558
+        }
+      ]
+    },
+    {
+      "query_id": "q046",
+      "query": "Milo was not frightened by thunder",
+      "category": "negation",
+      "top_entries": [
+        {
+          "id": 19,
+          "similarity": 0.2025807067841588
+        },
+        {
+          "id": 32,
+          "similarity": 0.18737267618978665
+        },
+        {
+          "id": 9,
+          "similarity": 0.14960847225882895
+        },
+        {
+          "id": 24,
+          "similarity": 0.1211693895529296
+        },
+        {
+          "id": 18,
+          "similarity": 0.09028463141971961
+        },
+        {
+          "id": 45,
+          "similarity": 0.0501078584800558
+        }
+      ]
+    }
+  ]
+}
