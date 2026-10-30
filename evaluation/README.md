@@ -1,8 +1,8 @@
 # Semantic search evaluation data
 
-- `dataset.json`: 51 synthetic English diary entries for Milo, a cat. Entry 51, "Relaxing Evening" (2026-09-20), describes Milo enjoying being brushed with three different brushes and feeling relaxed.
-- `queries.json`: 46 English search queries (40 answerable, 6 with no relevant entries), including eight queries that contrast positive and negative statements. All 46 queries include relevance rationales.
-- `annotations.md`: supporting relevance notes. Its query table covers q001–q046, with a reverse mapping for all 51 diary entries.
+- `data/dataset.json`: 51 synthetic English diary entries for Milo, a cat. Entry 51, "Relaxing Evening" (2026-09-20), describes Milo enjoying being brushed with three different brushes and feeling relaxed.
+- `data/queries.json`: 46 English search queries (40 answerable, 6 with no relevant entries), including eight queries that contrast positive and negative statements. All 46 queries include relevance rationales.
+- `data/annotations.md`: supporting relevance notes. Its query table covers q001–q046, with a reverse mapping for all 51 diary entries.
 
 The queries focus on recalling everyday experiences: play, food preferences, weather, visitors, training, celebrations, home life, and occasional discomfort. Natural-language questions are retrieval inputs; this dataset does not evaluate generated answers or date arithmetic.
 
@@ -12,7 +12,7 @@ Search all 51 entries for Milo. Judge relevance using `content` only, matching t
 
 A relevant entry directly supports the requested event or experience. For a multi-concept query, all key conditions must be present. Merely sharing a topic is insufficient: healthy ears do not answer a query for ear discomfort, and calmly sleeping during thunder does not answer a query for hiding because of thunder. Empty `relevant_diary_ids` means no entry supports that event.
 
-`category` describes the primary retrieval challenge; categories can overlap conceptually. `rationale` explains the expected IDs and selected confusing alternatives. IDs are references into `dataset.json`, not database IDs. This is an offline corpus and requires no database seeding.
+`category` describes the primary retrieval challenge; categories can overlap conceptually. `rationale` explains the expected IDs and selected confusing alternatives. IDs are references into `data/dataset.json`, not database IDs. This is an offline corpus and requires no database seeding.
 
 ## Review status and use
 
@@ -22,14 +22,34 @@ The current file is a development draft, not a held-out benchmark. After reviewi
 
 For answerable queries, report Recall@6, MRR@6, and Precision@6. Evaluate empty-label queries separately for correct abstention; Recall and MRR are undefined for them. Most queries have only one relevant entry, so perfect Precision@6 is usually impossible when six entries are always returned. The initial retrieval metrics are reported below. Latency and abstention performance have not been measured.
 
+## Directory structure
+
+```text
+evaluation/
+├── README.md
+├── requirements.txt
+├── evaluate.mjs
+├── keyword_baseline.py
+├── analyze.py
+├── data/
+│   ├── dataset.json
+│   ├── queries.json
+│   └── annotations.md
+└── results/
+    ├── semantic_results.json
+    └── keyword_results.json
+```
+
+Data and annotations live in `data/`; saved retrieval runs live in `results/`. The analyzer accepts a filename within `results/`, so use `semantic_results.json` or `keyword_results.json` without the directory prefix.
+
 ## Run the evaluation
 
 The workflow uses JavaScript to generate retrieval results and Python to analyze them:
 
-- `evaluate.mjs` reuses `embedText` from `server/utils/embedText.js`, embeds diary content and queries, and ranks all 51 entries by cosine similarity. It saves the top six results for each query to `results.json`.
-- `results.json` stores model metadata and per-query `top_entries`, each containing an `id` and `similarity`. It contains retrieval output, not aggregate evaluation metrics.
-- `keyword_baseline.py` fits scikit-learn’s default `TfidfVectorizer()` on diary content, transforms queries using that vocabulary and weighting, and ranks entries by cosine similarity. It saves the top six results to `keyword_results.json`.
-- `analyze.py` reads the saved results and joins them to `queries.json` by `query_id` to obtain relevance labels. It prints aggregate metrics, missing relevant IDs, and rankings for q023 and q030.
+- `evaluate.mjs` reuses `embedText` from `server/utils/embedText.js`, embeds diary content and queries, and ranks all 51 entries by cosine similarity. It saves the top six results for each query to `results/semantic_results.json`.
+- `results/semantic_results.json` stores model metadata and per-query `top_entries`, each containing an `id` and `similarity`. It contains retrieval output, not aggregate evaluation metrics.
+- `keyword_baseline.py` fits scikit-learn’s default `TfidfVectorizer()` on diary content, transforms queries using that vocabulary and weighting, and ranks entries by cosine similarity. It saves the top six results to `results/keyword_results.json`.
+- `analyze.py` reads the saved results and joins them to `data/queries.json` by `query_id` to obtain relevance labels. It prints aggregate metrics, missing relevant IDs, and rankings for q023 and q030.
 
 The embedding implementation uses `Xenova/all-MiniLM-L6-v2`, 1,000-character truncation, mean pooling, and normalized 384-dimensional vectors. The `.mjs` extension enables ES modules so the script can import the existing backend function.
 
@@ -38,17 +58,17 @@ Install the server dependencies if needed, then run these commands from the repo
 ```bash
 npm ci --prefix server
 node evaluation/evaluate.mjs
-python3 evaluation/analyze.py results.json
+python3 evaluation/analyze.py semantic_results.json
 
 # Generate and analyze the keyword baseline using the same Python environment
-python3 -m pip install scikit-learn
+python3 -m pip install -r evaluation/requirements.txt
 python3 evaluation/keyword_baseline.py
 python3 evaluation/analyze.py keyword_results.json
 ```
 
-The analysis script uses only the Python standard library; generating the TF-IDF baseline requires scikit-learn. With no filename argument, `analyze.py` defaults to `results.json`. The first embedding run may require downloading the model. No API server or PostgreSQL connection is needed: similarity is calculated in memory. This evaluates embedding retrieval quality, not database queries or pet-isolation behavior.
+The analysis script uses only the Python standard library; generating the TF-IDF baseline requires scikit-learn. With no filename argument, `analyze.py` defaults to `results/semantic_results.json`. The first embedding run may require downloading the model. No API server or PostgreSQL connection is needed: similarity is calculated in memory. This evaluates embedding retrieval quality, not database queries or pet-isolation behavior.
 
-To reanalyze an unchanged saved run, execute only the Python command. If the corpus or queries change, regenerate the retrieval results before analyzing them. The analyzer reads current relevance labels from `queries.json`, so keep the results and labels from the same evaluation version.
+To reanalyze an unchanged saved run, execute only the Python command. If the corpus or queries change, regenerate the retrieval results before analyzing them. The analyzer reads current relevance labels from `data/queries.json`, so keep the results and labels from the same evaluation version.
 
 ## Initial semantic-search baseline
 

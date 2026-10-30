@@ -6,10 +6,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_DIR = Path(__file__).resolve().parent
 
-with (BASE_DIR / "dataset.json").open("r") as file:
+with (BASE_DIR / "data" / "dataset.json").open("r") as file:
     dataset = json.load(file)
 
-with(BASE_DIR / "queries.json").open("r") as file:
+with(BASE_DIR / "data" / "queries.json").open("r") as file:
     queries = json.load(file)
 
 # use the content for TF-IDF vectorization as the vector search.
@@ -66,9 +66,9 @@ output = {
     "results": results,
 }
 
-with (BASE_DIR / "keyword_results.json").open(
+with (BASE_DIR / "results" / "keyword_results.json").open(
     "w", encoding="utf-8"
 ) as file:
     json.dump(output, file, indent=2, ensure_ascii=False)
 
-print(f"\nSaved {len(results)} queries to keyword_results.json")
+print(f"\nSaved {len(results)} queries to results/keyword_results.json")

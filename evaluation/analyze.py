@@ -5,15 +5,15 @@ import sys
 
 BASE_DIR = Path(__file__).resolve().parent
 
-# if filename is not provided as a command line argument, default to "results.json"
-filename = sys.argv[1] if len(sys.argv) > 1 else "results.json"
+# if filename is not provided as a command line argument, default to "semantic_results.json"
+filename = sys.argv[1] if len(sys.argv) > 1 else "semantic_results.json"
 
-with (BASE_DIR / filename).open(encoding="utf-8") as file:
+with (BASE_DIR / "results" / filename).open(encoding="utf-8") as file:
     results = json.load(file)
 
 print(f"Analyzing: {filename}")
 
-with(BASE_DIR / "queries.json").open("r") as file:
+with(BASE_DIR / "data" / "queries.json").open("r") as file:
     queries = json.load(file)
 
 queries_by_id = {query["query_id"]: query for query in queries}

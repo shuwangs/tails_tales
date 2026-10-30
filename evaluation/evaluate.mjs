@@ -1,8 +1,8 @@
 import { readFile, writeFile } from 'fs/promises';
 import { embedText } from '../server/utils/embedText.js';
 
-const dataset = JSON.parse(await readFile(new URL('./dataset.json', import.meta.url), 'utf-8'));
-const queries = JSON.parse(await readFile(new URL('./queries.json', import.meta.url), 'utf-8'));
+const dataset = JSON.parse(await readFile(new URL('./data/dataset.json', import.meta.url), 'utf-8'));
+const queries = JSON.parse(await readFile(new URL('./data/queries.json', import.meta.url), 'utf-8'));
 
 const diaryEmbeddings = [];
 for (const entry of dataset) {
@@ -69,7 +69,7 @@ const output = {
     results,
 }
 
-await writeFile(new URL('./results.json', import.meta.url),
+await writeFile(new URL('./results/semantic_results.json', import.meta.url),
     JSON.stringify(output, null, 2), 'utf-8');
 
-console.log(`Saved ${results.length} query results to evaluation/results.json`);
+console.log(`Saved ${results.length} query results to evaluation/results/semantic_results.json`);
