@@ -1,5 +1,11 @@
 name: CI
 on:
+  workflow_dispatch:
+    inputs:
+      full_evaluation:
+        description: Regenerate MiniLM and TF-IDF rankings (downloads model)
+        type: boolean
+        default: false
   push:
   pull_request:
     branches: [main]
@@ -31,3 +37,45 @@ jobs:
       - name: Check server
         working-directory: server
         run: biome ci .
+
+  evaluation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test evaluation metrics and validation
+        run: python3 -m unittest discover -s evaluation -p 'test_*.py'
+      - name: Set up Node for full regeneration
+        if: github.event_name == 'workflow_dispatch' && inputs.full_evaluation
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Install model and baseline dependencies
+        if: github.event_name == 'workflow_dispatch' && inputs.full_evaluation
+        run: |
+          npm ci --prefix server
+          python3 -m pip install -r evaluation/requirements.txt
+      - name: Regenerate rankings and report
+        if: github.event_name == 'workflow_dispatch' && inputs.full_evaluation
+        run: python3 evaluation/run.py
+      - name: Analyze saved rankings
+        if: github.event_name != 'workflow_dispatch' || !inputs.full_evaluation
+        run: python3 evaluation/run.py --from-saved
+      - name: Publish report in Actions summary
+        run: cat evaluation/reports/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload evaluation report and rankings
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-evaluation
+          path: |
+            evaluation/reports/
+            evaluation/results/
+          if-no-files-found: error

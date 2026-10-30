@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .env 
+*.vite
+# Generated evaluation artifacts
+__pycache__/
+evaluation/reports/

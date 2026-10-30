@@ -1,4 +1,8 @@
-import { readFile, writeFile } from 'fs/promises';
+import { mkdir, readFile, writeFile } from 'fs/promises';
+import { resolve } from 'node:path';
+
+const outputDir = process.argv[2] ? resolve(process.argv[2]) : new URL('./results/', import.meta.url);
+await mkdir(outputDir, { recursive: true });
 import { embedText } from '../server/utils/embedText.js';
 
 const dataset = JSON.parse(await readFile(new URL('./data/dataset.json', import.meta.url), 'utf-8'));
@@ -69,7 +73,7 @@ const output = {
     results,
 }
 
-await writeFile(new URL('./results/semantic_results.json', import.meta.url),
+await writeFile(process.argv[2] ? resolve(outputDir, 'semantic_results.json') : new URL('./results/semantic_results.json', import.meta.url),
     JSON.stringify(output, null, 2), 'utf-8');
 
-console.log(`Saved ${results.length} query results to evaluation/results/semantic_results.json`);
+console.log(`Saved ${results.length} semantic query results`);
