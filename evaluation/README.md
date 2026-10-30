@@ -20,30 +20,53 @@ These queries and labels were drafted by an AI assistant by reading the diary co
 
 The current file is a development draft, not a held-out benchmark. After reviewing labels, separate development and test queries before tuning similarity thresholds. Group queries for closely related events together when splitting to reduce overlap. Do not select thresholds using final test results.
 
-For answerable queries, report Recall@6, MRR@6, and Precision@6. Evaluate empty-label queries separately for correct abstention; Recall and MRR are undefined for them. Most queries have only one relevant entry, so perfect Precision@6 is usually impossible when six entries are always returned. No evaluation metrics or latency measurements have been run yet.
+For answerable queries, report Recall@6, MRR@6, and Precision@6. Evaluate empty-label queries separately for correct abstention; Recall and MRR are undefined for them. Most queries have only one relevant entry, so perfect Precision@6 is usually impossible when six entries are always returned. The initial retrieval metrics are reported below. Latency and abstention performance have not been measured.
 
-## Planned evaluation script
+## Run the evaluation
 
-The evaluation script has not been implemented yet. The next step is to create `evaluation/evaluate.mjs` and reuse `embedText` from `server/utils/embedText.js`:
+The workflow uses JavaScript to generate retrieval results and Python to analyze them:
 
-```js
-import { embedText } from "../server/utils/embedText.js";
-```
+- `evaluate.mjs` reuses `embedText` from `server/utils/embedText.js`, embeds diary content and queries, and ranks all 51 entries by cosine similarity. It saves the top six results for each query to `results.json`.
+- `results.json` stores model metadata and per-query `top_entries`, each containing an `id` and `similarity`. It contains retrieval output, not aggregate evaluation metrics.
+- `analyze.py` reads the saved results and joins them to `queries.json` by `query_id` to obtain relevance labels. It prints aggregate metrics, missing relevant IDs, and rankings for q023 and q030.
 
-The `.mjs` extension explicitly enables ES modules in Node.js, allowing `import` and `export` without changing the root package configuration. The script will use the application's existing `Xenova/all-MiniLM-L6-v2` model, 1,000-character truncation, mean pooling, and normalized embeddings.
+The embedding implementation uses `Xenova/all-MiniLM-L6-v2`, 1,000-character truncation, mean pooling, and normalized 384-dimensional vectors. The `.mjs` extension enables ES modules so the script can import the existing backend function.
 
-The planned workflow is:
-
-1. Load `dataset.json` and `queries.json` relative to the script using `import.meta.url`.
-2. Generate embeddings for diary content and query text using `embedText`.
-3. Rank all 51 diary entries by cosine similarity for each query and retain the top six.
-4. Compare retrieved IDs with `relevant_diary_ids` and calculate Recall@6, MRR@6, and Precision@6 for the 40 answerable queries.
-5. Save per-query rankings, similarity scores, and aggregate metrics to `evaluation/results.json`. Inspect opposite-meaning results for the negation queries and report the six empty-label queries separately.
-
-Once the script exists and the server dependencies are installed, run it from the repository root:
+Install the server dependencies if needed, then run these commands from the repository root:
 
 ```bash
+npm ci --prefix server
 node evaluation/evaluate.mjs
+python3 evaluation/analyze.py
 ```
 
-The first embedding run may require downloading the model. This offline evaluation will not require starting the API server or connecting to PostgreSQL. Establish the semantic-search baseline first, then compare it with keyword retrieval on the same corpus and queries. Neither the script nor `results.json` is currently included.
+Python uses only the standard library. The first embedding run may require downloading the model. No API server or PostgreSQL connection is needed: similarity is calculated in memory. This evaluates embedding retrieval quality, not database queries or pet-isolation behavior.
+
+To reanalyze an unchanged saved run, execute only the Python command. If the corpus or queries change, regenerate the retrieval results before analyzing them. The analyzer reads current relevance labels from `queries.json`, so keep the results and labels from the same evaluation version.
+
+## Initial semantic-search baseline
+
+The saved run was generated at `2026-10-30T05:44:26.610Z`. Metrics are macro-averages over the 40 answerable queries; the six queries with no relevant entries are excluded.
+
+| Metric | Result | Meaning |
+| --- | --- | --- |
+| Recall@6 | 0.9500 | Average fraction of relevant entries retrieved in the top six |
+| MRR@6 | 0.8217 | Average reciprocal rank of the first relevant result; zero if none appears in the top six |
+| Precision@6 | 0.1750 | Average number of relevant results divided by six |
+
+Most queries have only one relevant entry, so Precision@6 is limited by the fixed six-result output. MRR is a ranking metric, not a percentage of correct queries. The six empty-label queries are counted separately, but no abstention threshold or abstention metric has been implemented.
+
+### Failure analysis
+
+Two answerable queries missed their relevant entries entirely in the top six:
+
+| Query | Expected diary ID | Retrieved IDs, in rank order |
+| --- | --- | --- |
+| q023: Greeting me excitedly when I got home | 33 | 36, 24, 17, 9, 51, 27 |
+| q030: Not feeling like playing, even with his favorite toy | 9 | 12, 30, 45, 19, 37, 23 |
+
+For q023, results include interactions with visitors and the owner but miss the specific homecoming greeting. The exact cause has not been established.
+
+For q030, the highest-ranked entry describes having plenty of energy and playing with toys, the opposite of the requested behavior. The retrieved list suggests that play-related similarity outweighed the negative condition in this example.
+
+These are observations from a small synthetic development dataset, not evidence of performance on real user traffic or a held-out test set. No keyword baseline comparison has been run yet. The next step is to compare keyword retrieval on the same content, queries, and top-six cutoff, then investigate improvements without changing relevance labels merely to improve scores.
