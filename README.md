@@ -42,8 +42,9 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 ### Backend
 - Node.js + Express
 ### AI 
+- Python
 - Embeddings via MiniLM
--Cosine similarity for ranking
+- Cosine similarity for ranking
 ### Database
 - PostgreSQL + pgvector
 
@@ -58,11 +59,11 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 
 An offline evaluation compares MiniLM semantic retrieval with a default TF-IDF keyword baseline using **51 synthetic English diary entries and 46 labeled queries**. Both methods search diary content and return the top six results. JavaScript generates semantic rankings using the application's embedding function; Python generates the TF-IDF baseline and analyzes both runs.
 
-| Metric | Semantic search | TF-IDF baseline |
-| --- | --- | --- |
-| Recall@6 | 0.9500 | 0.8750 |
-| MRR@6 | 0.8217 | 0.7417 |
-| Precision@6 | 0.1750 | 0.1625 |
+| Metric      | Semantic search | TF-IDF baseline |
+| ----------- | --------------- | --------------- |
+| Recall@6    | 0.9500          | 0.8750          |
+| MRR@6       | 0.8217          | 0.7417          |
+| Precision@6 | 0.1750          | 0.1625          |
 
 Metrics are averaged over **40 answerable queries**. Semantic search improves Recall@6 by **7.5 percentage points** on this dataset. The six no-answer queries are excluded; abstention performance has not been measured.
 
@@ -70,12 +71,13 @@ Error analysis shows complementary behavior: semantic retrieval finds relevant e
 
 These results describe a small synthetic development dataset with provisional relevance labels, not a held-out benchmark or real-user performance. Evaluation runs in memory without PostgreSQL and does not test database filtering.
 
-To analyze the saved results from the repository root using Python 3:
+Generate a comparison report from the saved results using Python 3 (no extra dependencies):
 
 ```bash
-python3 evaluation/analyze.py
-python3 evaluation/analyze.py keyword_results.json
+python3 evaluation/run.py --from-saved
 ```
+
+Reports are written to `evaluation/reports/report.md` and `report.json`. CI publishes the comparison in Actions Summary and uploads it as an artifact. After installing the evaluation dependencies, run `python3 evaluation/run.py` to regenerate both methods; full evaluation is also available through the CI workflow’s manual trigger. Saved-results analysis does not test current model behavior.
 
 See the [evaluation README](./evaluation/README.md) for data, relevance criteria, dependencies, commands to regenerate results, and detailed failure analysis.
 

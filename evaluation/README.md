@@ -6,6 +6,57 @@
 
 The queries focus on recalling everyday experiences: play, food preferences, weather, visitors, training, celebrations, home life, and occasional discomfort. Natural-language questions are retrieval inputs; this dataset does not evaluate generated answers or date arithmetic.
 
+## One-command comparison report
+
+From the repository root:
+
+```bash
+# Fast: validate and compare the checked-in rankings (Python standard library only)
+python3 evaluation/run.py --from-saved
+
+# Full: install dependencies once, then regenerate both retrieval methods
+npm ci --prefix server
+python3 -m pip install -r evaluation/requirements.txt
+python3 evaluation/run.py
+```
+
+Both modes write `evaluation/reports/report.md` and `report.json`. Use
+`--output-dir /path/to/reports` to choose another directory. Full mode writes fresh
+rankings under that directory's `rankings/` subdirectory and preserves the
+checked-in baseline files. Model downloads may require network access on the
+first run. A failed subprocess or invalid evaluation input exits nonzero.
+
+Reports include macro Recall@6, MRR@6, Precision@6, semantic-minus-TF-IDF deltas,
+per-query metrics, missing relevant IDs, complementary retrieval hits, model/run
+metadata, and SHA-256 hashes of report inputs. These hashes identify report inputs;
+legacy saved rankings do not prove corpus provenance. Saved mode checks query
+texts and IDs, but cannot detect every stale ranking after corpus edits. Regenerate
+rankings whenever corpus, queries, or retrieval code changes.
+
+The analyzer rejects duplicate IDs, unknown relevance/ranking IDs, missing or extra
+queries, changed query text, mismatched counts, invalid scores, and malformed rankings.
+No-answer queries remain excluded from retrieval averages; abstention is not measured.
+
+### GitHub Actions
+
+The existing CI workflow now runs evaluation unit tests and saved-results analysis
+on pushes and pull requests. It displays the Markdown report in the run's **Summary**
+and uploads reports and rankings as the `retrieval-evaluation` artifact.
+For fresh model inference, open **Actions → CI → Run workflow** and enable
+`full_evaluation`. This installs Node/Python dependencies and downloads MiniLM;
+it requires neither a database nor API keys. Full regeneration runs on CPU and
+may take longer than saved analysis.
+
+Saved-results CI validates data and analysis, not changes to model behavior.
+There is no quality threshold: a lower score is reported rather than automatically
+rejected. Neither mode evaluates database queries, permissions, latency, or cost.
+
+Run the hand-calculated metric and invalid-input tests with:
+
+```bash
+python3 -m unittest discover -s evaluation -p 'test_*.py'
+```
+
 ## Relevance policy
 
 Search all 51 entries for Milo. Judge relevance using `content` only, matching the application's current embedding input. Do not embed query labels, diary categories, titles, or review notes.
@@ -31,6 +82,8 @@ evaluation/
 ├── evaluate.mjs
 ├── keyword_baseline.py
 ├── analyze.py
+├── run.py
+├── test_analyze.py
 ├── data/
 │   ├── dataset.json
 │   ├── queries.json
@@ -115,7 +168,7 @@ Semantic retrieval performs better overall on this dataset, but not on every que
 
 TF-IDF misses diaries 27, 31, 32, 9, and 31 for q005, q019, q020, q030, and q045 respectively. Its q030 results are diaries 49, 33, 30, 32, 44, and 45. The earlier semantic failure analysis suggests difficulty with negation in q030; the TF-IDF failure alone does not establish the same cause.
 
-The analyzer currently prints q023 and q030 under “Failed query rankings” for both methods. These are fixed diagnostic queries; q023 is actually successful for TF-IDF.
+The analyzer and comparison report list failures dynamically from the relevance labels; q023 is a failure for semantic retrieval but a success for TF-IDF.
 
 ### Scope and next steps
 

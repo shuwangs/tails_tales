@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 from datetime import timezone,datetime
@@ -5,6 +6,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_DIR = Path(__file__).resolve().parent
+parser = argparse.ArgumentParser(description="Generate TF-IDF retrieval rankings")
+parser.add_argument("--output-dir", type=Path, default=BASE_DIR / "results")
+
+args = parser.parse_args()
+args.output_dir.mkdir(parents=True, exist_ok=True)
 
 with (BASE_DIR / "data" / "dataset.json").open("r") as file:
     dataset = json.load(file)
@@ -66,9 +72,9 @@ output = {
     "results": results,
 }
 
-with (BASE_DIR / "results" / "keyword_results.json").open(
+with (args.output_dir / "keyword_results.json").open(
     "w", encoding="utf-8"
 ) as file:
     json.dump(output, file, indent=2, ensure_ascii=False)
 
-print(f"\nSaved {len(results)} queries to results/keyword_results.json")
+print(f"\nSaved {len(results)} queries to {args.output_dir / 'keyword_results.json'}")
