@@ -1,3 +1,4 @@
+import AppError from "../utils/AppError.js";
 import { calCosineSimilarity } from "../models/cosineSimilarity.js";
 import { embedText } from "../utils/embedText.js";
 import textTranslator from "../utils/textTranslation.js";

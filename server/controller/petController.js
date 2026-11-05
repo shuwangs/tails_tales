@@ -8,9 +8,6 @@ export const getEntriesByPetId = async (req, res, next) => {
 			return next(new AppError("Invalid petId", 400));
 
 		const result = await petModel.getEntriesByPetIdQuery(petId);
-		if (result.length === 0) {
-			return next(new AppError("Not Found", 404));
-		}
 
 		res.status(200).json({
 			success: true,

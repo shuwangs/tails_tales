@@ -15,3 +15,23 @@ export async function verifyPassword(password, stored) {
     const candidate = await hashPassword(password, salt);
     return timingSafeEqual(Buffer.from(hash, "hex"), Buffer.from(candidate.split(":")[1], "hex"));
 }
+
+export const isValidEmail = (email) => {
+    if (typeof email !== "string") return false;
+    const normalizedEmail = email.trim().toLowerCase();
+    return (
+        normalizedEmail.length <= 254 &&
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+    );
+}
+
+export const isValidPassword = (password) => {
+    if (typeof password !== "string") return false;
+    return password.length >= 15 && password.length <= 128;
+}
+
+export const isValidUsername = (username) => {
+    if (typeof username !== "string") return false;
+    const trimmedUsername = username.trim();
+    return trimmedUsername.length >= 1 && trimmedUsername.length <= 100;
+}
