@@ -7,6 +7,7 @@ import AuthPage from "./pages/AuthPage";
 import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import WritePage from "./pages/WirtePage";
+import CreatePetForm from "./components/CreatePetForm";
 import "./App.css";
 
 function ProtectedLayout() {
@@ -27,8 +28,18 @@ function ProtectedLayout() {
             <button onClick={signOut} disabled={busy} className="underline py-2">{busy ? "Logging out…" : "Log out"}</button>
             {error && <p role="alert">{error}</p>}
         </div>
-        {petId ? <EntriesProvider key={`${session.user.id}:${petId}`} petId={petId}><Outlet /></EntriesProvider> : <p className="p-8 text-amber-900">No pets are linked to this account yet.</p>}
-    </>;
+        {petId ? (
+            <EntriesProvider
+                key={`${session.user.id}:${petId}`}
+                petId={petId}
+            >
+                <Outlet />
+            </EntriesProvider>
+        ) : (
+            <main className="px-4">
+                <CreatePetForm />
+            </main>
+        )}   </>;
 }
 
 function AppRoutes() {

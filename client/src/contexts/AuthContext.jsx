@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { authRequest } from "../services/api.js";
+import { getMyPets, createPet } from "../services/petService.js";
 const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
     const [session, setSession] = useState(null);
@@ -11,16 +12,21 @@ export function AuthProvider({ children }) {
         setLoading(true); setError("");
         try {
             const user = await authRequest("me");
-            setSession({ user, pets: [] });
+            const pets = await getMyPets();
+            setSelectedPet(null);
+
+            setSession({ user, pets });
         } catch (err) { if (err.status !== 401) setError(err.message); }
         finally { setLoading(false); }
     }
     useEffect(() => {
         let active = true;
         authRequest("me")
-            .then((user) => {
+            .then(async (user) => {
+                const pets = await getMyPets();
+
                 if (active) {
-                    setSession({ user, pets: [] });
+                    setSession({ user, pets });
                 }
             })
             .catch((err) => {
@@ -42,8 +48,10 @@ export function AuthProvider({ children }) {
         const data = await authRequest(mode, fields);
 
         if (mode === "login") {
+            const pets = await getMyPets();
+
             setSelectedPet(null);
-            setSession({ user: data, pets: [] });
+            setSession({ user: data, pets });
         }
     }
 
@@ -51,8 +59,40 @@ export function AuthProvider({ children }) {
         await authRequest("logout", {});
         setSession(null); setSelectedPet(null);
     }
+
+    async function addPet(fields) {
+        const pet = await createPet(fields);
+
+        setSession((current) => {
+            if (!current) return current;
+
+            return {
+                ...current,
+                pets: [...current.pets, pet],
+            };
+        });
+
+        setSelectedPet(pet.id);
+        return pet;
+    }
+
     const petId = selectedPet ?? session?.pets?.[0]?.id;
-    return <AuthContext.Provider value={{ session, loading, error, restore, authenticate, logout, petId, setSelectedPet }}>{children}</AuthContext.Provider>;
+
+    const values = {
+        session,
+        loading,
+        error,
+        restore,
+        authenticate,
+        logout,
+        petId,
+        setSelectedPet,
+        addPet
+    }
+
+    return (
+        <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+    );
 }
 
 
