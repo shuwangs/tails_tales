@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" fill="none">
+  <rect width="480" height="300" rx="20" fill="#F6F1E7"/>
+  <path d="M290 0H480V260L210 260Z" fill="#F3E3B6" opacity=".55"/>
+  <path d="M332 0V124M409 0V124M303 63H449" stroke="#DFD3BB" stroke-width="7"/>
+  <circle cx="371" cy="48" r="21" fill="#EAC879"/>
+  <ellipse cx="239" cy="252" rx="160" ry="13" fill="#E6DCCA"/>
+  <path d="M110 237C69 226 69 188 92 181C109 175 121 191 111 202" stroke="#B77A4E" stroke-width="24" stroke-linecap="round"/>
+  <path d="M128 238C109 213 122 165 165 145C199 129 258 134 291 166C318 191 320 220 298 239Z" fill="#D8AB7D"/>
+  <path d="M143 181C139 168 143 151 154 143M170 163C170 150 175 140 181 136M199 155C201 145 207 140 214 136" stroke="#B77A4E" stroke-width="9" stroke-linecap="round"/>
+  <path d="M247 186L251 128L282 152C293 149 310 150 320 155L350 136L347 194C350 224 329 245 299 245C267 245 245 221 247 186Z" fill="#E2B98D"/>
+  <path d="M257 142L260 167L275 158M328 164L341 151L339 177" fill="#CB9474"/>
+  <path d="M291 155L294 169M304 155L304 169" stroke="#B77A4E" stroke-width="6" stroke-linecap="round"/>
+  <path d="M266 196Q274 204 282 196M313 196Q321 204 329 196" stroke="#694D3B" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M292 210L298 215L304 210" fill="#A46C58"/>
+  <path d="M298 215V220M298 220Q292 225 288 220M298 220Q304 225 308 220M258 211L232 206M258 220L232 222M335 211L361 206M335 220L361 223" stroke="#694D3B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M191 239C192 224 209 221 223 230C233 216 252 221 254 239" fill="#EDD0A9"/>
+  <path d="M123 250H355" stroke="#C4B69E" stroke-width="2" stroke-linecap="round"/>
+</svg>

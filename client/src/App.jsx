@@ -6,6 +6,7 @@ import { EntriesProvider } from "./contexts/EntriesContext";
 import AuthPage from "./pages/AuthPage";
 import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import WritePage from "./pages/WirtePage";
 import CreatePetForm from "./components/CreatePetForm";
 import "./App.css";
@@ -47,6 +48,7 @@ function AppRoutes() {
     if (loading) return <p role="status" className="p-8 text-amber-900">Loading your diary…</p>;
     if (error) return <div className="p-8"><p role="alert">{error}</p><button onClick={restore}>Try again</button></div>;
     return <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<AuthPage key="login" />} />
         <Route path="/register" element={<AuthPage key="register" register />} />
         <Route element={<ProtectedLayout />}>
