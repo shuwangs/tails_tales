@@ -10,8 +10,7 @@ import {
 
 const EntriesContext = createContext();
 
-export const EntriesProvider = ({ children }) => {
-	const petId = 1;
+export const EntriesProvider = ({ children, petId }) => {
 	const [entries, setEntries] = useState([]);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
@@ -37,7 +36,7 @@ export const EntriesProvider = ({ children }) => {
 		};
 
 		fetchEntries(petId);
-	}, []);
+	}, [petId]);
 
 	const deleteEntryHandler = async (entry_id) => {
 		try {

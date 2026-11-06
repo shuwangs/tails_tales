@@ -45,7 +45,11 @@ export const registerUser = async (req, res, next) => {
         // Generate the hashed password
         const hashedPassword = await hashPassword(password);
 
-        const newUser = await createUserInDB({ trimmedUsername, normalizedEmail, hashedPassword });
+        const newUser = await createUserInDB({
+            username: trimmedUsername,
+            email: normalizedEmail,
+            hashedPassword,
+        });
         res.status(201).json({
             success: true,
             data: newUser,
@@ -77,7 +81,10 @@ export const loginUser = async (req, res, next) => {
         const normalizedEmail = email.trim().toLowerCase();
 
         const user = await getUserByEmailQuery(normalizedEmail);
-
+        console.log({
+            userFound: Boolean(user),
+            hasPasswordHash: Boolean(user?.password_hash),
+        });
         if (!user?.password_hash) {
             throw new AppError("Invalid email or password", 401);
         }
