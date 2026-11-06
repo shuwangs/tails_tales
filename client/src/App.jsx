@@ -21,7 +21,7 @@ function ProtectedLayout() {
         try { await logout(); } catch (err) { setError(err.message); } finally { setBusy(false); }
     }
     return <>
-        <NavBar />
+        <NavBar petName={session.pets.find((pet) => pet.id === petId)?.pet_name} />
         <div className="pt-20 px-6 flex flex-wrap items-center justify-end gap-4 text-amber-900">
             <span>{session.user.username}</span>
             {session.pets.length > 1 && <label>Pet <select aria-label="Current pet" value={petId} onChange={(e) => setSelectedPet(Number(e.target.value))}>{session.pets.map((pet) => <option key={pet.id} value={pet.id}>{pet.pet_name}</option>)}</select></label>}

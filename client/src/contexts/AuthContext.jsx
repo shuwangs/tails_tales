@@ -45,14 +45,18 @@ export function AuthProvider({ children }) {
     }, []);
 
     async function authenticate(mode, fields) {
-        const data = await authRequest(mode, fields);
+        let user = await authRequest(mode, fields);
 
-        if (mode === "login") {
-            const pets = await getMyPets();
-
-            setSelectedPet(null);
-            setSession({ user: data, pets });
+        if (mode === "register") {
+            user = await authRequest("login", {
+                email: fields.email,
+                password: fields.password,
+            });
         }
+
+        const pets = await getMyPets();
+        setSelectedPet(null);
+        setSession({ user, pets });
     }
 
     async function logout() {

@@ -8,9 +8,7 @@ export default function AuthPage({ register = false }) {
     const location = useLocation();
     const [error, setError] = useState("");
     const [busy, setBusy] = useState(false);
-    const destination = location.state?.from || "/entries";
-
-    if (session) return <Navigate to={destination} replace />;
+    if (session) return <Navigate to="/entries" replace />;
     async function submit(event) {
         event.preventDefault(); setError(""); setBusy(true);
         const fields = Object.fromEntries(new FormData(event.currentTarget));
