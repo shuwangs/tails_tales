@@ -1,13 +1,12 @@
 import { Router } from "express";
 import {
 	addEntryToPetId,
+	createPet,
 	getEntriesByPetId,
 	getMyPets,
-	createPet
 } from "../controller/petController.js";
 
 const router = Router();
-
 
 router.get("/", getMyPets);
 router.post("/", createPet);

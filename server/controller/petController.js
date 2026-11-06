@@ -92,10 +92,7 @@ export const createPet = async (req, res, next) => {
 			throw new AppError("Age must be a non-negative whole number", 400);
 		}
 
-		if (
-			personality_tags != null &&
-			typeof personality_tags !== "string"
-		) {
+		if (personality_tags != null && typeof personality_tags !== "string") {
 			throw new AppError("Personality tags must be text", 400);
 		}
 

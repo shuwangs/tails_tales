@@ -7,7 +7,9 @@ const NavBar = ({ petName }) => {
 		<nav className="w-full h-20 fixed flex flex-row bg-amber-100/95 border-b-2 border-amber-200">
 			<div className="flex flex-row w-full max-w-[1126px] mx-auto items-center justify-between ">
 				<h1 className="color-primary-text font-heading text-amber-800 ">
-					<NavLink to="/entries">{petName ? `${petName}'s Diary` : "Tails & Tales"}</NavLink>
+					<NavLink to="/entries">
+						{petName ? `${petName}'s Diary` : "Tails & Tales"}
+					</NavLink>
 				</h1>
 				<div className="flex flex-row gap-2">
 					<div className="px-6 py-4 rounded-4xl hover:bg-amber-200">

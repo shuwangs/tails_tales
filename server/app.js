@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import express from "express";
-import authRoute from "./routes/authRoute.js";
 import { requireAuth } from "./middleware/auth.js";
 import errorHandler from "./middleware/errorHandler.js";
 import aiRoute from "./routes/aiRoute.js";
+import authRoute from "./routes/authRoute.js";
 import entriesRoute from "./routes/entriesRoute.js";
 import petsRoute from "./routes/petsRoute.js";
 

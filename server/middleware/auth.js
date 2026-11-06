@@ -1,46 +1,46 @@
 import { createHash } from "node:crypto";
 import pool from "../db/db.js";
-import AppError from "../utils/AppError.js";
 import { getSessionUserQuery } from "../models/userModel.js";
+import AppError from "../utils/AppError.js";
 
 export const cookieName = "tails_session";
 
 export const cookieOptions = () => ({
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
+	httpOnly: true,
+	secure: process.env.NODE_ENV === "production",
+	sameSite: "strict",
+	path: "/",
 });
 
 export const sessionToken = (req) => {
-    const cookies = req.headers.cookie?.split(";") ?? [];
+	const cookies = req.headers.cookie?.split(";") ?? [];
 
-    const sessionCookie = cookies
-        .map((cookie) => cookie.trim())
-        .find((cookie) => cookie.startsWith(`${cookieName}=`));
+	const sessionCookie = cookies
+		.map((cookie) => cookie.trim())
+		.find((cookie) => cookie.startsWith(`${cookieName}=`));
 
-    return sessionCookie?.slice(cookieName.length + 1);
+	return sessionCookie?.slice(cookieName.length + 1);
 };
 
 export const requireAuth = async (req, res, next) => {
-    try {
-        const token = sessionToken(req);
+	try {
+		const token = sessionToken(req);
 
-        if (!token) {
-            throw new AppError("Unauthorized: No session token provided", 401);
-        }
+		if (!token) {
+			throw new AppError("Unauthorized: No session token provided", 401);
+		}
 
-        const tokenHash = createHash("sha256").update(token).digest("hex");
+		const tokenHash = createHash("sha256").update(token).digest("hex");
 
-        const user = await getSessionUserQuery(tokenHash);
+		const user = await getSessionUserQuery(tokenHash);
 
-        if (!user) {
-            throw new AppError("Unauthorized: Invalid session token", 401);
-        }
+		if (!user) {
+			throw new AppError("Unauthorized: Invalid session token", 401);
+		}
 
-        req.user = user;
-        next();
-    } catch (error) {
-        next(error);
-    }
-}
+		req.user = user;
+		next();
+	} catch (error) {
+		next(error);
+	}
+};
