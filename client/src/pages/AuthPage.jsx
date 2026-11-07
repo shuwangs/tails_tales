@@ -105,6 +105,7 @@ export default function AuthPage({ register = false }) {
 						</p>
 					)}
 					<button
+						type="submit"
 						disabled={busy}
 						className="w-full rounded-xl bg-amber-700 p-3 text-white hover:bg-amber-800 disabled:opacity-50"
 					>

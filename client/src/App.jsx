@@ -59,7 +59,12 @@ function ProtectedLayout() {
 						</select>
 					</label>
 				)}
-				<button onClick={signOut} disabled={busy} className="underline py-2">
+				<button
+					type="button"
+					onClick={signOut}
+					disabled={busy}
+					className="underline py-2"
+				>
 					{busy ? "Logging out…" : "Log out"}
 				</button>
 				{error && <p role="alert">{error}</p>}
@@ -89,7 +94,9 @@ function AppRoutes() {
 		return (
 			<div className="p-8">
 				<p role="alert">{error}</p>
-				<button onClick={restore}>Try again</button>
+				<button type="button" onClick={restore}>
+					Try again
+				</button>
 			</div>
 		);
 	return (
