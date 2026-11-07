@@ -7,6 +7,15 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 ![tails_tales](./client/public/tails-tales.gif)
 
 ## ✨ Features
+### 🐾 Accounts & Pet Profiles
+- Public landing page with registration and login links
+- Email and password registration, login, and logout
+- Password hashing and database-backed sessions with an HTTP-only cookie
+- Restore the signed-in session and load linked pets on refresh
+- Automatically sign in after registration and redirect to `/entries`
+- Create a pet profile when an account has no pets
+- Switch between linked pets and display the selected pet’s name in the navigation and diary heading
+
 ### 📝 Core Diary Features
 - Create, view, edit, and delete diary entries
 - Edit titles and content directly on the detail page with Save and Cancel controls
@@ -42,9 +51,9 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 ### Backend
 - Node.js + Express
 ### AI 
-- Python
-- Embeddings via MiniLM
+- MiniLM embeddings via JavaScript and Hugging Face Transformers.js
 - Cosine similarity for ranking
+- Python for offline retrieval evaluation and the TF-IDF baseline
 ### Database
 - PostgreSQL + pgvector
 
@@ -82,6 +91,22 @@ Reports are written to `evaluation/reports/report.md` and `report.json`. CI publ
 See the [evaluation README](./evaluation/README.md) for data, relevance criteria, dependencies, commands to regenerate results, and detailed failure analysis.
 
 ## 📦 API Endpoints
+### Authentication
+| Method | Endpoint             | Purpose                                 | Login required                            |
+| ------ | -------------------- | --------------------------------------- | ----------------------------------------- |
+| POST   | `/api/auth/register` | Create an account                       | No                                        |
+| POST   | `/api/auth/login`    | Sign in and set the session cookie      | No                                        |
+| POST   | `/api/auth/logout`   | Delete the session and clear the cookie | No; clears an existing session if present |
+| GET    | `/api/auth/me`       | Get the signed-in user                  | Yes                                       |
+
+### Pet Profiles
+| Method | Endpoint    | Purpose                                 | Login required |
+| ------ | ----------- | --------------------------------------- | -------------- |
+| GET    | `/api/pets` | List the current user’s pets            | Yes            |
+| POST   | `/api/pets` | Create a pet linked to the current user | Yes            |
+
+All entry, pet-entry, and AI endpoints below also require a valid session cookie. Unauthenticated requests return `401`.
+
 ### Entries
 >GET /api/entries/:id   
 >PUT /api/entries/:id → update an entry and regenerate its embedding\
@@ -156,16 +181,29 @@ createdb pet_diary_db
 ```
 Or replace `pet_diary_db` with your preferred database name.
 
-### 5 . Run Schema
+### 5. Initialize the database
+For a new database, run the schema from the repository root:
+
 ```bash
-psql -d pet_diary -f server/db/schema.sql
-```
-### 6.env file
-```bash
-cp .env.exmple .env
+psql -d pet_diary_db -f server/db/schema.sql
 ```
 
-Update the .env with your Database Username, Gemini API key and Google Cloud Key
+**Warning:** `schema.sql` drops and recreates the application tables. For an existing database using the earlier schema, apply the authentication migration instead:
+
+```bash
+psql -d pet_diary_db -f server/db/migrations/001_email_auth.sql
+```
+
+### 6. Configure environment variables
+From the repository root:
+
+```bash
+cp server/.env.example server/.env
+```
+
+Edit `server/.env` with your PostgreSQL connection settings (`PGHOST`, `PGUSER`, `PGDATABASE`, and `PGPORT`), `GEMINI_API_KEY`, and `TRANSLATE_API_KEY`. Set `PGDATABASE=pet_diary_db` to match the database created above, or use your chosen database name consistently. The backend also supports a `db_connection` connection string instead of the individual PostgreSQL settings.
+
+The server reads `LISTENING_PORT` and defaults to `3001`; the example file currently calls this variable `LISTEN_PORT`, so rename it in your local `.env` if you need to set a custom port. The client’s development proxy targets port `3001` by default.
 ### 7. setup client and server dependencies
 make sure you are in server folder
 ```bash

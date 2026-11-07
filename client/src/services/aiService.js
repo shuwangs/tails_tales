@@ -1,5 +1,6 @@
+import { apiFetch } from "./api.js";
 export const getSuggestedTitle = async (content) => {
-	const response = await fetch(`/api/ai/title`, {
+	const response = await apiFetch(`/api/ai/title`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -17,7 +18,7 @@ export const getSuggestedTitle = async (content) => {
 };
 
 export const getTranslatedText = async (content, lang) => {
-	const response = await fetch(`/api/ai/translate`, {
+	const response = await apiFetch(`/api/ai/translate`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

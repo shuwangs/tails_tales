@@ -10,7 +10,7 @@ describe("NavBar test", () => {
 	beforeEach(() => {
 		render(
 			<BrowserRouter>
-				<NavBar />
+				<NavBar petName="Coco" />
 			</BrowserRouter>,
 		);
 	});
@@ -20,7 +20,7 @@ describe("NavBar test", () => {
 	});
 
 	it("has correct navigation paths", () => {
-		expect(screen.getByRole("link", { name: /bobo's diary/i })).toHaveAttribute(
+		expect(screen.getByRole("link", { name: /coco's diary/i })).toHaveAttribute(
 			"href",
 			"/entries",
 		);

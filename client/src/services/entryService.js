@@ -1,5 +1,6 @@
+import { apiFetch } from "./api.js";
 export const getEntriesByPetId = async (petId) => {
-	const response = await fetch(`/api/pets/${petId}/entries`);
+	const response = await apiFetch(`/api/pets/${petId}/entries`);
 	if (!response.ok) {
 		throw new Error("Failed to fetch entries");
 	}
@@ -8,7 +9,7 @@ export const getEntriesByPetId = async (petId) => {
 };
 
 export const deleteEntry = async (entryId) => {
-	const response = await fetch(`/api/entries/${entryId}`, {
+	const response = await apiFetch(`/api/entries/${entryId}`, {
 		method: "DELETE",
 	});
 	if (!response.ok) {
@@ -20,7 +21,7 @@ export const deleteEntry = async (entryId) => {
 };
 
 export const addEntriesToPetId = async (petId, newEntry) => {
-	const result = await fetch(`/api/pets/${petId}/entries`, {
+	const result = await apiFetch(`/api/pets/${petId}/entries`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -37,7 +38,7 @@ export const addEntriesToPetId = async (petId, newEntry) => {
 };
 
 export const searchDiary = async (petId, searchText) => {
-	const result = await fetch(`/api/ai/${petId}/search`, {
+	const result = await apiFetch(`/api/ai/${petId}/search`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -57,7 +58,7 @@ export const searchDiary = async (petId, searchText) => {
 };
 
 export const getEntryById = async (id, signal) => {
-	const response = await fetch(`/api/entries/${id}`, { signal });
+	const response = await apiFetch(`/api/entries/${id}`, { signal });
 
 	if (response.status === 404) {
 		return null;
@@ -72,7 +73,7 @@ export const getEntryById = async (id, signal) => {
 };
 
 export const updateEntry = async (entryId, entry) => {
-	const response = await fetch(`/api/entries/${entryId}`, {
+	const response = await apiFetch(`/api/entries/${entryId}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",

@@ -30,3 +30,36 @@ export const addEntriesByPetIdQuery = async (petId, entry) => {
 	);
 	return rows[0];
 };
+
+export const getPetsByUserIdQuery = async (userId) => {
+	const { rows } = await pool.query(
+		`SELECT *
+         FROM pet_diary.pets
+         WHERE user_id = $1
+         ORDER BY created_at, id`,
+		[userId],
+	);
+
+	return rows;
+};
+
+export const createPetQuery = async (userId, pet) => {
+	const { pet_name, animal_type, breed, age, personality_tags } = pet;
+
+	const { rows } = await pool.query(
+		`INSERT INTO pet_diary.pets
+            (user_id, pet_name, animal_type, breed, age, personality_tags)
+         VALUES ($1, $2, $3, $4, $5, $6)
+         RETURNING *`,
+		[
+			userId,
+			pet_name,
+			animal_type,
+			breed ?? null,
+			age ?? null,
+			personality_tags ?? null,
+		],
+	);
+
+	return rows[0];
+};

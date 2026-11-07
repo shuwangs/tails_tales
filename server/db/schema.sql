@@ -3,6 +3,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 CREATE SCHEMA IF NOT EXISTS pet_diary;
 SET search_path TO pet_diary , public;
 
+DROP TABLE IF EXISTS sessions CASCADE;
 DROP TABLE IF EXISTS diary_entries CASCADE;
 DROP TABLE IF EXISTS pets CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
@@ -11,7 +12,8 @@ DROP TABLE IF EXISTS users CASCADE;
 -- TABLE users
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    clerk_user_id VARCHAR(255) UNIQUE, 
+    clerk_user_id VARCHAR(255) UNIQUE,
+    password_hash TEXT, 
     username VARCHAR(100),
     email VARCHAR(255) UNIQUE,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
@@ -42,3 +44,10 @@ CREATE TABLE diary_entries(
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+CREATE UNIQUE INDEX users_email_lower_unique ON users (LOWER(email));
+CREATE TABLE sessions (
+ token_hash TEXT PRIMARY KEY,
+ user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ expires_at TIMESTAMPTZ NOT NULL
+);
+CREATE INDEX sessions_expiry_idx ON sessions(expires_at);

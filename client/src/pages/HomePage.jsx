@@ -4,12 +4,15 @@ import { ToastContainer, toast } from "react-toastify";
 import DiaryCalendar from "../components/DiaryCalendar.jsx";
 import EntryList from "../components/EntryList.jsx";
 import SearchBar from "../components/SearchBar.jsx";
+import { useAuth } from "../contexts/AuthContext.jsx";
 import { useEntries } from "../contexts/EntriesContext.jsx";
 import MainLayout from "../layout/MainLayout";
 
 const HomePage = () => {
 	const location = useLocation();
 	const { entries } = useEntries();
+	const { session, petId } = useAuth();
+	const petName = session.pets.find((pet) => pet.id === petId)?.pet_name;
 	const [selectedDate, setSelectedDate] = useState("");
 	useEffect(() => {
 		if (location.state?.message) {
@@ -23,7 +26,9 @@ const HomePage = () => {
 		<MainLayout>
 			<ToastContainer />
 			<div className="flex flex-col gap-6 px-4 pb-8 sm:px-6">
-				<h1 className="text-amber-900">Bobo’s Diary</h1>
+				<h1 className="text-amber-900">
+					{petName ? `${petName}'s Diary` : "Your pet’s diary"}
+				</h1>
 				<SearchBar />
 				<div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
 					<div className="min-w-0">
