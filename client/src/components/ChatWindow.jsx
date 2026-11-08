@@ -48,19 +48,35 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
                         </p>
                     )}
                     {messages.map((text, index) => (
-                        <div key={index} className="flex justify-end gap-2 mb-2">
-                            <p className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm bg-amber-200 px-4 py-2 text-amber-900">
-                                {text}
-                            </p>
+                        <div key={index} className="flex flex-col gap-2 mb-2">
+                            <div className="flex items-end justify-end">
+
+                                <p className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm bg-amber-200 px-4 py-2 text-amber-900">
+                                    {text}
+                                </p>
+                            </div>
+
+                            {/* Asistant answers placeholder */}
+
+                            <div className="flex items-start justify-start gap-2">
+                                <span aria-hidden="true">🐾</span>
+
+                                <div className="max-w-[85%] rounded-2xl rounded-tl-sm border border-amber-200 bg-white px-4 py-2">
+                                    <p className="text-sm font-semibold text-amber-900">
+                                        Diary Assistant
+                                    </p>
+                                    <p className="mt-1 text-amber-700">
+                                        Example response
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     ))}
-
                 </div>
-
 
                 {/* 输入区域 */}
 
-                <div >
+                < div >
                     <form
                         onSubmit={onSubmit}
                         className="flex items-center border-t border-amber-200 p-4 gap-2">
