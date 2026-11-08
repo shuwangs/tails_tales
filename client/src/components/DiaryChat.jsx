@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { IoPaw } from "react-icons/io5";
+import ChatWindow from './ChatWindow.jsx';
 const DiaryChat = () => {
 
     const [isOpen, setIsOpen] = useState(false);
-
+    const [messages, setMessages] = useState([]);
     return (
         <div>
             <button
@@ -20,9 +21,11 @@ const DiaryChat = () => {
             </button>
 
             {isOpen && (
-                <div>
-                    <p>Welcome to the Diary Chat!</p>
-                </div>
+                <ChatWindow
+                    onClose={() => setIsOpen(false)}
+                    messages={messages}
+                    setMessages={setMessages}
+                />
             )}
         </div>
     );
