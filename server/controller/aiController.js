@@ -1,4 +1,6 @@
 import { calCosineSimilarity } from "../models/cosineSimilarity.js";
+import { getPetsByUserIdQuery } from "../models/petModel.js";
+import diaryAnswerGenerator from "../utils/diaryAnswerGenerator.js";
 import AppError from "../utils/AppError.js";
 import { embedText } from "../utils/embedText.js";
 import textTranslator from "../utils/textTranslation.js";
@@ -81,14 +83,45 @@ export const askDiary = async (req, res, next) => {
 		if (!petID) {
 			return next(new AppError("Pet ID is required", 400));
 		}
-		if (!question?.trim()) {
+		if (typeof question !== "string" || !question.trim()) {
 			return next(new AppError("Question is required", 400));
 		}
 
+		const pets = await getPetsByUserIdQuery(req.user.id);
+
+		const ownsPet = pets.some(
+			(pet) => Number(pet.id) === Number(req.params.petId)
+		);
+
+		if (!ownsPet) {
+			throw new AppError("Pet not found", 404);
+		}
+
+		const questionEmbedding = await embedText(question.trim());
+
+		const entries = await calCosineSimilarity(
+			req.params.petId,
+			questionEmbedding
+		);
+
+		console.log("Retrieved diary entries:", entries);
+		const context = entries
+			.map((entry, index) =>
+				JSON.stringify({
+					source: index + 1,
+					title: entry.title,
+					date: entry.entry_date,
+					content: entry.content,
+				})
+			)
+			.join("\n\n");
+
+		const answer = await diaryAnswerGenerator(question, context);
+
 		res.status(200).json({
 			success: true,
-			data: "This is a placeholder response. The diary assistant feature will be implemented soon.",
-			sources: [],
+			data: answer,
+
 		});
 
 	}
