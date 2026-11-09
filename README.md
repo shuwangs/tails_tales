@@ -1,8 +1,8 @@
 # 🐾 Tails & Tales — AI-Powered Pet Diary
 
-A full-stack pet diary application that combines traditional CRUD functionality with AI-powered features such as semantic search, Title generation, and translation.
+A full-stack pet diary application that combines traditional CRUD functionality with semantic search, RAG-based diary question answering, title generation, and translation.
 
-Built with a modern PERN-style architecture and extended with embeddings-based retrieval.
+Built with a modern PERN-style architecture and extended with embeddings-based retrieval and Gemini answer generation.
 ## Demo
 ![tails_tales](./client/public/tails-tales.gif)
 
@@ -14,7 +14,6 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 - Restore the signed-in session and load linked pets on refresh
 - Automatically sign in after registration and redirect to `/entries`
 - Create a pet profile when an account has no pets
-- Switch between linked pets and display the selected pet’s name in the navigation and diary heading
 
 ### 📝 Core Diary Features
 - Create, view, edit, and delete diary entries
@@ -35,6 +34,12 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 - 🔍 Semantic Search (NEW 🚀)
     - Search diary entries by meaning, not keywords
     - Uses embeddings + cosine similarity
+- 🐾 Diary Q&A (RAG)
+    - Open a chat window using the paw-shaped launcher on signed-in pages
+    - Ask questions about the selected pet's diary and view generated answers
+    - Preserve completed messages when closing and reopening the window; messages are not stored across page reloads
+    - Display loading and error states during requests
+    - Verify pet ownership before retrieving diary records for answers
     
 ### Embedding Pipeline
 - Generate embeddings when creating entries
@@ -53,6 +58,7 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 ### AI 
 - MiniLM embeddings via JavaScript and Hugging Face Transformers.js
 - Cosine similarity for ranking
+- Gemini via the Google Gen AI JavaScript SDK for diary answers and title suggestions
 - Python for offline retrieval evaluation and the TF-IDF baseline
 ### Database
 - PostgreSQL + pgvector
@@ -63,6 +69,24 @@ Built with a modern PERN-style architecture and extended with embeddings-based r
 2. Query is converted into embedding
 3. Compare with stored embeddings (cosine similarity)
 4. Return top 6 most relevant entries
+
+## 🐾 Diary Q&A Flow (RAG)
+
+1. The signed-in user submits a question for the selected pet.
+2. The server validates the question and verifies that the pet belongs to the user.
+3. The question is embedded, and up to six diary entries with embeddings are retrieved using cosine similarity.
+4. Entry titles, dates, and content are assembled into context and sent to Gemini with the question.
+5. The generated answer is returned to the chat window. If no entries are retrieved, the server returns a fallback message without calling Gemini.
+
+The model is instructed to use only the supplied records, acknowledge insufficient information, and answer in the question's language. These instructions do not guarantee factual accuracy.
+
+### Current limitations
+- Questions are processed independently; previous chat messages are not sent to the model.
+- Answers do not yet include clickable diary citations.
+- Retrieval ranks entries without a relevance cutoff, so unrelated questions can still retrieve records.
+- Selected entries cannot establish complete counts or summaries of all diary history.
+- Chat history is held in frontend memory and is not separated by pet when switching pets.
+- The search evaluation below measures retrieval only, not generated-answer quality.
 
 ## 📊 Search Evaluation
 
@@ -119,11 +143,28 @@ All entry, pet-entry, and AI endpoints below also require a valid session cookie
 ### AI
 >POST /api/ai/title → generate title suggestions    
 >POST /api/ai/translate → translate content    
->POST /api/ai/search → semantic search
+>POST /api/ai/:petId/search → semantic search<br>
+>POST /api/ai/:petId/ask → answer a question using the pet's diary
+
+The question-answering endpoint accepts:
+
+```json
+{ "question": "What outdoor activities does my pet enjoy?" }
+```
+
+It returns an answer string in `data`:
+
+```json
+{ "success": true, "data": "An answer based on retrieved diary records." }
+```
+
+Blank or non-string questions return `400`. Pets that do not belong to the signed-in user return `404`.
 
 
 ## 🎯 Future Improvements
-- 🔜 Chat with your diary (RAG-based Q&A)
+- 🔜 Diary citations and retrieval relevance filtering for Q&A
+- 🔜 Conversation-aware follow-up questions and pet-specific chat history
+- 🔜 Generated-answer evaluation
 - 🔜 Emotion / mood analytics dashboard
 - 🔜 Image generation for diary covers
 - 🔜 Better ranking (re-ranking / hybrid search)
@@ -131,6 +172,7 @@ All entry, pet-entry, and AI endpoints below also require a valid session cookie
 ## 💡 Key Learnings
 - Designing AI features on top of CRUD apps
 - Working with embeddings + vector databases
+- Building a RAG pipeline that combines pet-scoped retrieval with model-generated answers
 - Error handling with handler
 
 
@@ -202,6 +244,8 @@ cp server/.env.example server/.env
 ```
 
 Edit `server/.env` with your PostgreSQL connection settings (`PGHOST`, `PGUSER`, `PGDATABASE`, and `PGPORT`), `GEMINI_API_KEY`, and `TRANSLATE_API_KEY`. Set `PGDATABASE=pet_diary_db` to match the database created above, or use your chosen database name consistently. The backend also supports a `db_connection` connection string instead of the individual PostgreSQL settings.
+
+`GEMINI_API_KEY` is used for title suggestions and diary Q&A. The diary answer generator currently sets its model in `server/utils/diaryAnswerGenerator.js`. Q&A retrieves only entries with stored embeddings; existing entries without embeddings need to be backfilled before they can be used as context.
 
 The server reads `LISTENING_PORT` and defaults to `3001`; the example file currently calls this variable `LISTEN_PORT`, so rename it in your local `.env` if you need to set a custom port. The client’s development proxy targets port `3001` by default.
 ### 7. setup client and server dependencies
