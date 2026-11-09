@@ -1,5 +1,4 @@
 import { createHash } from "node:crypto";
-import pool from "../db/db.js";
 import { getSessionUserQuery } from "../models/userModel.js";
 import AppError from "../utils/AppError.js";
 
@@ -22,7 +21,7 @@ export const sessionToken = (req) => {
 	return sessionCookie?.slice(cookieName.length + 1);
 };
 
-export const requireAuth = async (req, res, next) => {
+export const requireAuth = async (req, _res, next) => {
 	try {
 		const token = sessionToken(req);
 

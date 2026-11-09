@@ -34,3 +34,20 @@ export const getTranslatedText = async (content, lang) => {
 	const data = await response.json();
 	return data.data;
 };
+
+export const askDiary = async (petId, question) => {
+	const response = await apiFetch(`/api/ai/${petId}/ask`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			question: question,
+		}),
+	});
+	if (!response.ok) {
+		throw new Error("Failed to ask diary");
+	}
+	const data = await response.json();
+	return data.data;
+};
