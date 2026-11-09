@@ -1,16 +1,35 @@
 import { useState } from "react";
 import { IoIosSend } from "react-icons/io";
-
+import { askDiary } from "../services/aiService";
+import { useAuth } from "../contexts/AuthContext";
 const ChatWindow = ({ onClose, messages, setMessages }) => {
     const [message, setMessage] = useState("");
-    const onSubmit = (e) => {
+    const [error, setError] = useState("");
+    const [isSending, setIsSending] = useState(false);
+    const { petId } = useAuth();
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const text = message.trim();
         if (!text) return;
 
-        setMessages((previous) => [...previous, text]);
-        setMessage("");
+        setIsSending(true);
+        setError("");
+
+        try {
+            const result = await askDiary(petId, text);
+            setMessages((prev) => [
+                ...prev,
+                { question: text, answer: result }
+            ]);
+            setMessage("");
+
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsSending(false);
+        }
+
     }
 
     return (
@@ -47,12 +66,12 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
                             What would you like to remember about your pet?
                         </p>
                     )}
-                    {messages.map((text, index) => (
+                    {messages.map((item, index) => (
                         <div key={index} className="flex flex-col gap-2 mb-2">
                             <div className="flex items-end justify-end">
 
                                 <p className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm bg-amber-200 px-4 py-2 text-amber-900">
-                                    {text}
+                                    {item.question}
                                 </p>
                             </div>
 
@@ -66,7 +85,7 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
                                         Diary Assistant
                                     </p>
                                     <p className="mt-1 text-amber-700">
-                                        Example response
+                                        {item.answer}
                                     </p>
                                 </div>
                             </div>
@@ -75,7 +94,8 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
                 </div>
 
                 {/* 输入区域 */}
-
+                {isSending && <p role="status">Thinking…</p>}
+                {error && <p role="alert">{error}</p>}
                 < div >
                     <form
                         onSubmit={onSubmit}

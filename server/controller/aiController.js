@@ -72,3 +72,27 @@ export const translateContent = async (req, res, next) => {
 		next(err);
 	}
 };
+
+export const askDiary = async (req, res, next) => {
+	console.log("ask diary controller is called....");
+	try {
+		const petID = req.params.petId;
+		const { question } = req.body ?? {};
+		if (!petID) {
+			return next(new AppError("Pet ID is required", 400));
+		}
+		if (!question?.trim()) {
+			return next(new AppError("Question is required", 400));
+		}
+
+		res.status(200).json({
+			success: true,
+			data: "This is a placeholder response. The diary assistant feature will be implemented soon.",
+			sources: [],
+		});
+
+	}
+	catch (err) {
+		next(err);
+	}
+};
