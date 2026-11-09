@@ -19,7 +19,8 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
 
 		try {
 			const result = await askDiary(petId, text);
-			setMessages((prev) => [...prev, { question: text, answer: result }]);
+			const id = crypto.randomUUID();
+			setMessages((prev) => [...prev, { id, question: text, answer: result }]);
 			setMessage("");
 		} catch (err) {
 			setError(err.message);
@@ -61,8 +62,8 @@ const ChatWindow = ({ onClose, messages, setMessages }) => {
 							What would you like to remember about your pet?
 						</p>
 					)}
-					{messages.map((item, index) => (
-						<div key={index} className="flex flex-col gap-2 mb-2">
+					{messages.map((item) => (
+						<div key={item.id} className="flex flex-col gap-2 mb-2">
 							<div className="flex items-end justify-end">
 								<p className="max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-sm bg-amber-200 px-4 py-2 text-amber-900">
 									{item.question}
