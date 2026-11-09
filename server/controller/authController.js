@@ -1,5 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
-import { cookieName, cookieOptions, sessionToken } from "../middleware/auth.js";
+import { cookieOptions, sessionToken } from "../middleware/auth.js";
 import {
 	createSessionQuery,
 	createUserInDB,
@@ -150,7 +150,7 @@ export const logoutUser = async (req, res, next) => {
 	}
 };
 
-export const getCurrentUser = async (req, res, next) => {
+export const getCurrentUser = async (req, res) => {
 	res.status(200).json({
 		success: true,
 		data: {
