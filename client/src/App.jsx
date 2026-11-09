@@ -8,6 +8,7 @@ import {
 	useLocation,
 } from "react-router-dom";
 import CreatePetForm from "./components/CreatePetForm";
+import DiaryChat from "./components/DiaryChat";
 import NavBar from "./components/NavBar";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { EntriesProvider } from "./contexts/EntriesContext";
@@ -16,7 +17,6 @@ import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import WritePage from "./pages/WirtePage";
-import DiaryChat from "./components/DiaryChat";
 import "./App.css";
 
 function ProtectedLayout() {
@@ -42,7 +42,6 @@ function ProtectedLayout() {
 			<NavBar
 				petName={session.pets.find((pet) => pet.id === petId)?.pet_name}
 			/>
-
 			<DiaryChat />
 			<div className="pt-20 px-6 flex flex-wrap items-center justify-end gap-4 text-amber-900">
 				<span>{session.user.username}</span>

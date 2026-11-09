@@ -90,7 +90,7 @@ export const askDiary = async (req, res, next) => {
 		const pets = await getPetsByUserIdQuery(req.user.id);
 
 		const ownsPet = pets.some(
-			(pet) => Number(pet.id) === Number(req.params.petId)
+			(pet) => Number(pet.id) === Number(req.params.petId),
 		);
 
 		if (!ownsPet) {
@@ -101,7 +101,7 @@ export const askDiary = async (req, res, next) => {
 
 		const entries = await calCosineSimilarity(
 			req.params.petId,
-			questionEmbedding
+			questionEmbedding,
 		);
 
 		console.log("Retrieved diary entries:", entries);
@@ -112,7 +112,7 @@ export const askDiary = async (req, res, next) => {
 					title: entry.title,
 					date: entry.entry_date,
 					content: entry.content,
-				})
+				}),
 			)
 			.join("\n\n");
 
@@ -121,11 +121,8 @@ export const askDiary = async (req, res, next) => {
 		res.status(200).json({
 			success: true,
 			data: answer,
-
 		});
-
-	}
-	catch (err) {
+	} catch (err) {
 		next(err);
 	}
 };
