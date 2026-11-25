@@ -1,47 +1,48 @@
-# Tails & Tales Selenium UI Test Plan
+# Tails & Tales End-to-End Tests
 
-## Objective
+This folder contains the Selenium browser checks for Tails & Tales. 
 
-Verify core pet diary workflows in Chrome against the React frontend, Express API, and a dedicated PostgreSQL database with pgvector. Keep component behavior covered by Vitest and measure semantic search quality with the existing offline evaluation.
+See [TestPlan.md](TestPlan.md) for planned coverage and individual test statuses.
 
-## Phase 1 — Core smoke coverage
+## Set up the app
 
+1. Install Node.js and Google Chrome.
+2. Follow the [project setup instructions](../README.md) to start the React client and Express API with a local PostgreSQL test database that has pgvector enabled. The script uses `http://localhost:5173`. If Vite prints another address, update `baseUrl` in the script.
+3. In the running app, register or sign in with a dedicated test account that has a pet. Add a diary entry for that pet with the following values, or update `diaryTitle` and `diaryStory` in the script to match an existing entry.
 
-| ID     | Scenario                       | Setup and action                                                                                                                             | Expected result                                                                                | Status  |
-| ------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------- |
-| UI-01  | Sign in, refresh, and sign out | Sign in with a seeded account and refresh the diary list. Sign out and revisit the diary URL.                                                | The session survives refresh. After sign-out, the protected diary is inaccessible.             | Planned |
-| UI-02a | Edit and persist               | Seed an account, pet, and diary entry. Open the entry, change its title and story, save, wait for confirmation, and refresh the detail page. | Both fields show their updated values after refresh.                                           | Planned |
-| UI-02b | Create and persist             | Seed an account and pet. Create a uniquely titled entry, refresh the list, and open the new entry.                                           | The entry remains in the list and opens with the submitted title and story.                    | Planned |
-| UI-02c | Delete and persist             | Seed an account, pet, and diary entry. Open the entry, confirm deletion, and refresh the list.                                               | The deleted entry remains absent from the list.                                                | Planned |
-| UI-03  | Filter entries by date         | Seed two entries on different dates in the same month. Select one of those dates, then click **All dates**.                                  | Only the selected date's entry appears while filtered. Clearing the filter shows both entries. | Planned |
+   | Field | Value                      |
+   | ----- | -------------------------- |
+   | Title | `Selenium edit fixture`    |
+   | Story | `TestDog went for a walk.` |
 
-## Phase 2 — Editing, accounts, and pets
+   Use a unique title and keep it visible in the diary list. The script finds the link by title text and compares the story exactly.
 
-Prioritize **UI-07** and **UI-08** to build on the editing workflow from UI-02a.
+## Run the browser check
 
-| ID    | Scenario                        | Setup and action                                                                                    | Expected result                                                                                             | Status  |
-| ----- | ------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------- |
-| UI-07 | Cancel an edit                  | Change the title and story of a seeded entry. Click **Cancel**, then refresh.                       | Both original values return immediately and remain after refresh.                                           | Planned |
-| UI-08 | Recover from a failed save      | Edit a seeded entry. Configure one update request to fail, then retry with the normal API response. | The page shows an error and retains both draft fields. The retry succeeds and both changes survive refresh. | Planned |
-| UI-04 | Reject an invalid sign-in       | Enter a valid test email with the wrong password.                                                   | The page shows an error and the session stays signed out.                                                   | Planned |
-| UI-05 | Register with a first pet       | Register with a unique email and provide the first pet's details. Refresh the diary page.           | Registration signs the user in and the new pet is still selected or available after refresh.                | Planned |
-| UI-06 | Switch pets                     | Seed two pets under one account with distinct diary entries. Switch between them.                   | The list shows the selected pet's entries each time.                                                        | Planned |
-| UI-09 | Protect another account's entry | Set up two accounts. Sign in as one and open the other account's entry URL.                         | The other account's entry content is inaccessible.                                                          | Planned |
+From the repository root, enter `e2e/` and install the dependencies.
 
-## Phase 3 — Calendar, search, and AI
+```sh
+cd e2e
+npm ci
+```
 
-| ID    | Scenario                                   | Setup and action                                                                                      | Expected result                                                                                     | Status  |
-| ----- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| UI-10 | Navigate months and return to today        | Navigate to a different month and select a date with a seeded entry. Click **Today**.                 | The selected date shows its entry. **Today** returns to the current month and selects today's date. | Planned |
-| UI-11 | Combine semantic search and date filters   | Return two controlled search matches on different dates. Select one date, then click **All dates**.   | The date filter narrows the matches. Clearing it restores both matches and preserves the search.    | Planned |
-| UI-12 | Display and retain a diary Q&A answer      | Submit a question with a delayed, fixed response. Close and reopen the chat after the answer arrives. | The loading state appears, the answer renders, and the exchange remains visible after reopening.    | Planned |
-| UI-13 | Recover from a diary Q&A error             | Return a controlled error for the first question and a fixed answer for the next one.                 | The error is visible and the next answer renders successfully.                                      | Planned |
-| UI-14 | Display a title suggestion and translation | Request a title suggestion and a translation using separate fixed responses.                          | Each result appears in the corresponding UI.                                                        | Planned |
+Create `.env.local` in that folder with the credentials of the account you prepared. Replace both example values. Git ignores this file.
 
-## Execution and troubleshooting
+```dotenv
+E2E_EMAIL=selenium@example.test
+E2E_PASSWORD=replace-with-your-test-account-password
+```
 
-- Start with local Chrome. Use headless Chrome when enabling the CI smoke test.
-- Give each case its own test data and a fresh browser session. Use a disposable PostgreSQL database and clean up fixture rows after the test.
-- Use the real API and database for account and diary persistence. Use controlled responses for AI, search UI, and simulated errors.
-- Wait for visible conditions such as save confirmation or a rendered entry. Use stable locators and verify persistence by refreshing before checking field values.
-- Before marking a case **Passing locally**, run it independently and repeat it from clean test data. On failures, record the test ID, failing assertion, and current URL. Capture a screenshot when a browser session is available.
+With the frontend and API running, launch the script from `e2e/`.
+
+```sh
+node --env-file=.env.local opensExistingDiary.mjs
+```
+
+A passing run prints `Opened the expected diary and verified its title and story.` Chrome closes when the script finishes.
+
+## Troubleshooting
+
+- If `sendKeys` receives `undefined`, confirm you used `--env-file=.env.local` and that both variable names match the example.
+- If the wait for `/entries` times out, try signing in manually against the same local app and check that the API is running.
+- If `Expected the diary detail form to open` appears, check the stack trace. The script currently uses that message for both the diary-link wait and the detail-form wait. For the first, confirm the entry is visible under the signed-in pet. For the second, open the same entry manually and confirm the form loads.
