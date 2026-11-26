@@ -36,7 +36,7 @@ export async function getDiaryFields(driver) {
     return { titleInput, storyInput };
 }
 
-async function saveDiary(driver) {
+export async function saveDiary(driver) {
     const saveButton = await driver.findElement(
         By.css('button[form="edit-entry-form"]'),
     );

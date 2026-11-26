@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { By, Key, until } from 'selenium-webdriver';
 import { createDriver } from '../support/browser.mjs';
-import { signIn, getDiaryFields, restoreDiary } from '../support/diary.mjs';
+import { signIn, getDiaryFields, restoreDiary, saveDiary } from '../support/diary.mjs';
 import { originalDiary, updatedDiary } from '../fixtures/diaryData.mjs';
 
 const waitMs = 5000;
@@ -13,10 +13,10 @@ async function verifyDiaryEditPersists() {
 
     const selectAll = Key.chord(Key.COMMAND, 'a');
     let editSaveAttempted = false;
+    const driver = await createDriver();
 
     try {
         // Arrange: sign in and open the prepared diary.
-        const driver = await createDriver();
         await signIn(driver, E2E_EMAIL, E2E_PASSWORD);
 
         const diaryLink = await driver.wait(
