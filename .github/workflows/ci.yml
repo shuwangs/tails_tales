@@ -79,3 +79,26 @@ jobs:
             evaluation/reports/
             evaluation/results/
           if-no-files-found: error
+
+  e2e:
+    name: Selenium setup
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false   
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Install Selenium dependencies
+        run: npm ci --prefix server
+      - name: Check E2E script syntax
+        run: |
+          node --check e2e/tests/testOpensExistingDiary.mjs
+          node --check e2e/tests/testCancelDiaryEdit.mjs
