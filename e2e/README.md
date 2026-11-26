@@ -33,16 +33,16 @@ E2E_EMAIL=selenium@example.test
 E2E_PASSWORD=replace-with-your-test-account-password
 ```
 
-With the frontend and API running, launch the script from `e2e/`.
+With the frontend and API running, launch the browser check from `e2e/`.
 
 ```sh
-node --env-file=.env.local opensExistingDiary.mjs
+npm test
 ```
 
 A passing run prints `Opened the expected diary and verified its title and story.` Chrome closes when the script finishes.
 
 ## Troubleshooting
 
-- If `sendKeys` receives `undefined`, confirm you used `--env-file=.env.local` and that both variable names match the example.
+- If `sendKeys` receives `undefined`, confirm `.env.local` exists and both variable names match the example.
 - If the wait for `/entries` times out, try signing in manually against the same local app and check that the API is running.
 - If `Expected the diary detail form to open` appears, check the stack trace. The script currently uses that message for both the diary-link wait and the detail-form wait. For the first, confirm the entry is visible under the signed-in pet. For the second, open the same entry manually and confirm the form loads.
