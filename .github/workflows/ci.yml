@@ -95,9 +95,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: server/package-lock.json
+          cache-dependency-path: e2e/package-lock.json
       - name: Install Selenium dependencies
-        run: npm ci --prefix server
+        run: npm ci --prefix e2e
       - name: Check E2E script syntax
         run: |
           node --check e2e/tests/testOpensExistingDiary.mjs
