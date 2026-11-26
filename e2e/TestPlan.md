@@ -9,20 +9,20 @@ Verify core pet diary workflows in Chrome against the React frontend, Express AP
 
 | ID     | Scenario                       | Setup and action                                                                                                                                    | Expected result                                                                                | Status  |
 | ------ | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------- |
-| UI-01  | Sign in, refresh, and sign out | Sign in with a seeded account and refresh the diary list. Sign out and revisit the diary URL.                                                       | The session survives refresh. After sign-out, the protected diary is inaccessible.             | Planned |
-| UI-02a | Edit and persist               | Open a prepared diary entry in Chrome, change its title and story, save, and refresh. Restore the original values during cleanup and refresh again. | Both edits persist after refresh. Cleanup restores both original values.                       | Passed  |
+| UI-01  | Sign in, refresh, and sign out | Sign in with a seeded account and refresh the diary list. Sign out and revisit the diary URL.                                                       | The session survives refresh. After sign-out, the protected diary is inaccessible.             | Passing locally |
+| UI-02a | Edit and persist               | Open a prepared diary entry in Chrome, change its title and story, save, and refresh. Restore the original values during cleanup and refresh again. | Both edits persist after refresh. Cleanup restores both original values.                       | Passing locally |
 | UI-02b | Create and persist             | Seed an account and pet. Create a uniquely titled entry, refresh the list, and open the new entry.                                                  | The entry remains in the list and opens with the submitted title and story.                    | Planned |
 | UI-02c | Delete and persist             | Seed an account, pet, and diary entry. Open the entry, confirm deletion, and refresh the list.                                                      | The deleted entry remains absent from the list.                                                | Planned |
 | UI-03  | Filter entries by date         | Seed two entries on different dates in the same month. Select one of those dates, then click **All dates**.                                         | Only the selected date's entry appears while filtered. Clearing the filter shows both entries. | Planned |
 
 ## Phase 2 — Editing, accounts, and pets
 
-UI-02a and UI-07 passed locally before the shared-helper refactor. Fix the UI-02a import and driver scope and rerun both scripts before implementing **UI-08**.
+UI-07 and UI-08 cover canceling an edit and retrying after a failed save.
 
 | ID    | Scenario                        | Setup and action                                                                                                                    | Expected result                                                                                             | Status                      |
 | ----- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------- |
-| UI-07 | Cancel an edit                  | Change the title and story of a prepared entry. Click **Cancel**, check both fields immediately, then refresh and check them again. | Both original values return before refresh and remain afterward.                                            | Implemented (rerun pending) |
-| UI-08 | Recover from a failed save      | Edit a seeded entry. Configure one update request to fail, then retry with the normal API response.                                 | The page shows an error and retains both draft fields. The retry succeeds and both changes survive refresh. | Planned (next)              |
+| UI-07 | Cancel an edit                  | Change the title and story of a prepared entry. Click **Cancel**, check both fields immediately, then refresh and check them again. | Both original values return before refresh and remain afterward.                                            | Passing locally |
+| UI-08 | Recover from a failed save      | Edit a prepared entry. Simulate one HTTP 500 response in the browser, then retry the same draft through the real API.                                 | The page shows an error and retains both draft fields. The retry succeeds and both changes survive refresh. | Passing locally |
 | UI-04 | Reject an invalid sign-in       | Enter a valid test email with the wrong password.                                                                                   | The page shows an error and the session stays signed out.                                                   | Planned                     |
 | UI-05 | Register with a first pet       | Register with a unique email and provide the first pet's details. Refresh the diary page.                                           | Registration signs the user in and the new pet is still selected or available after refresh.                | Planned                     |
 | UI-06 | Switch pets                     | Seed two pets under one account with distinct diary entries. Switch between them.                                                   | The list shows the selected pet's entries each time.                                                        | Planned                     |
@@ -39,6 +39,9 @@ UI-02a and UI-07 passed locally before the shared-helper refactor. Fix the UI-02
 | UI-14 | Display a title suggestion and translation | Request a title suggestion and a translation using separate fixed responses.                          | Each result appears in the corresponding UI.                                                        | Planned |
 
 ## Execution and troubleshooting
+
+The four implemented cases passed together in local Chrome with `npm --prefix e2e test`.
+The current GitHub Actions job installs E2E dependencies and checks the syntax of UI-02a and UI-07. Browser execution in CI is pending.
 
 - Start with local Chrome. Use headless Chrome when enabling the CI smoke test.
 - Give each case its own test data and a fresh browser session. Use a disposable PostgreSQL database and clean up fixture rows after the test.
