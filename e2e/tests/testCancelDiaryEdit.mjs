@@ -4,9 +4,7 @@ import { createDriver } from '../support/browser.mjs';
 import { originalDiary, updatedDiary } from '../fixtures/diaryData.mjs';
 import { signIn, getDiaryFields, restoreDiary } from '../support/diary.mjs';
 
-const baseUrl = 'http://localhost:5173';
 const waitMs = 5000;
-
 
 async function cancelDiaryEdit() {
     const { E2E_EMAIL, E2E_PASSWORD } = process.env;

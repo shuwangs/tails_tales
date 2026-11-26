@@ -36,13 +36,16 @@ export async function getDiaryFields(driver) {
     return { titleInput, storyInput };
 }
 
-export async function saveDiary(driver) {
+export async function clickSave(driver) {
     const saveButton = await driver.findElement(
         By.css('button[form="edit-entry-form"]'),
     );
     await driver.wait(until.elementIsEnabled(saveButton), waitMs);
     await saveButton.click();
+}
 
+export async function saveDiary(driver) {
+    await clickSave(driver);
     await driver.wait(
         until.elementLocated(
             By.xpath('//*[@role="status" and normalize-space()="Changes saved."]'),
